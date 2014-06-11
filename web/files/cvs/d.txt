@@ -1,0 +1,15 @@
+//clear cache
+php app/console cache:clear --env = prod --no-debug
+
+//create bundle 
+
+php app/console generate:bundle --namespace = Acme/Login --format = yml
+
+// schema update
+php app/console doctrine:schema:update --force
+
+// generate entities
+
+php app/console doctrine:generate:entities Acatism\MainBundle\Entity\Project
+
+id, nume, descriere, id_prof 

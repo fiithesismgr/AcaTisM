@@ -1,0 +1,9 @@
+parameters:
+#    main.example.class: Acme\MainBundle\Example
+
+services:
+#    main.example:
+#        class: %main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+     account.entity:
+      class: Acme\MainBundle\Entity\Account

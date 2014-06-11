@@ -1,0 +1,402 @@
+{# src/Acatism/MainBundle/Show/ProfView.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block utilies %}
+
+    <div class="howdyandtools">
+
+        <div class="profilename"><a href="#">{{app.user.firstname ~ " " ~ app.user.lastname}}</a></div>
+
+        <div class="profilecaption">
+            <a href="#">
+                <img src="{{ professor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
+        </div>
+
+        <div class="tool">
+            <a href="#">
+                <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+            </a>
+            <a href="{{ path('logout') }}">
+                <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+            </a>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block profile_section %}
+
+    <div id="profile">
+
+        <div class="profileleft">
+
+            <div class="widget">
+
+                <div class="widgettop">About</div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="University"><span>University</span>: {{professor.university}}</li>
+                        <li name="Faculty"><span>Faculty</span>: {{professor.faculty}}</li>
+                        <li name="Office"><span>Office</span>: {{professor.office}}</li>
+
+                        <!-- for student: year and group, for teacher -->
+
+                        <li name="Email"><span>E-mail</span>: {{app.user.email}}</li>
+                        <li name="Phone"><span>Phone</span>: {{professor.phone}}</li>
+                        <li name="Website"><span>Website</span>: <a href="#">{{professor.website}}</a></span></li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profilecenter">
+
+            <div class="profile_picture">
+                <a href=""><img src="{{ professor.getProfilePath() | apply_filter('profile_thumb') }}" alt="" />	</a>
+                <div class="profile_picture_details">
+                    <span class="title">{{professor.title}}</span>
+                    <br/>
+                    <span class="name">{{app.user.firstname ~ " " ~ app.user.lastname}}</span>
+                </div>
+                <div class="social">
+
+                    <img src="{{ asset("images/Facebook.png") }}" alt="Facebook" title="Facebook"/>
+                    <img src="{{ asset("images/GooglePlus.png") }}" alt="Google Plus" title="Google Plus"/>
+                    <img src="{{ asset("images/Twitter.png") }}" alt="Twitter" title="Twitter"/>
+                    <!-- <img src="{{ asset("images/LinkedIn.png") }}" alt="LinkedIn" title="LinkedIn"/> -->
+                    <img src="{{ asset("images/Skype.png") }}" alt="Skype" title="Skype"/>
+                    <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
+                    <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="profileright">
+
+            <div class="widget">
+
+                <div class="widgettop">Bibliography: </div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="Domains"><span>Domains of interest:</span> {{professor.domains}} </li>
+                        <li name="Teaching"><span>Teaching</span>: {{professor.teaching}}</li>
+                        <li name="Publications"><span>Main publications:</span>
+                        {{professor.publications}}
+                        </li>
+                        <li name="Languages"><span>Languages</span>: {{professor.languages}}</li>
+                        <li name="Bib" class="fullbib">
+
+                            <div  class="bibimg"><img src="{{ asset("images/cv.png") }}" alt="Bibliography"/></div>
+                            <div class="biblink">
+                                <a href="{{ asset(professor.getCvPath()) }}" title="Bibliography" >View entire Bibliography</a>
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+
+{% endblock %}
+
+{% block activity_section %}
+
+     <div id="activity">
+
+         <div class="activitytop">
+
+             What's New
+
+         </div>
+
+         <div class="activitymain">
+
+             <div class="activitycategory">
+
+                 <ul>
+
+                     <li id="activityTab_1">NewsFeed</li>
+                     <li id="activityTab_2">Projects</li>
+                     <li id="activityTab_3">Tasks</li>
+
+
+                 </ul>
+
+             </div>
+
+             <div class="activitycontent">
+
+                 <div class="activityPage" id="activityPage_1">
+
+                     <ul class="news">
+
+                         <li class="article">
+
+                             <div class="articlesubject">
+
+                                 <div class="content">
+
+                                     Catalin Baltuta si-a actualizat profilul.
+
+                                 </div>
+
+
+                                 <div class="posttime">
+
+                                     01/06/2014, 17:34
+
+                                 </div>
+
+                                 <div class="clear"></div>
+
+                             </div>
+
+                             <div class="clear"></div>
+
+                         </li>
+
+                         <li class="article">
+
+                             <div class="articlesubject">
+
+                                 <div class="content">
+
+                                     Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
+
+                                 </div>
+
+
+                                 <div class="posttime">
+
+                                     01/06/2014, 17:34
+
+                                 </div>
+
+                                 <div class="clear"></div>
+
+                             </div>
+
+                             <div class="articlecontent">
+
+                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                             </div>
+
+                         </li>
+
+                     </ul>
+
+                 </div>
+
+                 <div class="activityPage" id="activityPage_2">
+
+                     <ul class="projectList">
+
+                         {% for project in projectlist %}
+
+                         <li id="project">
+
+                             <a href="#project">
+
+                                 <div class="projectHeader">
+
+                                     <div class="content">
+
+                                         {{ project.name }}
+
+                                     </div>
+
+
+                                     <div class="extend">
+
+                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+
+                                     </div>
+
+                                     <div class="clear"></div>
+
+                                 </div>
+
+                             </a>
+
+                                 <div class="projectContent">
+
+                                 {{ project.description }}
+
+                                     <div class="trashProject">
+
+                                         <a href="{{ path('acatism_delete_project', { 'project_id': project.id }) }}">
+                                         <img src="{{ asset('images/trash.png') }}" alt="Delete" title="Delete" />
+                                         </a>
+
+                                     </div>
+
+
+                                     <div class="clear"></div>
+
+                             </div>
+
+
+
+
+                         </li>
+
+                         {% endfor %}
+
+                     </ul>
+
+                     <div class="addNew">
+
+                         <a href="{{ path("acatism_new_project") }}">
+                         <img src=" {{ asset("images/add.png") }} " alt="Add" />
+                         </a>
+
+                     </div>
+
+
+                </div>
+
+                 <div class="activityPage" id="activityPage_3">
+
+                     <ul class="taskList">
+
+                         <li id="task">
+
+                             <a href="#task">
+
+                                 <div class="taskHeader">
+
+                                     <div class="content">
+
+                                         Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
+
+                                     </div>
+
+
+                                     <div class="posttime">
+
+                                         01/06/2014, 17:34
+
+                                     </div>
+
+
+                                     <div class="extend">
+                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                     </div>
+
+                                     <div class="clear"></div>
+
+                                 </div>
+
+                             </a>
+
+                             <div class="taskContent">
+
+                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                             </div>
+
+
+                         </li>
+
+                         <li id="task">
+
+                             <a href="#task">
+
+                                 <div class="taskHeader">
+
+                                     <div class="content">
+
+                                         Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
+
+                                     </div>
+
+
+                                     <div class="posttime">
+
+                                         01/06/2014, 17:34
+
+                                     </div>
+
+
+                                     <div class="extend">
+                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                     </div>
+
+                                     <div class="clear"></div>
+
+                                 </div>
+
+                             </a>
+
+                             <div class="taskContent">
+
+                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                             </div>
+
+
+                         </li>
+
+                     </ul>
+
+                     <div class="clear"></div>
+
+                     <div class="addNew">
+
+                         <a href="{{ path("acatism_main_homepage") }}">
+                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
+                         </a>
+
+                     </div>
+
+                 </div>
+
+             </div>
+
+         </div>
+
+         <div class="clear"></div>
+
+     </div>
+
+ {% endblock %}
+
+{% block javascripts %}
+
+<script type="text/javascript" src="{{ asset("scripts/tabs.js") }}" ></script>
+
+<script type="text/javascript" src="{{  asset("scripts/jquery.min.js") }}" ></script>
+
+<script type="text/javascript" src="{{ asset("scripts/taskDropdown.js") }}" ></script>
+
+<script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
+
+{% endblock %}

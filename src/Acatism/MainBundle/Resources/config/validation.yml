@@ -1,0 +1,12 @@
+# src/Acatism/MainBundle/Resources/config/validation.yml
+
+Acatism\MainBundle\Entity\Project:
+    properties:
+        name:
+            - NotBlank: ~
+
+        description:
+            - Length:
+                 min: 200
+                 minMessage: "Project description must be at least 200 chars length ! "
+

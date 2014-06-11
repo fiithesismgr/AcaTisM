@@ -1,0 +1,29 @@
+security:
+    encoders:
+        Acatism\AuthenticationBundle\Entity\User:
+            algorithm: bcrypt
+
+    
+    providers:
+        users_db:
+            entity: { class AcatismAuthenticationBundle:User }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        secured_area:
+            pattern:    ^/.*
+            form_login:
+                login_path: login
+                check_path: login_check
+            anonymous: ~
+            logout:
+                path:   /logout
+                target: /
+            #http_basic:
+            #    realm: "Secured Demo Area"
+    access_control:
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/.*, roles: [ROLE_STUDENT, ROLE_PROFESSOR] }

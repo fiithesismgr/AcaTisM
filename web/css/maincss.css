@@ -1,0 +1,578 @@
+a {
+    color: #449960;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #449960;
+    box-shadow: 0 0 5px 0;
+
+}
+
+
+#logo {
+
+    float: left;
+    padding: 0.6% 0% 0.6% 13%;
+
+
+}
+
+#logo img{
+    height: 20px;
+    padding-top: 2px;
+}
+
+#search {
+    padding: 0.6% 13% 0.6% 0;
+    width: 35%;
+    float: right;
+}
+
+#search form input{
+
+    padding-left: 3%;
+    position: relative;
+    width:350px;
+    height: 24px;
+    width: 62%;
+    border: medium none;
+    border-radius: 1px;
+    float: right;
+
+}
+
+
+#toplinks{
+    float: left;
+    padding: 0.7% 0% 0.6% 0%;
+
+}
+
+#toplinks ul{
+    margin: 0;
+}
+
+#toplinks ul li{
+    display: inline;
+}
+
+#toplinks a {
+
+    color: #FFFFFF;
+    decoration: none;
+    font: 0.7rem "ProximaNovaRegular",Arial,sans-serif;
+    text-transform: uppercase;
+    padding-left: 1.2em;
+}
+
+#maincontainer {
+
+    font-family: Helvetica,Arial,'lucida grande',tahoma,verdana,arial,sans-serif;
+    width: 75%;
+    padding: 35px 0 10% 0;
+    margin: 0 auto;
+
+
+}
+
+#profile {
+
+    padding: 80px 0 35px 0;
+    transition: all 0.2s linear 0s;
+}
+
+.profileleft{
+
+    padding-top: 1em;
+    float: left;
+    width: 31.3%;
+
+}
+
+.profileright{
+
+    padding-top: 1em;
+    float: left;
+    width: 31.3%;
+
+}
+
+
+
+.profilecenter{
+
+    padding-top: 1em;
+    float: left;
+    width: 31.3%;
+    margin: 0 3%;
+
+}
+
+.clear {
+
+    clear: both;
+
+}
+
+.profile_picture {
+    color: #6A7480;
+    padding: 2em;
+    position: relative;
+    text-align: center;
+}
+
+.profile_picture > a > img {
+    border: 4px solid #449960;
+    border-radius: 8em;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.45);
+}
+
+.profile_picture_details {
+    padding-top: 5%;
+    line-height: 25px;
+    }
+
+
+.profile_picture_details .title {
+
+    font-size: 14px;
+
+}
+
+.profile_picture_details .name{
+
+    font-size: 24px;
+
+}
+
+.profile_picture .social{
+
+    padding-top: 20px;
+
+}
+
+.profsprofiles{
+    padding-top: 10px;
+    float: left;
+    width: 90%;
+    margin: -20px 7%;
+}
+
+.profs_picture {
+    text-align: center;
+    float: left;
+    list-style: none;
+    margin: 0px 25px 50px 0;
+}
+
+.profs_picture > a > img {
+    border: 4px solid #449960;
+    border-radius: 8em;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.45);
+}
+
+.profs_picture_details .name{
+
+    font-size: 22px;
+
+}
+
+
+
+.widget{
+
+    font-size: 12px;
+    border: 1px solid #D3D6DB;
+    color: #6A7480;
+    line-height: 2.9;
+
+}
+
+
+.widgettop{
+
+    background: #F6F7F8;
+    height: 35px;
+    text-transform: uppercase;
+    padding-left: 14px;
+    font-weight: bold;
+
+}
+
+.widgetcontent{
+
+    background: none repeat scroll 0 0 #FFF;
+    padding: 0 14px;
+}
+
+.widgetcontent ul{
+
+    margin: 0;
+    padding: 0;
+
+}
+
+.widgetcontent ul li{
+
+    border-bottom: 1px solid #E9EAED;
+    line-height: 16px;
+    list-style: none outside none;
+    padding: 10px 0;
+
+}
+
+.widgetcontent span{
+
+    font-weight: bold;
+
+}
+
+.widgetcontent .fullcv {
+
+    height: 30px;
+    width: 120px;
+    margin: 0 auto;
+
+}
+
+.widgetcontent .fullcv .cvimg{
+
+    float: left;
+
+}
+
+.widgetcontent .fullcv .cvlink{
+
+    float: left;
+    padding-top: 8px;
+
+}
+
+.widgetcontent .fullbib {
+
+    height: 30px;
+    width: 180px;
+    margin: 0 auto;
+
+}
+
+.widgetcontent .fullbib .bibimg{
+
+    float: left;
+
+}
+
+.widgetcontent .fullbib .biblink{
+
+    float: left;
+    padding-top: 8px;
+
+}
+
+.howdyandtools{
+
+    padding-top: 30px;
+    float: right;
+
+
+}
+
+.tool {
+
+    padding: 5px 0 0 5px;
+    float: left;
+
+}
+
+
+.profilecaption{
+
+    float: left;
+    padding:0 5px 0 5px;
+}
+
+.profilecaption img{
+
+    border: 2px solid #449960;
+    border-radius: 2em;
+
+}
+
+.profilename{
+
+   float: left;
+   padding: 8px 0 0 0 ;
+
+}
+
+#activity{
+
+    font-size: 12px;
+    color: #6A7480;
+
+}
+
+.activitytop{
+
+    background: none repeat scroll 0 0 #F6F7F8;
+    border-left: 1px solid #D3D6DB;
+    border-right: 1px solid #D3D6DB;
+    border-top: 1px solid #D3D6DB;
+    box-shadow: 0 5px 4px -4px;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+
+}
+
+.activitymain{
+
+    width: 100%;
+    background: url("/tw_acatism/web/images/top-corner.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    float: left;
+
+}
+
+
+.activitycategory{
+
+    float: left;
+    width: 25%;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top: 5%;
+}
+
+.activitycategory ul{
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.activitycategory ul li{
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border-bottom: 1px solid #D3D6DB;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    line-height: 16px;
+    padding: 10px 0 10px 10px;
+
+}
+
+
+.activitycategory ul li:hover{
+
+    background: none repeat scroll 0 0 #449960;
+    color: #fff;
+    border-bottom: none;
+
+}
+
+.activitycategory > ul > li.activityActive{
+
+    background: none repeat scroll 0 0 #449960;
+    color: #fff;
+    border-bottom: none;
+
+}
+
+.activitycontent{
+
+    /* background: #F6F7F8; */
+    border-left: 4px solid #449960;
+    /* border-top: 1px solid #D3D6DB;
+    border-right: 1px solid #D3D6DB;
+    border-bottom: 1px solid #D3D6DB; */
+    float: left;
+    width: 65%;
+    padding: 3% 0 5% 5%;
+
+}
+
+.activitycontent .news {
+
+    list-style: none outside none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.activitycontent .article{
+
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #E5E6E9 #DFE0E4 #D0D1D5;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    margin-top: 10px;
+
+}
+
+.activitycontent .article .articlesubject {
+
+    padding: 10px 0;
+
+}
+
+.activitycontent .article .articlesubject .content{
+
+    float: left;
+
+}
+
+.activitycontent .article .articlesubject .posttime{
+
+    float: right;
+
+}
+
+.activitycontent .article .articlecontent {
+
+    padding: 10px 0;
+    border-top: 1px solid #E9EAED;
+
+}
+
+.activitycontent .taskList {
+
+    list-style: none outside none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.activitycontent #task{
+
+    margin-top: 10px;
+
+}
+
+.activitycontent #task .taskHeader {
+
+    z-index: 2;
+    background: none repeat scroll 0 0 #EBF5FF;
+    padding: 10px 10px;
+
+}
+
+.activitycontent #task .taskHeader .content{
+
+    width: 50%;
+    float: left;
+
+}
+
+.activitycontent #task .taskHeader .posttime{
+
+    float: left;
+    padding-left: 15%;
+    padding-top: 1%;
+
+}
+
+.activitycontent #task .taskHeader .extend {
+
+    padding-top: 1.1%;
+    float: right;
+
+}
+
+.activitycontent #task .taskContent {
+
+    background: none repeat scroll 0 0 #fff;
+    padding: 10px 10px;
+    border-top: 1px solid #E9EAED;
+    z-index: 1;
+    display: none;
+    height: auto;
+
+}
+
+.activitycontent .projectList {
+
+    list-style: none outside none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.activitycontent #project{
+
+    margin-top: 10px;
+
+}
+
+.activitycontent #project .projectHeader {
+
+    z-index: 2;
+    background: none repeat scroll 0 0 #EBF5FF;
+    padding: 10px 10px;
+
+}
+
+.activitycontent #project .projectHeader .content{
+
+    width: 50%;
+    float: left;
+    padding: 1%;
+    font-size: 15px;
+
+}
+
+.activitycontent #project .projectHeader .extend {
+
+    padding-top: 1.1%;
+    float: right;
+
+}
+
+.activitycontent #project .projectContent {
+
+    background: none repeat scroll 0 0 #fff;
+    padding: 10px 10px;
+    border-top: 1px solid #E9EAED;
+    z-index: 1;
+    display: none;
+    height: auto;
+
+}
+
+.activitycontent #project .projectContent .trashProject{
+
+    float: right;
+    padding-top: 4%;
+
+}
+
+.addNew{
+
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 50px;
+
+}
+
+

@@ -1,0 +1,114 @@
+#logo{
+
+    padding: 0.6% 0 0.6% 20%;
+
+}
+
+#loginSection{
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    margin: 3% auto 0;
+    width: 85%;
+
+}
+
+#loginSection a{
+
+    font-weight: normal;
+
+}
+
+.loginHeader{
+
+    padding: 5% 0 0 15%;
+
+}
+
+.loginHeader h1{
+
+    font-weight: lighter;
+    font-size: 24px;
+    margin: 0;
+    padding-left: 10px;
+
+}
+
+.loginMain{
+
+    padding: 2% 15%;
+}
+
+.loginMain input:focus{
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset, 0 0 8px rgba(38, 241, 145, 0.4);
+    border: 1px solid #449960;
+
+}
+
+
+.loginMain button{
+
+    background: linear-gradient(to bottom, #449960 0%, #44F085 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    height: 40px;
+    margin: 0 auto;
+    padding: 12px 5px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+    width: 80px;
+
+}
+
+.loginFooter{
+
+    background: #f4f4f4;
+    padding: 3% 15%;
+    font-size: 12px;
+    color: #8899A6;
+
+}
+
+.actionGroup{
+
+    font-size: 12px;
+    padding: 3% 1%;
+
+}
+
+.actionGroup .inputClassButton{
+
+    float: left;
+
+}
+
+.actionGroup .actions{
+
+    padding: 2%;
+    float:left;
+
+}
+
+
+.inputClass{
+
+    padding: 1%;
+
+}
+
+
+.logInput{
+
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    height: 25px;
+    padding-left: 1%;
+    width: 280px;
+
+}

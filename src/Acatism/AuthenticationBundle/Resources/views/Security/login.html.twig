@@ -1,0 +1,103 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/login.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block title %}
+
+    Sign in to AcaTisM
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/loginCss.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+
+    {% block header %}
+
+        <div id="header">
+
+            <div id="logo">
+                <a href="{{ path('acatism_main_homepage') }}">  <img src="{{ asset('logo.png') }}" title="AcaTisM" alt="AcaTisM" /></a>
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    {% endblock %}
+
+    {% block main %}
+
+        <div id="maincontainer">
+
+        <div id="loginSection">
+
+
+            <div class="loginHeader">
+
+                <h1>Sign in to AcaTisM</h1>
+
+            </div>
+
+            <div class="loginMain">
+
+{% if error %}
+	<div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('login_check') }}" method="post">
+
+    <div class="inputClass">
+	<input class="logInput" type="text" placeholder="Username" id="username" name="_username" value="{{ last_username }}" />
+    </div>
+
+    <div class="inputClass">
+	<input class="logInput" type="password" placeholder="Password" id="password" name="_password" />
+    </div>
+
+
+    <div class="actionGroup">
+
+        <div class="inputClassButton">
+        	<button type="submit">Sign In</button>
+        </div>
+
+        <div class="actions">
+
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember Me</label>
+            &nbsp; &bull; &nbsp;
+            <a href="#">Forgot your Password ?</a>
+
+        </div>
+
+        <div class="clear"></div>
+
+
+    </div>
+
+
+</form>
+
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="loginFooter">
+
+                Don't have an account yet ? <a href="{{ path('register') }}">Sign up now >></a>
+
+            </div>
+
+            </div>
+
+        </div>
+
+
+    {% endblock %}
+
+

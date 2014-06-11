@@ -1,0 +1,37 @@
+acatism_main_homepage:
+    pattern:  /
+    defaults: { _controller: AcatismMainBundle:Default:index }
+
+acatism_profs:
+    pattern:  /profs
+    defaults: { _controller: AcatismMainBundle:Profs:profs }
+
+acatism_new_project:
+    pattern: /new_project
+    defaults: { _controller: AcatismMainBundle:Creation:newProject }
+
+acatism_new_task:
+    pattern: /new_task
+    defaults: { _controller: AcatismMainBundle:Creation:newTask }
+
+acatism_success:
+    pattern: /success
+    defaults: { _controller: AcatismMainBundle:Success:success }
+
+acatism_delete_project:
+    pattern: /delete_project/{project_id}
+    defaults: { _controller: AcatismMainBundle:Delete:deleteProject }
+
+acatism_delete_task:
+    pattern: /delete_task/{task_id}
+    defaults: { _controller: AcatismMainBundle:Delete:deleteTask }
+
+acatism_view_students:
+    pattern: /students/
+    defaults: { _controller: AcatismMainBundle:View:viewAllStudents }
+
+acatism_view_student:
+    pattern: /students/{username}
+    defaults: { _controller: AcatismMainBundle:View:viewStudent}
+
+

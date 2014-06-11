@@ -1,0 +1,107 @@
+{# src/Acatism/MainBundle/Show/ViewStudProfile.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block profile_section %}
+
+    <div id="profile">
+
+        <div class="profileleft">
+
+            <div class="widget">
+
+                <div class="widgettop">About</div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="University"><span>University</span>: {{student.university}}</li>
+                        <li name="Faculty"><span>Faculty</span>: {{student.faculty}}</li>
+
+
+
+                        <!-- for student: year and group, for teacher -->
+
+                        <li name="Year"><span>Year of study</span>: {{student.getYearOfStudy()}} </li>
+                        <li name="Group"><span>Group</span>: {{student.group}}</li>
+
+
+                        <li name="Email"><span>E-mail</span>: {{user.email}}</li>
+                        <li name="Phone"><span>Phone</span>: {{student.phone}}</li>
+
+                        <li name="Website"><span>Website</span>: <a href="#">{{student.website}}</a></span></li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profilecenter">
+
+            <div class="profile_picture">
+                <a href=""><img src="{{ student.getProfilePath() | apply_filter('profile_thumb') }}" alt="" />	</a>
+                <div class="profile_picture_details">
+                    <span class="title">Student</span>
+                    <br/>
+                    <span class="name">{{user.firstname ~ " " ~ user.lastname}}</span>
+                </div>
+                <div class="social">
+
+                    <img src="{{ asset("images/Facebook.png") }}" alt="Facebook" title="Facebook"/>
+                    <img src="{{ asset("images/GooglePlus.png") }}" alt="Google Plus" title="Google Plus"/>
+                    <img src="{{ asset("images/Twitter.png") }}" alt="Twitter" title="Twitter"/>
+                    <!-- <img src="{{ asset("images/LinkedIn.png") }}" alt="LinkedIn" title="LinkedIn"/> -->
+                    <img src="{{ asset("images/Skype.png") }}" alt="Skype" title="Skype"/>
+                    <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
+                    <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="profileright">
+
+            <div class="widget">
+
+                <div class="widgettop">Curriculum Vitae: </div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="Domains"><span>Domains of interest:</span> {{student.domains}} </li>
+                        <li name="ProgrammingLanguages"><span>Well-known programming languages</span>: {{student.getProgLanguages()}}</li>
+                        <li name="ProgramingTechs"><span>Well-known programming technologies</span>: {{student.getProgTechnologies()}}</li>
+                        <li name="Projects"><span>Projects</span>: {{student.projects}}</li>
+                        <li name="Languages"><span>Languages</span>: {{student.languages}}</li>
+                        <li name="CV" class="fullcv">
+
+                            <div  class="cvimg"><img src="{{ asset("images/cv.png") }}" alt="CV"/></div>
+                            <div class="cvlink">
+                                <a href="{{ asset(student.getCvPath()) }}" title="CV" >View full CV</a>
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+
+{% endblock %}
+
+ {% block activity_section %}
+
+ {% endblock %}
+

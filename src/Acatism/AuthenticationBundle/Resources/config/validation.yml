@@ -1,0 +1,16 @@
+# src/Acatism/AuthenticationBundle/Resources/config/validation.yml
+
+Acatism\AuthenticationBundle\Entity\User:
+      constraints:
+           - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+                    fields: email
+                    message: 'This e-mail is already in use'
+           - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+                    fields: username
+                    message: 'This username is already in use'
+      properties:
+           email:
+              - Regex:
+                   pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
+                   message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
+

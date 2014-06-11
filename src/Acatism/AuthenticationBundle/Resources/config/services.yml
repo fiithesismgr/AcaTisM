@@ -1,0 +1,7 @@
+parameters:
+#    acatism_authentication.example.class: Acatism\AuthenticationBundle\Example
+
+services:
+#    acatism_authentication.example:
+#        class: %acatism_authentication.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

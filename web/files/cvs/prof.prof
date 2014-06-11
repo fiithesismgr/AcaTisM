@@ -1,0 +1,32 @@
+// Ierarhii, template-uri, parametrizare
+
+//Exemplu template - swap
+
+void swap(int& x, int& y){
+int aux=x;
+x=y;
+y=aux;
+}
+
+void swap(char& x, char& y){
+char aux=x;
+...
+}
+
+void swap(float& u, float& y){
+float aux=u;
+...
+}
+
+template <class T>
+void swap(T& x, T&y){
+tip aux=x;
+x=y;
+y=aux;
+}
+
+///pentru problema cu biblioteca
+
+* cu meniu, sa pot adauga publicatie, pizda masii
+* la inceput avem o baza de date... un fisier cu publicatii
+introducere, eliminare 

@@ -1,0 +1,36 @@
+acatism_main:
+    resource: "@AcatismMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    path:	  /login
+    defaults: { _controller: AcatismAuthenticationBundle:Security:login }
+
+register:
+    path:	  /register
+    defaults: { _controller: AcatismAuthenticationBundle:Security:register }
+
+wizard_first:
+    path:	  /wizard_first
+    defaults: { _controller: AcatismMainBundle:Default:wizardFirst }
+
+wizard_second:
+    path:	  /wizard_second
+    defaults: { _controller: AcatismMainBundle:Default:wizardSecond }
+
+wizard_third:
+    path:     /wizard_third
+    defaults: { _controller: AcatismMainBundle:Default:wizardThird }
+
+logout:
+    path: /logout
+
+login_check:
+    path:	  /login_check
+_imagine:
+    resource: .
+    type:     imagine
+
+
+
+
