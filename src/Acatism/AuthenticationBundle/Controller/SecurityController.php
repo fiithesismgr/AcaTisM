@@ -33,6 +33,7 @@ class SecurityController extends Controller
    public function registerAction(Request $request) 
    {
    	    $user = new User();
+
         $form = $this->createForm(new UserType(), $user,
           array('action' => $this->generateUrl('register'),
             ));

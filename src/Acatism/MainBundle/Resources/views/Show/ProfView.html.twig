@@ -217,52 +217,37 @@
 
                          {% for project in projectlist %}
 
-                         <li id="project">
+                             <li id="project">
 
-                             <a href="#project">
+                                 <a href="#project">
 
-                                 <div class="projectHeader">
+                                     <div class="projectHeader">
 
-                                     <div class="content">
+                                         <div class="content">
 
-                                         {{ project.name }}
+                                             {{ project.name }}
+
+                                         </div>
+
+
+                                         <div class="extend">
+                                             <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                         </div>
+
+                                         <div class="clear"></div>
 
                                      </div>
 
-
-                                     <div class="extend">
-
-                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
-
-                                     </div>
-
-                                     <div class="clear"></div>
-
-                                 </div>
-
-                             </a>
+                                 </a>
 
                                  <div class="projectContent">
 
-                                 {{ project.description }}
+                                     {{ project.description }}
 
-                                     <div class="trashProject">
-
-                                         <a href="{{ path('acatism_delete_project', { 'project_id': project.id }) }}">
-                                         <img src="{{ asset('images/trash.png') }}" alt="Delete" title="Delete" />
-                                         </a>
-
-                                     </div>
+                                 </div>
 
 
-                                     <div class="clear"></div>
-
-                             </div>
-
-
-
-
-                         </li>
+                             </li>
 
                          {% endfor %}
 
@@ -271,13 +256,15 @@
                      <div class="addNew">
 
                          <a href="{{ path("acatism_new_project") }}">
-                         <img src=" {{ asset("images/add.png") }} " alt="Add" />
+
+                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
+
                          </a>
 
                      </div>
 
 
-                </div>
+                 </div>
 
                  <div class="activityPage" id="activityPage_3">
 

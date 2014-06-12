@@ -20,6 +20,7 @@ public function newProjectAction(Request $request){
         ->setAction($this->generateUrl('acatism_new_project'))
         ->add('name','text')
         ->add('description','textarea')
+        ->add('Add','submit')
         ->getForm();
 
     $form->handleRequest($request);

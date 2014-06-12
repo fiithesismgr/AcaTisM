@@ -453,6 +453,8 @@ a:hover{
 
     padding: 10px 0;
     border-top: 1px solid #E9EAED;
+    word-wrap: normal;
+    word-break: break-all;
 
 }
 
@@ -508,6 +510,8 @@ a:hover{
     z-index: 1;
     display: none;
     height: auto;
+    word-wrap: normal;
+    word-break: break-all;
 
 }
 
@@ -557,6 +561,8 @@ a:hover{
     z-index: 1;
     display: none;
     height: auto;
+    word-wrap: normal;
+    word-break: break-all;
 
 }
 

@@ -87,7 +87,7 @@ class DefaultController extends Controller
         }
         else
         {
-            return $this->render('AcatismAuthenticationBundle:Security:register.html.twig',
+            return $this->render('AcatismMainBundle:Show:WizzardView.html.twig',
                     array('form' => $form->createView(),
                     ));
         }         
