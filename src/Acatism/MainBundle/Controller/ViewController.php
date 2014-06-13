@@ -9,9 +9,9 @@ class ViewController extends Controller
 {
     public function viewStudentAction($username)
     {
-    	$user = $this->getDoctrine()
+    	$user = $this->get('doctrine_mongodb')
                         ->getRepository('AcatismAuthenticationBundle:User')
-                        ->findOneByUsername($username);
+                        ->findOneBy(array('username' => $username));
         if(is_null($user) || ($user->getRole()->getName() != 'student'))
         {
         	throw $this->createNotFoundException('Student with username ' . $username . ' does not exist.');
@@ -22,9 +22,9 @@ class ViewController extends Controller
         	return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
 
-        $student = $this->getDoctrine()
+        $student = $this->get('doctrine_mongodb')
         					->getRepository('AcatismMainBundle:Student')
-        					->findOneByUser($user);
+        					->findOneBy(array('user' => $user));
         if(is_null($student))
         {
         	throw $this->createNotFoundException('Student with username ' . $username . ' does not have a profile defined yet.');

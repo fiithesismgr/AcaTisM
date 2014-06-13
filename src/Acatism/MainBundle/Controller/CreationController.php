@@ -5,7 +5,7 @@ namespace Acatism\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acatism\MainBundle\Form\Type\ProjectType;
-use Acatism\MainBundle\Entity\Project;
+use Acatism\MainBundle\Document\Project;
 
 class CreationController extends Controller{
 
@@ -36,7 +36,7 @@ public function newProjectAction(Request $request){
         $project->setDescription($form->get('description')->getData());
 
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine_mongodb')->getManager();
         $em->persist($project);
         $em->flush();
 

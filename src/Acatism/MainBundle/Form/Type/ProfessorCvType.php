@@ -28,7 +28,7 @@ class ProfessorCvType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'Acatism\MainBundle\Entity\Professor',
+			'data_class' => 'Acatism\MainBundle\Document\Professor',
 			));
 	}
 }

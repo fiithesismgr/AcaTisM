@@ -17,15 +17,15 @@ class DeleteController extends Controller{
             $user = $this->getUser();
 
             // searching the project object by the given id
-            $project = $this->getDoctrine()
+            $project = $this->get('doctrine_mongodb')
                 ->getRepository('AcatismMainBundle:Project')
-                ->findOneById($project_id);
+                ->findOneBy(array('id' => $project_id));
 
             // if the project is owned by the current professor, delete it
 
             if($project->getProf() === $user){
 
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->get('doctrine_mongodb')->getManager();
                 $em->remove($project);
                 $em->flush();
 

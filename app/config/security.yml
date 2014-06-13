@@ -1,12 +1,12 @@
 security:
     encoders:
-        Acatism\AuthenticationBundle\Entity\User:
+        Acatism\AuthenticationBundle\Document\User:
             algorithm: bcrypt
 
     
     providers:
-        users_db:
-            entity: { class AcatismAuthenticationBundle:User }
+        my_mongo_provider:
+            mongodb: {class: Acatism\AuthenticationBundle\Document\User }
 
     firewalls:
         dev:

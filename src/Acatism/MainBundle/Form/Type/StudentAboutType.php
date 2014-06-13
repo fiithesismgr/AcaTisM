@@ -33,7 +33,7 @@ class StudentAboutType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'Acatism\MainBundle\Entity\Student',
+			'data_class' => 'Acatism\MainBundle\Document\Student',
 			));
 	}
 }

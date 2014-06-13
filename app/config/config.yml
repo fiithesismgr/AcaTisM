@@ -77,3 +77,14 @@ avalanche_imagine:
             type:    thumbnail
             options: { size: [32, 32], mode: outbound }
 
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://localhost:27017
+            options: {}
+    default_database: acatism
+    document_managers:
+        default:
+            auto_mapping: true
+    auto_generate_hydrator_classes: true 
+

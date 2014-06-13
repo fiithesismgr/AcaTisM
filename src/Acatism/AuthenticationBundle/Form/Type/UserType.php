@@ -34,7 +34,7 @@ class UserType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'Acatism\AuthenticationBundle\Entity\User',
+			'data_class' => 'Acatism\AuthenticationBundle\Document\User',
 			));
 	}
 }

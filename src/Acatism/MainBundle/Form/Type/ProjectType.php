@@ -22,7 +22,7 @@ class ProjectType extends AbstractType {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Acatism\MainBundle\Entity\Project'
+            'data_class' => 'Acatism\MainBundle\Document\Project'
         ));
     }
 

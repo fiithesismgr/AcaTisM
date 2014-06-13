@@ -5,7 +5,7 @@ namespace Acatism\AuthenticationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Acatism\AuthenticationBundle\Entity\User;
+use Acatism\AuthenticationBundle\Document\User;
 use Acatism\AuthenticationBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,6 +32,7 @@ class SecurityController extends Controller
 
    public function registerAction(Request $request) 
    {
+        
    	    $user = new User();
 
         $form = $this->createForm(new UserType(), $user,
@@ -42,18 +43,22 @@ class SecurityController extends Controller
 
    	   if ($form->isValid())
        {
-           $role = $this->getDoctrine()
+          //return new Response('ept');
+           $role = $this->get('doctrine_mongodb')
                         ->getRepository('AcatismAuthenticationBundle:Role')
-                        ->findOneByName($form->get('role')->getData());
-
+                        ->findOneBy(array('name' => $form->get('role')->getData()));
+           
            $user->setRole($role);
-
+          
            $factory = $this->get('security.encoder_factory');
+
            $encoder = $factory->getEncoder($user);
+          
            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+
            $user->setPassword($password);
 
-           $em = $this->getDoctrine()->getManager();
+           $em = $this->get('doctrine_mongodb')->getManager();
            $em->persist($user);
            $em->flush();
 
@@ -65,7 +70,8 @@ class SecurityController extends Controller
                         array('form' => $form->createView(),
                       ));
        }
-
+      
+       
    	    
    }
    

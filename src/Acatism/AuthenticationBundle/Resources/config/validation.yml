@@ -1,11 +1,11 @@
 # src/Acatism/AuthenticationBundle/Resources/config/validation.yml
 
-Acatism\AuthenticationBundle\Entity\User:
+Acatism\AuthenticationBundle\Document\User:
       constraints:
-           - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+           - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
                     fields: email
                     message: 'This e-mail is already in use'
-           - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+           - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
                     fields: username
                     message: 'This username is already in use'
       properties:

@@ -7,8 +7,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Acatism\MainBundle\Entity\Student;
-use Acatism\MainBundle\Entity\Professor;
+use Acatism\MainBundle\Document\Student;
+use Acatism\MainBundle\Document\Professor;
 use Acatism\MainBundle\Form\Type\StudentAboutType;
 use Acatism\MainBundle\Form\Type\StudentCvType;
 use Acatism\MainBundle\Form\Type\ProfessorAboutType;
@@ -20,11 +20,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-
+        //
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
         {
+            
             $student = $this->getStudentInformation();
-
             if(is_null($student))
             {
                 $this->get('session')->set('person', new Student());
@@ -49,9 +49,11 @@ class DefaultController extends Controller
             {
 
                 $user = $this->getUser();
-                $projects = $this->getDoctrine()
-                                 ->getRepository('AcatismMainBundle:Project')
-                                 ->findByProf($user,array( 'name' => 'ASC' ));
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
+                         ->field('prof')->references($user)
+                         ->sort('name', 'ASC');
+                $projects = $qb->getQuery()->execute();
 
 
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
@@ -150,9 +152,9 @@ class DefaultController extends Controller
         {
             $person->setUser($this->getUser());
             $person->upload();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($person);
+            $dm->flush();
             $this->get('session')->remove('person');
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
@@ -171,14 +173,21 @@ class DefaultController extends Controller
 
    public function getStudentInformation()
    {
-      return $this->getDoctrine()
-                        ->getRepository('AcatismMainBundle:Student')
-                        ->find($this->getUser());
+      
+
+      $dm = $this->get('doctrine_mongodb')->getManager();
+
+      $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+               ->field('user')->references($this->getUser());
+      return $qb->getQuery()->getSingleResult();
    }
    public function getProfessorInformation()
    {
-      return $this->getDoctrine()
-                        ->getRepository('AcatismMainBundle:Professor')
-                        ->find($this->getUser());
+
+      $dm = $this->get('doctrine_mongodb')->getManager();
+
+      $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+               ->field('user')->references($this->getUser());
+      return $qb->getQuery()->getSingleResult();
    }
 }
