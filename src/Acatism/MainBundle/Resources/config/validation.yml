@@ -1,6 +1,6 @@
 # src/Acatism/MainBundle/Resources/config/validation.yml
 
-Acatism\MainBundle\Entity\Project:
+Acatism\MainBundle\Document\Project:
     properties:
         name:
             - NotBlank: ~
