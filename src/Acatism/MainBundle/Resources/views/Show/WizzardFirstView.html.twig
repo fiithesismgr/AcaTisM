@@ -1,0 +1,46 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/register.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block title %}
+
+    Profile Info Wizard
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/forms.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block text_widget %}
+    <div class="inputClass">
+        {% set type = type|default('text') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block email_widget %}
+    <div class="inputClass">
+        {% set type = type|default('email') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block password_widget %}
+    <div class="inputClass">
+        {% set type = type|default('password') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+
+    {% block pageContent %}
+
+         {{ form(form) }}
+
+    {% endblock %}
