@@ -89,14 +89,7 @@ class DefaultController extends Controller
         }
         else
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             $viewtype = $this->getUser()->getRole()->getRole();
->>>>>>> 43b33edd391fae8d60f3112045f2d915a8bbd99b
-=======
-            $viewtype = $this->getUser()->getRole()->getRole();
->>>>>>> 43b33edd391fae8d60f3112045f2d915a8bbd99b
             return $this->render('AcatismMainBundle:Show:WizzardFirstView.html.twig',
                     array('form' => $form->createView(),
                           'viewtype' => $viewtype
