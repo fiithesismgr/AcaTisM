@@ -32,7 +32,7 @@ class SecurityController extends Controller
 
    public function registerAction(Request $request) 
    {
-        
+
    	    $user = new User();
 
         $form = $this->createForm(new UserType(), $user,
@@ -47,13 +47,13 @@ class SecurityController extends Controller
            $role = $this->get('doctrine_mongodb')
                         ->getRepository('AcatismAuthenticationBundle:Role')
                         ->findOneBy(array('name' => $form->get('role')->getData()));
-           
+
            $user->setRole($role);
-          
+
            $factory = $this->get('security.encoder_factory');
 
            $encoder = $factory->getEncoder($user);
-          
+
            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
 
            $user->setPassword($password);
@@ -63,14 +63,14 @@ class SecurityController extends Controller
            $em->flush();
 
            return $this->redirect($this->generateUrl('login'));
-       } 
+       }
        else
        {
            return $this->render('AcatismAuthenticationBundle:Security:register.html.twig',
                         array('form' => $form->createView(),
                       ));
        }
-      
+
        
    	    
    }

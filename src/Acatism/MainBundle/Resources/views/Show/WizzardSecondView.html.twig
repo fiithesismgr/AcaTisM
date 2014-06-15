@@ -1,0 +1,148 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/register.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block title %}
+
+    Profile Info Wizard
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/forms.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% form_theme form _self %}
+
+{% block textarea_widget %}
+    <div class="inputClass">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+{% endblock %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="errorSection">
+                    <div class="icon">
+                        <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                    </div>
+                    <div class="message">
+                        {{ error.message }}
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+    {% block pageContent %}
+
+        <div id="wizardSection">
+
+            <div class="wizardHeader">
+
+                <h1>Complete your profile info - Second Step</h1>
+
+            </div>
+
+            <div class="wizardMain">
+
+                {% if (viewtype == 'ROLE_PROFESSOR') %}
+
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.domains) }}
+                    {{  form_errors(form.teaching) }}
+                    {{  form_errors(form.publications) }}
+                    {{  form_errors(form.languages) }}
+
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form.domains, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Domains' } }) }}
+
+                    {{ form_widget(form.teaching, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Teaching' } }) }}
+
+                    {{ form_widget(form.publications, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Publications' } }) }}
+
+                    {{ form_widget(form.languages, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Languages' } }) }}
+
+                    <div class="clear"></div>
+
+                    <div class="actionGroup">
+
+                        <div class="inputClassButton">
+                            {{ form_widget(form.previous) }}
+                        </div>
+
+                        <div class="inputClassButton" style="padding-left: 5%;">
+                            {{ form_widget(form.next) }}
+
+                        </div>
+
+
+                        <div class="clear"></div>
+
+
+                    </div>
+
+                    {{ form_end(form) }}
+
+                {% elseif (viewtype == 'ROLE_STUDENT') %}
+
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.prog_languages) }}
+                    {{  form_errors(form.prog_technologies) }}
+                    {{  form_errors(form.projects) }}
+                    {{  form_errors(form.languages) }}
+
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form.domains, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Domains' } }) }}
+
+                    {{ form_widget(form.prog_languages, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Well-known Programming Languages' } })  }}
+
+                    {{ form_widget(form.prog_technologies, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Well-known Programming Techs' } }) }}
+
+                    {{ form_widget(form.projects, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Projects' } }) }}
+
+                    {{ form_widget(form.languages, { 'attr': { 'class': 'textareaInput', 'placeholder': 'Languages' } }) }}
+
+                    <div class="clear"></div>
+
+                    <div class="actionGroup">
+
+                        <div class="inputClassButton">
+                            {{ form_widget(form.previous) }}
+                        </div>
+
+                        <div class="inputClassButton" style="padding-left: 5%;">
+                            {{ form_widget(form.next) }}
+
+                        </div>
+
+
+                        <div class="clear"></div>
+
+
+                    </div>
+
+                    {{ form_end(form) }}
+
+
+                {% endif %}
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+
+
+    {% endblock %}

@@ -67,7 +67,7 @@ class DefaultController extends Controller
 
     }
 
-    public function wizardFirstAction(Request $request) 
+   public function wizardFirstAction(Request $request)
    {
 
         $person = $this->get('session')->get('person');
@@ -89,12 +89,15 @@ class DefaultController extends Controller
         }
         else
         {
-            return $this->render('AcatismMainBundle:Show:WizzardView.html.twig',
+            $viewtype = $this->getUser()->getRole()->getRole();
+            return $this->render('AcatismMainBundle:Show:WizzardFirstView.html.twig',
                     array('form' => $form->createView(),
+                          'viewtype' => $viewtype
                     ));
         }         
    }
-   public function wizardSecondAction(Request $request) 
+
+   public function wizardSecondAction(Request $request)
    {
         $person = $this->get('session')->get('person');
 
@@ -115,7 +118,7 @@ class DefaultController extends Controller
                 $this->get('session')->set('person', $person);
                 return $this->redirect($this->generateUrl('wizard_first'));
             }
-            elseif($form->get('upload')->isClicked())
+            elseif($form->get('next')->isClicked())
             {
                 
                 $this->get('session')->remove('person');
@@ -129,9 +132,11 @@ class DefaultController extends Controller
         }
         else
         {
-            return $this->render('AcatismAuthenticationBundle:Security:register.html.twig',
-                            array('form' => $form->createView(),
-                          ));
+            $viewtype = $this->getUser()->getRole()->getRole();
+            return $this->render('AcatismMainBundle:Show:WizzardSecondView.html.twig',
+                array('form' => $form->createView(),
+                    'viewtype' => $viewtype
+                ));
         }      
    }
 
@@ -160,11 +165,12 @@ class DefaultController extends Controller
         }
         else
         {
-            return $this->render('AcatismAuthenticationBundle:Security:register.html.twig',
-                            array('form' => $form->createView(),
-                          ));
+            $viewtype = $this->getUser()->getRole()->getRole();
+            return $this->render('AcatismMainBundle:Show:WizzardThirdView.html.twig',
+                array('form' => $form->createView(),
+                    'viewtype' => $viewtype
+                ));
         }
-
 
         
 

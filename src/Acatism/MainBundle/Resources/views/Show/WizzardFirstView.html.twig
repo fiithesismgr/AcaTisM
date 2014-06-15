@@ -24,23 +24,146 @@
     </div>
 {% endblock %}
 
-{% block email_widget %}
+{% block url_widget %}
     <div class="inputClass">
-        {% set type = type|default('email') %}
+        {% set type = type|default('url') %}
         {{ block('form_widget_simple') }}
     </div>
 {% endblock %}
 
-{% block password_widget %}
+{% block number_widget %}
     <div class="inputClass">
-        {% set type = type|default('password') %}
+        {% set type = type|default('number') %}
         {{ block('form_widget_simple') }}
     </div>
 {% endblock %}
 
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="errorSection">
+                    <div class="icon">
+                        <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                    </div>
+                    <div class="message">
+                        {{ error.message }}
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
 
     {% block pageContent %}
 
-         {{ form(form) }}
+        <div id="wizardSection">
+
+            <div class="wizardHeader">
+
+                <h1>Complete your profile info - First Step</h1>
+
+            </div>
+
+            <div class="wizardMain">
+
+
+                {% if (viewtype == 'ROLE_PROFESSOR') %}
+
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.university) }}
+                    {{  form_errors(form.faculty) }}
+                    {{  form_errors(form.title) }}
+                    {{  form_errors(form.office) }}
+                    {{  form_errors(form.phone) }}
+                    {{  form_errors(form.website) }}
+
+                {{ form_start(form) }}
+
+                {{ form_widget(form.university, { 'attr': { 'class': 'normalInput', 'placeholder': 'University' } }) }}
+
+                {{ form_widget(form.faculty, { 'attr': { 'class': 'normalInput', 'placeholder': 'Faculty' } }) }}
+
+                {{ form_widget(form.title, { 'attr': { 'class': 'normalInput', 'placeholder': 'Title' } }) }}
+
+                {{ form_widget(form.office, { 'attr': { 'class': 'normalInput', 'placeholder': 'Office' } }) }}
+
+                {{ form_widget(form.phone, { 'attr': { 'class': 'normalInput', 'placeholder': 'Phone' } }) }}
+
+                {{ form_widget(form.website, { 'attr': { 'class': 'normalInput', 'placeholder': 'Website' } }) }}
+
+                <div class="clear"></div>
+
+                <div class="actionGroup">
+
+                    <div class="inputClassButton">
+                        {{ form_widget(form.next) }}
+                    </div>
+
+                    <div class="clear"></div>
+
+
+                </div>
+
+                    {{ form_end(form) }}
+
+                {% elseif (viewtype == 'ROLE_STUDENT') %}
+
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.university) }}
+                    {{  form_errors(form.faculty) }}
+                    {{  form_errors(form.year_of_study) }}
+                    {{  form_errors(form.group) }}
+                    {{  form_errors(form.phone) }}
+                    {{  form_errors(form.website) }}
+
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form.university, { 'attr': { 'class': 'normalInput', 'placeholder': 'University' } }) }}
+
+                    {{ form_widget(form.faculty, { 'attr': { 'class': 'normalInput', 'placeholder': 'Faculty' } }) }}
+
+
+                    <div class="inputClassSelect">
+                        <div class="label">
+                            Year of study:
+                            </div>
+
+                        {{ form_widget(form.year_of_study, { 'attr': { 'class': 'selectInput'} }) }}
+
+                        <div class="clear"></div>
+                    </div>
+
+                    {{ form_widget(form.group, { 'attr': { 'class': 'normalInput', 'placeholder': 'Office' } }) }}
+
+                    {{ form_widget(form.phone, { 'attr': { 'class': 'normalInput', 'placeholder': 'Phone' } }) }}
+
+                    {{ form_widget(form.website, { 'attr': { 'class': 'normalInput', 'placeholder': 'Website' } }) }}
+
+                    <div class="clear"></div>
+
+                    <div class="actionGroup">
+
+                        <div class="inputClassButton">
+                            {{ form_widget(form.next) }}
+                        </div>
+                        <div class="clear"></div>
+
+
+                    </div>
+
+                    {{ form_end(form) }}
+
+
+                {% endif %}
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
 
     {% endblock %}
