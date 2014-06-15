@@ -400,14 +400,11 @@ a:hover{
 
 .activitycontent{
 
-    /* background: #F6F7F8; */
     border-left: 4px solid #449960;
-    /* border-top: 1px solid #D3D6DB;
-    border-right: 1px solid #D3D6DB;
-    border-bottom: 1px solid #D3D6DB; */
     float: left;
     width: 65%;
     padding: 3% 0 5% 5%;
+    min-height: 400px;
 
 }
 
@@ -510,10 +507,26 @@ a:hover{
     z-index: 1;
     display: none;
     height: auto;
+
+}
+
+.activitycontent #task .description{
+
     word-wrap: normal;
     word-break: break-all;
 
 }
+
+.activitycontent #task .specifications{
+
+    color: #449960;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding-top: 10px;
+
+}
+
 
 .activitycontent .projectList {
 
@@ -566,7 +579,7 @@ a:hover{
 
 }
 
-.activitycontent #project .projectContent .trashProject{
+.trash{
 
     float: right;
     padding-top: 4%;

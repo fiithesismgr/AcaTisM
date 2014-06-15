@@ -8,8 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectType extends AbstractType {
-
+class TaskType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +18,7 @@ class ProjectType extends AbstractType {
             ->add('dueDate', 'date',  array('required' => true))
             ->add('requireFile', 'checkbox',  array('label' => 'Require document', 'required' => false))
             ->add('requireFileFormat', 'checkbox',  array('label' => 'Require document to respect the defined format', 'required' => false))
-            ->add('requireSourceCode', 'checkbox',  array('label' => 'Require source code', 'required' => false));
+            ->add('requireSourceCode', 'checkbox',  array('label' => 'Require source code', 'required' => false))
             ->add('finish', 'submit', array('label' => 'Add task'));
     }
 
@@ -36,3 +35,5 @@ class ProjectType extends AbstractType {
     }
 
 }
+
+?>

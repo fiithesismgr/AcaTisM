@@ -56,8 +56,18 @@ class DefaultController extends Controller
                 $projects = $qb->getQuery()->execute();
 
 
+                $user = $this->getUser();
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
+                         ->field('user')
+                         ->references($user)
+                         ->sort('dueDate', 'ASC');
+                $tasks = $qb->getQuery()->execute();
+
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
-                  array('professor' => $professor, 'projectlist' => $projects));
+                  array('professor' => $professor,
+                        'projectlist' => $projects,
+                        'tasklist' => $tasks ));
             }
         }
 
