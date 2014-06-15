@@ -23,7 +23,7 @@ class DeleteController extends Controller{
 
             // if the project is owned by the current professor, delete it
 
-            if($project->getProf() === $user){
+            if($project->getProfessor() === $user){
 
                 $em = $this->get('doctrine_mongodb')->getManager();
                 $em->remove($project);
@@ -56,7 +56,7 @@ class DeleteController extends Controller{
 
             // if the project is owned by the current professor, delete it
 
-            if($task->getUser() === $user){
+            if($task->getProfessor() === $user){
 
                 $em = $this->get('doctrine_mongodb')->getManager();
                 $em->remove($task);
@@ -65,16 +65,12 @@ class DeleteController extends Controller{
                 return $this->redirect($this->generateUrl('acatism_main_homepage'));
 
             }
-
         }
-
         else
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
 
     }
-
-
-    }
+}
 
 ?>
 

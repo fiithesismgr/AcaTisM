@@ -40,7 +40,7 @@ class Project
     /**
      * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
      */
-    protected $prof;
+    protected $professor;
 
     /**
      * Get id
@@ -97,24 +97,28 @@ class Project
     }
 
     /**
-     * Set prof
+     * Set professor
      *
-     * @param Acatism\AuthenticationBundle\Document\User $prof
+     * @param Acatism\AuthenticationBundle\Document\User $professor
      * @return self
      */
-    public function setProf(\Acatism\AuthenticationBundle\Document\User $prof)
+    public function setProfessor(\Acatism\AuthenticationBundle\Document\User $professor)
     {
-        $this->prof = $prof;
+        if($professor->getRole()->getRole() === 'ROLE_PROFESSOR')
+        {
+            $this->professor = $professor;
+        }
+        
         return $this;
     }
 
     /**
-     * Get prof
+     * Get professor
      *
-     * @return Acatism\AuthenticationBundle\Document\User $prof
+     * @return Acatism\AuthenticationBundle\Document\User $professor
      */
-    public function getProf()
+    public function getProfessor()
     {
-        return $this->prof;
+        return $this->professor;
     }
 }

@@ -33,7 +33,7 @@ public function newProjectAction(Request $request){
 
         //$id = $user->getId();
 
-        $project->setProf($user);
+        $project->setProfessor($user);
         $project->setName($form->get('name')->getData());
         $project->setDescription($form->get('description')->getData());
 
@@ -66,7 +66,7 @@ public function newProjectAction(Request $request){
 
             $user = $this->getUser();
 
-            $task->setUser($user);
+            $task->setProfessor($user);
             $task->setTitle($form->get('title')->getData());
             $task->setDescription($form->get('description')->getData());
             $task->setDueDate($form->get('dueDate')->getData());

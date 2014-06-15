@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Acatism\AuthenticationBundle\Document\User;
+use Acatism\AuthenticationBundle\Document\Role;
 use Acatism\AuthenticationBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,7 +33,7 @@ class SecurityController extends Controller
 
    public function registerAction(Request $request) 
    {
-
+        
    	    $user = new User();
 
         $form = $this->createForm(new UserType(), $user,
@@ -70,8 +71,25 @@ class SecurityController extends Controller
                         array('form' => $form->createView(),
                       ));
        }
+      
+       /*
+       $role1 = new Role();
+       $role1->setName('student');
+       $role1->setRole('ROLE_STUDENT');
 
-       
+       $role2 = new Role();
+       $role2->setName('professor');
+       $role2->setRole('ROLE_PROFESSOR');
+
+       $em = $this->get('doctrine_mongodb')->getManager();
+       $em->persist($role1);
+       $em->flush();
+
+       $em->persist($role2);
+       $em->flush();
+
+       return new Response('wwoooow');
+       */
    	    
    }
    

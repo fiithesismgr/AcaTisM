@@ -51,7 +51,7 @@ class DefaultController extends Controller
                 $user = $this->getUser();
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
-                         ->field('prof')->references($user)
+                         ->field('professor')->references($user)
                          ->sort('name', 'ASC');
                 $projects = $qb->getQuery()->execute();
 
@@ -59,7 +59,7 @@ class DefaultController extends Controller
                 $user = $this->getUser();
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                         ->field('user')
+                         ->field('professor')
                          ->references($user)
                          ->sort('dueDate', 'ASC');
                 $tasks = $qb->getQuery()->execute();

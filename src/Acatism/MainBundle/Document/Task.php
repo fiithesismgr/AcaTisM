@@ -21,7 +21,7 @@ class Task
     /**
     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
     */
-    protected $user;
+    protected $professor;
     
     /**
     * @MongoDB\Field(type="string")
@@ -73,25 +73,29 @@ class Task
     }
 
     /**
-     * Set user
+     * Set professor
      *
-     * @param Acatism\AuthenticationBundle\Document\User $user
+     * @param Acatism\AuthenticationBundle\Document\User $professor
      * @return self
      */
-    public function setUser(\Acatism\AuthenticationBundle\Document\User $user)
+    public function setProfessor(\Acatism\AuthenticationBundle\Document\User $professor)
     {
-        $this->user = $user;
+        if($professor->getRole()->getRole() === 'ROLE_PROFESSOR')
+        {
+            $this->professor = $professor;
+        }
+        
         return $this;
     }
 
     /**
-     * Get user
+     * Get professor
      *
-     * @return Acatism\AuthenticationBundle\Document\User $user
+     * @return Acatism\AuthenticationBundle\Document\User $professor
      */
-    public function getUser()
+    public function getprofessor()
     {
-        return $this->user;
+        return $this->professor;
     }
 
     /**
@@ -224,5 +228,15 @@ class Task
     public function getRequireSourceCode()
     {
         return $this->requireSourceCode;
+    }
+
+    /**
+     * Get professor
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $professor
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
     }
 }
