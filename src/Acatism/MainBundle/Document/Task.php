@@ -88,15 +88,6 @@ class Task
         return $this;
     }
 
-    /**
-     * Get professor
-     *
-     * @return Acatism\AuthenticationBundle\Document\User $professor
-     */
-    public function getprofessor()
-    {
-        return $this->professor;
-    }
 
     /**
      * Set title
