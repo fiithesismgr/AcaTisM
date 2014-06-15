@@ -39,6 +39,26 @@
 {% endblock %}
 
 
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+                {% for error in errors %}
+                    <div class="errorSection">
+                        <div class="icon">
+                            <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                        </div>
+                        <div class="message">
+                            {{ error.message }}
+                        </div>
+
+                        <div class="clear"></div>
+
+                    </div>
+                {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
 
     {% block header %}
 
@@ -58,15 +78,24 @@
 
         <div id="maincontainer">
 
-            <div id="registerSection">
+            <div id="formSection">
 
-                <div class="registerHeader">
+                <div class="formSectionHeader">
 
                     <h1>Register to AcaTisM</h1>
 
                 </div>
 
-                <div class="registerMain">
+                <div class="formSectionMain">
+
+                    {{ form_errors(form) }}
+                    {{ form_errors(form.firstname) }}
+                    {{  form_errors(form.lastname) }}
+                    {{  form_errors(form.email) }}
+                    {{  form_errors(form.username) }}
+                    {{  form_errors(form.password) }}
+                    {{  form_errors(form.role) }}
+
 
                     {{ form_start(form) }}
 
@@ -82,7 +111,7 @@
 
                     <div class="chooseRole">
                         <div class="label">
-                        Account Type:
+                            Account Type:
                         </div>
                         {{ form_widget(form.role, { 'attr': { 'class': 'optionInput' } }) }}
                         <div class="clear"></div>
@@ -90,31 +119,31 @@
 
                     <div class="clear"></div>
 
-                        <div class="actionGroup">
+                    <div class="actionGroup">
 
-                            <div class="inputClassButton">
-                                {{ form_widget(form.register) }}
-                            </div>
+                        <div class="inputClassButton">
+                            {{ form_widget(form.register) }}
+                        </div>
 
-                            <div class="actions">
+                        <div class="actions">
 
-                                <input type="checkbox" id="remember" />
-                                <label for="remember">Remember Me</label>
-
-                            </div>
-
-                       {{ form_end(form) }}
-
-                            <div class="clear"></div>
-
+                            <input type="checkbox" id="remember" />
+                            <label for="remember">Remember Me</label>
 
                         </div>
+
+                        {{ form_end(form) }}
+
+                        <div class="clear"></div>
+
+
+                    </div>
 
                 </div>
 
                 <div class="clear"></div>
 
-                <div class="registerFooter">
+                <div class="formSectionFooter">
 
                     Already have an account ? <a href="{{ path('login') }}">Sign in >></a>
 

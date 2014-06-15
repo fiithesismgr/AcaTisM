@@ -16,8 +16,8 @@ class ProfessorCvType extends AbstractType
 		     ->add('teaching', 'textarea',  array('required' => true, 'label' => 'Teaching'))
 		     ->add('publications', 'textarea',  array('required' => true, 'label' => 'Publications'))
 		     ->add('languages', 'textarea', array('required' => true, 'label' => 'Languages'))
-		     ->add('previous', 'submit', array('label' => 'Go to previous page'))
-		     ->add('upload', 'submit', array('label' => 'Go to uploads page'));
+		     ->add('previous', 'submit', array('label' => 'Previous page'))
+		     ->add('next', 'submit', array('label' => 'Next page'));
 	}
 
 	public function getName()

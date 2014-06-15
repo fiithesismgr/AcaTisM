@@ -17,8 +17,8 @@ class StudentCvType extends AbstractType
 		     ->add('prog_technologies', 'textarea',  array('required' => true))
 		     ->add('projects', 'textarea',  array('required' => true))
 		     ->add('languages', 'textarea', array('required' => true))
-		     ->add('previous', 'submit')
-		     ->add('upload', 'submit', array('label' => 'Go to uploads page'));
+		     ->add('previous', 'submit', array('label' => 'Previous page'))
+		     ->add('next', 'submit', array('label' => 'Next page'));
 	}
 
 	public function getName()

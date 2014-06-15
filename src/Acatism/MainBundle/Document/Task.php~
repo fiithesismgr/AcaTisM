@@ -1,0 +1,64 @@
+<?php
+// src/Acatism/MainBundle/Document/Task.php
+
+namespace Acatism\MainBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+* Acatism\MainBundle\Document\Task
+*
+* @MongoDB\Document
+*/
+
+class Task
+{
+    /**
+    * @MongoDB\Id(strategy="AUTO")
+    */
+    protected $id;
+    
+    /**
+    * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+    */
+    protected $user;
+    
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $title;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $description;
+
+    
+    /**
+    * @MongoDB\Field(type="date")
+    */
+    protected $dueDate;
+
+    /**
+    * @MongoDB\Field(type="boolean")
+    */
+    protected $requireFile;
+
+    /**
+    * @MongoDB\Field(type="boolean")
+    */
+    protected $requireFileFormat;
+
+    /**
+    * @MongoDB\Field(type="boolean")
+    */
+    protected $requireSourceCode;
+
+    public function __construct()
+    {
+        $this->requireFile = false;
+        $this->requireFileFormat = false;
+        $this->requireSourceCode = false;
+  
+    }
+}

@@ -34,29 +34,39 @@
 
         <div id="maincontainer">
 
-        <div id="loginSection">
+        <div id="formSection">
 
 
-            <div class="loginHeader">
+            <div class="formSectionHeader">
 
                 <h1>Sign in to AcaTisM</h1>
 
             </div>
 
-            <div class="loginMain">
+            <div class="formSectionMain">
 
-{% if error %}
-	<div>{{ error.message }}</div>
-{% endif %}
+            {% if error %}
+	           <div class="errorSection">
+                   <div class="icon">
+                   <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                   </div>
+                   <div class="message">
+                   {{ error.message }}
+                   </div>
+
+                   <div class="clear"></div>
+
+               </div>
+            {% endif %}
 
 <form action="{{ path('login_check') }}" method="post">
 
     <div class="inputClass">
-	<input class="logInput" type="text" placeholder="Username" id="username" name="_username" value="{{ last_username }}" />
+	<input class="normalInput" type="text" placeholder="Username" id="username" name="_username" value="{{ last_username }}" />
     </div>
 
     <div class="inputClass">
-	<input class="logInput" type="password" placeholder="Password" id="password" name="_password" />
+	<input class="normalInput" type="password" placeholder="Password" id="password" name="_password" />
     </div>
 
 
@@ -87,7 +97,7 @@
 
             <div class="clear"></div>
 
-            <div class="loginFooter">
+            <div class="formSectionFooter">
 
                 Don't have an account yet ? <a href="{{ path('register') }}">Sign up now >></a>
 

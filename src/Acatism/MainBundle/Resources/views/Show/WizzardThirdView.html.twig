@@ -4,7 +4,7 @@
 
 {% block title %}
 
-    Register to AcaTisM
+    Profile Info Wizard
 
 {% endblock %}
 
@@ -17,74 +17,68 @@
 
 {% form_theme form _self %}
 
-{% block text_widget %}
-    <div class="inputClass">
-        {% set type = type|default('text') %}
-        {{ block('form_widget_simple') }}
-    </div>
-{% endblock %}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="errorSection">
+                    <div class="icon">
+                        <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                    </div>
+                    <div class="message">
+                        {{ error.message }}
+                    </div>
 
-{% block email_widget %}
-    <div class="inputClass">
-        {% set type = type|default('email') %}
-        {{ block('form_widget_simple') }}
-    </div>
-{% endblock %}
-
-{% block password_widget %}
-    <div class="inputClass">
-        {% set type = type|default('password') %}
-        {{ block('form_widget_simple') }}
-    </div>
-{% endblock %}
-
-
-
-    {% block header %}
-
-        <div id="header">
-
-            <div id="logo">
-                <a href="{{ path('acatism_main_homepage') }}">  <img src="{{ asset('logo.png') }}" title="AcaTisM" alt="AcaTisM" /></a>
-            </div>
-
-        </div>
-
-        <div class="clear"></div>
-
-    {% endblock %}
-
-    {% block main %}
-
-        <div id="maincontainer">
-
-            <div id="registerSection">
-
-                <div class="registerHeader">
-
-                    <h1>Register to AcaTisM</h1>
+                    <div class="clear"></div>
 
                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
 
-                <div class="registerMain">
+    {% block pageContent %}
+
+        <div id="wizardSection">
+
+            <div class="wizardHeader">
+
+                <h1>Choose your files - Third Step</h1>
+
+            </div>
+
+            <div class="wizardMain">
+
+                {% if (viewtype == 'ROLE_PROFESSOR') %}
+
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.profileFile) }}
+                    {{  form_errors(form.cvFile) }}
 
                     {{ form_start(form) }}
 
-                    {{ form_widget(form.firstname, { 'attr': { 'class': 'normalInput', 'placeholder': 'Firstname' } }) }}
+                    <div class="file">
 
-                    {{ form_widget(form.lastname, { 'attr': { 'class': 'normalInput', 'placeholder': 'Lastname' } }) }}
-
-                    {{ form_widget(form.email, { 'attr': { 'class': 'normalInput', 'placeholder': 'e-mail' } }) }}
-
-                    {{ form_widget(form.username, { 'attr': { 'class': 'normalInput', 'placeholder': 'username' } }) }}
-
-                    {{ form_widget(form.password, { 'attr': { 'class': 'normalInput', 'placeholder': 'password' } }) }}
-
-                    <div class="chooseRole">
                         <div class="label">
-                            Account Type:
+                            Upload your profile picture:
                         </div>
-                        {{ form_widget(form.role, { 'attr': { 'class': 'optionInput' } }) }}
+
+                        <div class="choose">
+                            {{ form_widget(form.profileFile, { 'attr': { 'class': 'fileInput' } }) }}
+                        </div>
+
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                    <div class="file">
+                        <div class="label">
+                            Upload your CV file:
+                        </div>
+                        <div class="choose">
+                            {{ form_widget(form.cvFile, { 'attr': { 'class': 'fileInput' } }) }}
+                        </div>
                         <div class="clear"></div>
                     </div>
 
@@ -93,34 +87,72 @@
                     <div class="actionGroup">
 
                         <div class="inputClassButton">
-                            {{ form_widget(form.register) }}
+                            {{ form_widget(form.finish) }}
                         </div>
 
-                        <div class="actions">
-
-                            <input type="checkbox" id="remember" />
-                            <label for="remember">Remember Me</label>
-
-                        </div>
-
-                        {{ form_end(form) }}
 
                         <div class="clear"></div>
 
 
                     </div>
 
-                </div>
+                    {{ form_end(form) }}
 
-                <div class="clear"></div>
+                {% elseif (viewtype == 'ROLE_STUDENT') %}
 
-                <div class="registerFooter">
+                    {{  form_errors(form) }}
+                    {{  form_errors(form.profileFile) }}
+                    {{  form_errors(form.cvFile) }}
 
-                    Already have an account ? <a href="{{ path('login') }}">Sign in >></a>
+                    {{ form_start(form) }}
 
-                </div>
+                    <div class="file">
+
+                        <div class="label">
+                            Upload your profile picture:
+                        </div>
+
+                        <div class="choose">
+                            {{ form_widget(form.profileFile, { 'attr': { 'class': 'fileInput' } }) }}
+                        </div>
+
+                        <div class="clear"></div>
+
+                    </div>
+
+
+                    <div class="file">
+                        <div class="label">
+                            Upload your CV file:
+                        </div>
+                        <div class="choose">
+                            {{ form_widget(form.cvFile, { 'attr': { 'class': 'fileInput' } }) }}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="actionGroup">
+
+                        <div class="inputClassButton">
+                            {{ form_widget(form.finish) }}
+                        </div>
+
+
+                        <div class="clear"></div>
+
+
+                    </div>
+
+                    {{ form_end(form) }}
+
+
+                {% endif %}
 
             </div>
+
+            <div class="clear"></div>
 
         </div>
 

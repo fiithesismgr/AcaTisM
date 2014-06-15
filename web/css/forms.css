@@ -4,7 +4,35 @@
 
 }
 
-#loginSection{
+/* errors */
+
+.errorSection{
+
+    background: none repeat scroll 0 0 #F6CECE;
+    border-radius: 2px;
+    color: #DF0101;
+    margin: 1%;
+    padding: 1%;
+
+}
+
+.errorSection .icon{
+
+    float: left;
+
+}
+
+.errorSection .message{
+
+    float: left;
+    padding: 0.3%;
+
+}
+
+
+/* forms */
+
+#formSection{
 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
@@ -13,19 +41,19 @@
 
 }
 
-#loginSection a{
+#formSection a{
 
     font-weight: normal;
 
 }
 
-.loginHeader{
+.formSectionHeader{
 
     padding: 5% 0 0 15%;
 
 }
 
-.loginHeader h1{
+.formSectionHeader h1{
 
     font-weight: lighter;
     font-size: 24px;
@@ -34,20 +62,19 @@
 
 }
 
-.loginMain{
+.formSectionMain{
 
     padding: 2% 15%;
 }
 
-.loginMain input:focus{
+.formSectionMain input:focus{
 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset, 0 0 8px rgba(38, 241, 145, 0.4);
     border: 1px solid #449960;
 
 }
 
-
-.loginMain button{
+.formSectionMain button{
 
     background: linear-gradient(to bottom, #449960 0%, #44F085 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
@@ -65,7 +92,7 @@
 
 }
 
-.loginFooter{
+.formSectionFooter{
 
     background: #f4f4f4;
     padding: 3% 15%;
@@ -95,9 +122,18 @@
 }
 
 
+/* inputs */
+
 .inputClass{
 
     padding: 1%;
+
+}
+
+.inputClassSelect{
+
+    padding: 1%;
+    color: #666;
 
 }
 
@@ -105,18 +141,6 @@
 
     color: rgba(0, 0, 0, 0.4);
     padding: 1%;
-
-}
-
-
-.logInput{
-
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    height: 25px;
-    padding-left: 1%;
-    width: 280px;
 
 }
 
@@ -136,53 +160,86 @@
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     height: 25px;
     width: 280px;
+    font-size: 16px;
+    float: left;
+    padding-left: 4%;
+
+}
+
+.selectInput{
+
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: 2%;
+
+}
+
+.textareaInput{
+
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 60px;
+    width: 400px;
+    padding-left: 1%;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+
+.label{
+
+    float: left;
+    font-size: 12px;
+    padding-top: 0.5%;
 
 }
 
 
-#registerSection{
+/* wizard */
+
+#wizardSection{
 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    margin: 3% auto 0;
-    width: 85%;
+    margin: 10% auto 0;
+    width: 60%;
 
 }
 
-#registerSection a{
+#wizardSection a{
 
     font-weight: normal;
 
 }
 
-.registerHeader{
+.wizardHeader{
 
-    padding: 5% 0 0 15%;
+    background: none repeat scroll 0 0 #F4F4F4;
+    color: #888888;
+    padding: 2%;
 
 }
 
-.registerHeader h1{
+.wizardHeader h1{
 
     font-weight: lighter;
-    font-size: 24px;
+    font-size: 18px;
     margin: 0;
-    padding-left: 10px;
 
 }
 
-.registerMain{
+.wizardMain{
 
-    padding: 2% 15%;
+    padding: 5% 15%;
 }
 
-.registerMain input:focus{
+.wizardMain input:focus{
 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset, 0 0 8px rgba(38, 241, 145, 0.4);
     border: 1px solid #449960;
 
 }
 
-.registerMain button{
+.wizardMain button{
 
     background: linear-gradient(to bottom, #449960 0%, #44F085 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
@@ -196,33 +253,36 @@
     margin: 0 auto;
     padding: 12px 5px;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
-    width: 80px;
+    min-width: 80px;
 
 }
 
-.registerFooter{
+.wizardMain .actionGroup{
 
-    background: #f4f4f4;
-    padding: 3% 15%;
-    font-size: 12px;
-    color: #8899A6;
+    padding: 3% 3%;
+
 
 }
 
-.label{
+/* file browsers */
+
+.file{
+
+    padding: 1%;
+    color: #777;
+
+}
+
+.file .label{
 
     float: left;
-    font-size: 12px;
-    padding-top: 0.5%;
+    padding: 1%;
 
 }
 
-.optionInput{
+.file .choose{
 
-    font-size: 16px;
     float: left;
-    padding-left: 4%;
 
 }
-
 
