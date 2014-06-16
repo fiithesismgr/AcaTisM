@@ -21,7 +21,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "avalanche123/imagine-bundle": "v2.1",
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/mongodb-odm-bundle": "3.0.*@dev"
+        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+        "misd/guzzle-bundle": "~1.0",
+        "knplabs/github-api": "*@dev"
     },
     "scripts": {
         "post-install-cmd": [

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Acatism\AuthenticationBundle\AcatismAuthenticationBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new Misd\GuzzleBundle\MisdGuzzleBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
