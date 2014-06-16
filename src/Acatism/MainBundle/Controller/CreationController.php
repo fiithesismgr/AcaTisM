@@ -90,23 +90,31 @@ public function newTaskAction(Request $request){
          }
     }
 
-public function newApplicationAction($proj_id){
+public function newApplicationAction($proj_id)
+{
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
+        {
+            $app = new Application();
 
-    $app = new Application();
+            $proj = $this->get('doctrine_mongodb')
+                ->getRepository('AcatismMainBundle:Project')
+                ->findOneBy(array('id' => $proj_id));
 
-        $proj = $this->get('doctrine_mongodb')
-        ->getRepository('AcatismMainBundle:Project')
-        ->findOneBy(array('id' => $proj_id));
+            $app->setStudent($this->getUser());
+            $app->setProfessor($proj->getProfessor());
+            $app->setProject($proj);
 
-        $app->setStudent($this->getUser());
-        $app->setProfessor($proj->getProfessor());
-        $app->setProject($proj);
+            $em = $this->get('doctrine_mongodb')->getManager();
+            $em->persist($app);
+            $em->flush();
 
-        $em = $this->get('doctrine_mongodb')->getManager();
-        $em->persist($app);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
+        
 
     }
 

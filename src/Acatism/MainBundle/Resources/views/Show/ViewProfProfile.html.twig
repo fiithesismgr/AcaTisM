@@ -161,18 +161,19 @@
 
                          {% if (app.user.role.role == 'ROLE_STUDENT') %}
                          <div class="apply">
-                             <div class="action">
-                             <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}">
-                                 <button>Apply</button>
-                             </a>
-                             </div>
-
-                             <div class="action">
-                                 <a href="#">
-                                     <button>Renounce</button>
-                                 </a>
-                             </div>
-
+                             {% if (projectsStatusList[project.id] is not defined) %}
+                                <div class="action">
+                                    <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}">
+                                        <button>Apply</button>
+                                    </a>
+                                </div>
+                             {% elseif (projectsStatusList[project.id] is defined) %}
+                                <div class="action">
+                                    <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}">
+                                        <button>Renounce</button>
+                                    </a>
+                                </div>
+                            {% endif %}
                          </div>
                          {% endif %}
 

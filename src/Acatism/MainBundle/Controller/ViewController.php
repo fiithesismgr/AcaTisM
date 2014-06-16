@@ -86,10 +86,28 @@ class ViewController extends Controller
             ->sort('name', 'ASC');
         $projects = $qb->getQuery()->execute();
 
+
+        $projectsStatusList = array();
+        if($this->getUser()->getRole()->getName() === 'student')
+        {
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Application');
+            $qb->addOr($qb->expr()->field('professor')->references($prof));
+            $qb->addOr($qb->expr()->field('student')->references($this->getUser()));
+            $applications = $qb->getQuery()->execute();
+            foreach($applications as $application)
+            {
+                $projectId = $application->getProject()->getId();
+                $projectsStatusList[$projectId] = true;
+            }
+        }
+        
+
         return $this->render('AcatismMainBundle:Show:ViewProfProfile.html.twig',
             array('user' => $user,
                   'prof' => $prof,
-                  'projectlist' => $projects
+                  'projectlist' => $projects,
+                  'projectsStatusList' => $projectsStatusList
             ));
 
 

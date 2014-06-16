@@ -67,8 +67,38 @@ class DeleteController extends Controller{
             }
         }
         else
+        {
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
 
+    }
+
+    public function cancelApplicationAction($proj_id)
+    {
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
+        {
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $project = $dm->getRepository('AcatismMainBundle:Project')
+                          ->findOneBy(array('id' => $proj_id));
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Application');
+            $qb->addOr($qb->expr()->field('project')->references($project));
+            $qb->addOr($qb->expr()->field('student')->references($this->getUser()));
+            $application = $qb->getQuery()->getSingleResult();
+
+            if(!is_null($application))
+            {
+                $dm->remove($application);
+                $dm->flush();
+            }
+
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
     }
 }
 

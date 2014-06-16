@@ -42,4 +42,8 @@ acatism_new_application:
     pattern: /new_application/{proj_id}
     defaults: { _controller: AcatismMainBundle:Creation:newApplication }
 
+acatism_cancel_application:
+    pattern: /cancel_application/{proj_id}
+    defaults: { _controller: AcatismMainBundle:Delete:cancelApplication }
+
 
