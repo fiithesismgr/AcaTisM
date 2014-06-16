@@ -143,6 +143,7 @@
 
                      <li id="activityTab_1">NewsFeed</li>
                      <li id="activityTab_2">Tasks</li>
+                     <li id="activityTab_3">Applications</li>
 
                  </ul>
 
@@ -303,6 +304,35 @@
                      </ul>
                  </div>
 
+                 <div class="activityPage" id="activityPage_3">
+
+                     {% for application in applicationlist %}
+
+                         <li id="application">
+
+                              <div class="applicationInfo">
+
+                                  <div class="projectName">
+
+                                      
+
+                                  </div>
+
+                                  <div class="applicationStatus">
+
+
+
+                                  </div>
+
+
+                              </div>
+
+                         </li>
+
+                     {% endfor %}
+
+                 </div>
+
 
              </div>
 
@@ -320,7 +350,7 @@
 
     <script type="text/javascript" src="{{  asset("scripts/jquery.min.js") }}" ></script>
 
-    <script type="text/javascript" src="{{ asset("scripts/taskDropdown.js") }}" ></script>
+    <script type="text/javascript" src="{{ asset("scripts/taskDropdownStudsView.js") }}" ></script>
 
     <script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
 
