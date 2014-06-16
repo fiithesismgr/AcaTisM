@@ -1,0 +1,30 @@
+#project button{
+
+    background: linear-gradient(to bottom, #449960 0%, #44F085 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    height: 30px;
+    margin: 0 auto;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+#project .apply{
+
+    float: right;
+    padding-top: 4%;
+
+}
+
+#project .apply .action{
+
+    float: left;
+    padding-left: 10px;
+
+}
+

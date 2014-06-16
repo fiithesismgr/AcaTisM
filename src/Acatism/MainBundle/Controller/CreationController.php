@@ -2,6 +2,7 @@
 
 namespace Acatism\MainBundle\Controller;
 
+use Acatism\MainBundle\Document\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Acatism\MainBundle\Form\Type\ProjectType;
@@ -52,7 +53,7 @@ public function newProjectAction(Request $request){
     }
 }
 
-    public function newTaskAction(Request $request){
+public function newTaskAction(Request $request){
 
         $task = new Task();
 
@@ -89,7 +90,25 @@ public function newProjectAction(Request $request){
          }
     }
 
+public function newApplicationAction($proj_id){
 
+    $app = new Application();
+
+        $proj = $this->get('doctrine_mongodb')
+        ->getRepository('AcatismMainBundle:Project')
+        ->findOneBy(array('id' => $proj_id));
+
+        $app->setStudent($this->getUser());
+        $app->setProfessor($proj->getProfessor());
+        $app->setProject($proj);
+
+        $em = $this->get('doctrine_mongodb')->getManager();
+        $em->persist($app);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('acatism_main_homepage'));
+
+    }
 
 
 }

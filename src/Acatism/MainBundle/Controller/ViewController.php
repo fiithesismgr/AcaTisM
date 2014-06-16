@@ -4,41 +4,100 @@ namespace Acatism\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Acatism\AuthenticationBundle\Document\User;
 
 class ViewController extends Controller
 {
     public function viewStudentAction($username)
     {
-    	$user = $this->get('doctrine_mongodb')
-                        ->getRepository('AcatismAuthenticationBundle:User')
-                        ->findOneBy(array('username' => $username));
+        $user = $this->get('doctrine_mongodb')
+            ->getRepository('AcatismAuthenticationBundle:User')
+            ->findOneBy(array('username' => $username));
+
         if(is_null($user) || ($user->getRole()->getName() != 'student'))
         {
-        	throw $this->createNotFoundException('Student with username ' . $username . ' does not exist.');
+            throw $this->createNotFoundException('Student with username ' . $username . ' does not exist.');
         }
 
         if($user === $this->getUser())
         {
-        	return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
 
-        $student = $this->get('doctrine_mongodb')
-        					->getRepository('AcatismMainBundle:Student')
-        					->findOneBy(array('user' => $user));
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+            ->field('user')->references($user);
+
+        $student = $qb->getQuery()->getSingleResult();
+
         if(is_null($student))
         {
-        	throw $this->createNotFoundException('Student with username ' . $username . ' does not have a profile defined yet.');
+            throw $this->createNotFoundException('Student with username ' . $username . ' does not have a profile defined yet.');
         }
 
         return $this->render('AcatismMainBundle:Show:ViewStudProfile.html.twig',
-                  array('user' => $user, 'student' => $student));
+            array('user' => $user, 'student' => $student));
 
 
     }
 
     public function viewAllStudentsAction()
     {
-    	return new Response('All students');
+        return new Response('All students');
+    }
+
+    public function viewProfAction($username)
+    {
+        // searching user in db for getting info
+
+        $user = $this->get('doctrine_mongodb')
+            ->getRepository('AcatismAuthenticationBundle:User')
+            ->findOneBy(array('username' => $username));
+
+        if(is_null($user) || ($user->getRole()->getName() != 'professor'))
+        {
+            throw $this->createNotFoundException('Professor with username ' . $username . ' does not exist.');
+        }
+
+        // if current user tries to access its page, homepage redirection
+
+        if($user === $this->getUser())
+        {
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
+
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+            ->field('user')->references($user);
+
+        $prof = $qb->getQuery()->getSingleResult();
+
+        if(is_null($prof))
+        {
+            throw $this->createNotFoundException('Professor with username ' . $username . ' does not have a profile defined yet.');
+        }
+
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
+            ->field('professor')->references($prof->getUser())
+            ->sort('name', 'ASC');
+        $projects = $qb->getQuery()->execute();
+
+        return $this->render('AcatismMainBundle:Show:ViewProfProfile.html.twig',
+            array('user' => $user,
+                  'prof' => $prof,
+                  'projectlist' => $projects
+            ));
+
+
+    }
+
+    public function viewAllProfsAction()
+    {
+        return new Response('All professors');
     }
 
 }

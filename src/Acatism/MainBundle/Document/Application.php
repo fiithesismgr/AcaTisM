@@ -31,6 +31,12 @@ class Application
     protected $student;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\MainBundle\Document\Project")
+     */
+
+    protected $project;
+
+    /**
     * @MongoDB\Field(type="boolean")
     */
     protected $isAccepted;
@@ -101,6 +107,7 @@ class Application
         return $this->student;
     }
 
+
     /**
      * Set isAccepted
      *
@@ -143,5 +150,27 @@ class Application
     public function getIsConfirmed()
     {
         return $this->isConfirmed;
+    }
+
+    /**
+     * Set project
+     *
+     * @param Acatism\MainBundle\Document\Project $project
+     * @return self
+     */
+    public function setProject(\Acatism\MainBundle\Document\Project $project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Acatism\MainBundle\Document\Project $project
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 }

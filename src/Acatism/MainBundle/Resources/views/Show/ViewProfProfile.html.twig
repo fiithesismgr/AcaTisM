@@ -1,0 +1,215 @@
+{# src/Acatism/MainBundle/Show/ViewProfProfile.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/views.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% block profile_section %}
+
+    <div id="profile">
+
+        <div class="profileleft">
+
+            <div class="widget">
+
+                <div class="widgettop">About</div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="University"><span>University</span>: {{ prof.university }}</li>
+                        <li name="Faculty"><span>Faculty</span>: {{ prof.faculty }}</li>
+                        <li name="Office"><span>Office</span>: {{ prof.office }}</li>
+                        <li name="Email"><span>E-mail</span>: {{ user.email }}</li>
+                        <li name="Phone"><span>Phone</span>: {{ prof.phone }}</li>
+                        <li name="Website"><span>Website</span>: <a href="#">{{ prof.website }}</a></span></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profilecenter">
+
+            <div class="profile_picture">
+
+                <a href=""><img src="{{ prof.getProfilePath() | apply_filter('profile_thumb') }}" alt="" />	</a>
+
+                <div class="profile_picture_details">
+                    <span class="title"> {{ prof.title }} </span>
+                    <br/>
+                    <span class="name"> {{ user.firstname ~ " " ~ user.lastname }} </span>
+                </div>
+
+                <div class="social">
+
+                    <img src="{{ asset("images/Facebook.png") }}" alt="Facebook" title="Facebook"/>
+                    <img src="{{ asset("images/GooglePlus.png") }}" alt="Google Plus" title="Google Plus"/>
+                    <img src="{{ asset("images/Twitter.png") }}" alt="Twitter" title="Twitter"/>
+                    <!-- <img src="{{ asset("images/LinkedIn.png") }}" alt="LinkedIn" title="LinkedIn"/> -->
+                    <img src="{{ asset("images/Skype.png") }}" alt="Skype" title="Skype"/>
+                    <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
+                    <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profileright">
+
+            <div class="widget">
+
+                <div class="widgettop">Bibliography: </div>
+                <div class="widgetcontent">
+
+                    <ul>
+
+                        <li name="Domains"><span>Domains of interest:</span> {{ prof.domains }} </li>
+                        <li name="Teaching"><span>Teaching</span>: {{ prof.teaching }} </li>
+                        <li name="Publications"><span>Main publications:</span> {{ prof.publications }} </li>
+                        <li name="Languages"><span>Languages</span>: {{ prof.languages }} </li>
+                        <li name="Bib" class="fullbib">
+                            <div  class="bibimg"><img src="{{ asset("images/cv.png") }}" alt="Bibliography"/></div>
+                            <div class="biblink">
+                                <a href="{{ asset( prof.getCvPath() ) }}" title="Bibliography" >View entire Bibliography</a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+
+{% endblock %}
+
+ {% block activity_section %}
+
+     <div id="activity">
+
+     <div class="activitytop">
+
+         What's new
+
+     </div>
+
+     <div class="activitymain">
+
+     <div class="activitycategory">
+
+         <ul>
+
+             <li id="activityTab_1">Thesis Themes</li>
+
+         </ul>
+
+     </div>
+
+     <div class="activitycontent">
+
+        <div class="activityPage" id="activityPage_1">
+
+            <ul class="projectList">
+
+                 {% for project in projectlist %}
+
+                 <li id="project">
+
+                     <a href="#project">
+
+                         <div class="projectHeader">
+
+                             <div class="content">
+
+                                 {{ project.name }}
+
+                             </div>
+
+
+                             <div class="extend">
+                                 <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                             </div>
+
+                             <div class="clear"></div>
+
+                         </div>
+
+                     </a>
+
+                     <div class="projectContent">
+
+                         <div class="description">
+                             {{ project.description }}
+                         </div>
+
+
+                         {% if (app.user.role.role == 'ROLE_STUDENT') %}
+                         <div class="apply">
+                             <div class="action">
+                             <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}">
+                                 <button>Apply</button>
+                             </a>
+                             </div>
+
+                             <div class="action">
+                                 <a href="#">
+                                     <button>Renounce</button>
+                                 </a>
+                             </div>
+
+                         </div>
+                         {% endif %}
+
+                         <div class="clear"></div>
+
+
+
+                         <div class="clear"></div>
+
+                     </div>
+
+
+                 </li>
+
+             {% endfor %}
+
+             </ul>
+
+         </div>
+
+     </div>
+
+     </div>
+
+     <div class="clear"></div>
+
+     </div>
+
+ {% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset("scripts/tabs.js") }}" ></script>
+
+    <script type="text/javascript" src="{{  asset("scripts/jquery.min.js") }}" ></script>
+
+    <script type="text/javascript" src="{{ asset("scripts/projectDropdown_Visitor.js") }}" ></script>
+
+{% endblock %}
+

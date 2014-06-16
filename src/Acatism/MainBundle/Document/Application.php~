@@ -31,6 +31,12 @@ class Application
     protected $student;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\Project")
+     */
+
+    protected $project;
+
+    /**
     * @MongoDB\Field(type="boolean")
     */
     protected $isAccepted;
@@ -100,6 +106,7 @@ class Application
     {
         return $this->student;
     }
+
 
     /**
      * Set isAccepted

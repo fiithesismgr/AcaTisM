@@ -2,10 +2,6 @@ acatism_main_homepage:
     pattern:  /
     defaults: { _controller: AcatismMainBundle:Default:index }
 
-acatism_profs:
-    pattern:  /profs
-    defaults: { _controller: AcatismMainBundle:Profs:profs }
-
 acatism_new_project:
     pattern: /new_project
     defaults: { _controller: AcatismMainBundle:Creation:newProject }
@@ -33,5 +29,17 @@ acatism_view_students:
 acatism_view_student:
     pattern: /students/{username}
     defaults: { _controller: AcatismMainBundle:View:viewStudent}
+
+acatism_view_profs:
+    pattern: /profs/
+    defaults: { _controller: AcatismMainBundle:View:viewAllProfs }
+
+acatism_view_prof:
+    pattern: /profs/{username}
+    defaults: { _controller: AcatismMainBundle:View:viewProf}
+
+acatism_new_application:
+    pattern: /new_application/{proj_id}
+    defaults: { _controller: AcatismMainBundle:Creation:newApplication }
 
 

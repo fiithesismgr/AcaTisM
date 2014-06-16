@@ -88,15 +88,6 @@ class Task
         return $this;
     }
 
-    /**
-     * Get professor
-     *
-     * @return Acatism\AuthenticationBundle\Document\User $professor
-     */
-    public function getprofessor()
-    {
-        return $this->professor;
-    }
 
     /**
      * Set title
@@ -228,5 +219,15 @@ class Task
     public function getRequireSourceCode()
     {
         return $this->requireSourceCode;
+    }
+
+    /**
+     * Get professor
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $professor
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
     }
 }
