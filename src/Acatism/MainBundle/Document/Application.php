@@ -37,14 +37,15 @@ class Application
     protected $project;
 
     /**
-    * @MongoDB\Field(type="boolean")
+    * @MongoDB\Field(type="string")
     */
-    protected $isAccepted;
+    protected $status;
 
-    /**
-    * @MongoDB\Field(type="boolean")
-    */
-    protected $isConfirmed;
+     public function __construct()
+    {
+        $this->status = 'UNPROCESSED';
+  
+    }
 
     /**
      * Get id
@@ -107,51 +108,6 @@ class Application
         return $this->student;
     }
 
-
-    /**
-     * Set isAccepted
-     *
-     * @param boolean $isAccepted
-     * @return self
-     */
-    public function setIsAccepted($isAccepted)
-    {
-        $this->isAccepted = $isAccepted;
-        return $this;
-    }
-
-    /**
-     * Get isAccepted
-     *
-     * @return boolean $isAccepted
-     */
-    public function getIsAccepted()
-    {
-        return $this->isAccepted;
-    }
-
-    /**
-     * Set isConfirmed
-     *
-     * @param boolean $isConfirmed
-     * @return self
-     */
-    public function setIsConfirmed($isConfirmed)
-    {
-        $this->isConfirmed = $isConfirmed;
-        return $this;
-    }
-
-    /**
-     * Get isConfirmed
-     *
-     * @return boolean $isConfirmed
-     */
-    public function getIsConfirmed()
-    {
-        return $this->isConfirmed;
-    }
-
     /**
      * Set project
      *
@@ -172,5 +128,27 @@ class Application
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string $status
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

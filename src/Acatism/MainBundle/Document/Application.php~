@@ -31,20 +31,21 @@ class Application
     protected $student;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\Project")
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\MainBundle\Document\Project")
      */
 
     protected $project;
 
     /**
-    * @MongoDB\Field(type="boolean")
+    * @MongoDB\Field(type="string")
     */
-    protected $isAccepted;
+    protected $status;
 
-    /**
-    * @MongoDB\Field(type="boolean")
-    */
-    protected $isConfirmed;
+     public function __construct()
+    {
+        $this->status = 'UNPROCESSED';
+  
+    }
 
     /**
      * Get id
@@ -107,48 +108,25 @@ class Application
         return $this->student;
     }
 
-
     /**
-     * Set isAccepted
+     * Set project
      *
-     * @param boolean $isAccepted
+     * @param Acatism\MainBundle\Document\Project $project
      * @return self
      */
-    public function setIsAccepted($isAccepted)
+    public function setProject(\Acatism\MainBundle\Document\Project $project)
     {
-        $this->isAccepted = $isAccepted;
+        $this->project = $project;
         return $this;
     }
 
     /**
-     * Get isAccepted
+     * Get project
      *
-     * @return boolean $isAccepted
+     * @return Acatism\MainBundle\Document\Project $project
      */
-    public function getIsAccepted()
+    public function getProject()
     {
-        return $this->isAccepted;
-    }
-
-    /**
-     * Set isConfirmed
-     *
-     * @param boolean $isConfirmed
-     * @return self
-     */
-    public function setIsConfirmed($isConfirmed)
-    {
-        $this->isConfirmed = $isConfirmed;
-        return $this;
-    }
-
-    /**
-     * Get isConfirmed
-     *
-     * @return boolean $isConfirmed
-     */
-    public function getIsConfirmed()
-    {
-        return $this->isConfirmed;
+        return $this->project;
     }
 }
