@@ -341,11 +341,9 @@
 
                                          {% elseif (application.status == 'WAITING_CONFIRMATION') %}
 
-                                            Accepted ( Awaiting for confirmation... )
+                                            Accepted ( Confirm ? )
 
-                                             <a href="{{ path('acatism_confirm_application', { 'applicationId': application.id }) }}">
-                                                 <button>Decline</button>
-                                             </a>
+                                            {% set showButton = "true" %}
 
                                          {% elseif (application.status == 'ACCEPTED') %}
 
@@ -357,6 +355,16 @@
 
                                          {% endif %}
 
+
+                                  </div>
+
+                                  <div class="actions">
+
+                                      {% if showButton == "true" %}
+
+                                      <button>Confirm</button>
+
+                                      {% endif %}
 
                                   </div>
 

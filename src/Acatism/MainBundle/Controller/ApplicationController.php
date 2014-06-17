@@ -17,17 +17,17 @@ class ApplicationController extends Controller
     		$application = $dm->getRepository('AcatismMainBundle:Application')
                         	  ->findOneBy(array('id' => $applicationId));
 
-            if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED') 
+            if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED')
             {
             	$application->setStatus('WAITING_CONFIRMATION');
             	$dm->flush();
             }
 
-            return $this->render($this->generateUrl('acatism_main_homepage'));
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
     	else
     	{
-    		return $this->render($this->generateUrl('acatism_main_homepage'));
+    		return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
     }
 
@@ -39,17 +39,17 @@ class ApplicationController extends Controller
     		$application = $dm->getRepository('AcatismMainBundle:Application')
                         	  ->findOneBy(array('id' => $applicationId));
 
-            if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED') 
+            if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED')
             {
             	$application->setStatus('DECLINED');
             	$dm->flush();
             }
 
-            return $this->render($this->generateUrl('acatism_main_homepage'));
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
     	else
     	{
-    		return $this->render($this->generateUrl('acatism_main_homepage'));
+    		return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
     }
 
@@ -81,7 +81,7 @@ class ApplicationController extends Controller
                 $dm->flush();
             }
 
-            return $this->render($this->generateUrl('acatism_main_homepage'));
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
     	else
     	{

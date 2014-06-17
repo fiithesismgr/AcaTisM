@@ -33,7 +33,7 @@ class SecurityController extends Controller
 
    public function registerAction(Request $request) 
    {
-        
+
    	    $user = new User();
 
         $form = $this->createForm(new UserType(), $user,
@@ -71,6 +71,8 @@ class SecurityController extends Controller
                         array('form' => $form->createView(),
                       ));
        }
+
+
       
        /*
        $role1 = new Role();
