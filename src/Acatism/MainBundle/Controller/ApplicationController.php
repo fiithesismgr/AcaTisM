@@ -73,6 +73,12 @@ class ApplicationController extends Controller
 
                 $dm->persist($collaboration);
                 $dm->flush();
+
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                         ->field('user')->references($this->getUser());
+                $student = $qb->getQuery()->getSingleResult();
+                $student->setIsAccepted(true);
+                $dm->flush();
             }
 
             return $this->render($this->generateUrl('acatism_main_homepage'));

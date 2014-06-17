@@ -40,24 +40,34 @@ class DefaultController extends Controller
                          ->field('student')->references($user);
                 $applications = $qb->getQuery()->execute();
 
-                $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
-                    ->field('student')
-                    ->references($user);
-                $collaboration = $qb->getQuery()->getSingleResult();
 
-                $supervisor = $collaboration->getProfessor();
+                if($student->getIsAccepted() === true)
+                {
+                    $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+                             ->field('student')
+                             ->references($user);
+                    $collaboration = $qb->getQuery()->getSingleResult();
 
-                $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                    ->field('professor')->references($supervisor);
+                    $supervisor = $collaboration->getProfessor();
 
-                $tasklist = $qb->getQuery()->execute();
+                    $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
+                             ->field('professor')->references($supervisor);
 
-                return $this->render('AcatismMainBundle:Show:StudView.html.twig',
-                  array('student' => $student,
-                        'applicationlist' => $applications,
-                        'tasklist' => $tasklist
-                  ));
+                    $tasklist = $qb->getQuery()->execute();
 
+                    return $this->render('AcatismMainBundle:Show:StudView.html.twig',
+                           array('student' => $student,
+                                 'applicationlist' => $applications,
+                                 'tasklist' => $tasklist
+                            ));
+                }
+                else
+                {
+                    return $this->render('AcatismMainBundle:Show:StudView.html.twig',
+                           array('student' => $student,
+                                 'applicationlist' => $applications
+                            ));
+                } 
             }
         }
         elseif ($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true)
