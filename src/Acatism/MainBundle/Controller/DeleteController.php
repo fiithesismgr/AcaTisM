@@ -3,6 +3,8 @@
 namespace Acatism\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+
 
 // Controller for deleting tasks, projects
 class DeleteController extends Controller{
@@ -91,13 +93,28 @@ class DeleteController extends Controller{
                 $dm->remove($application);
                 $dm->flush();
             }
+            if($this->getRequest()->isXmlHttpRequest())
+            {
+                return new Response('success');
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            }
 
-            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            
             
         }
         else
         {
-            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            if($this->getRequest()->isXmlHttpRequest())
+            {
+                return new Response('failure');
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            }
         }
     }
 }

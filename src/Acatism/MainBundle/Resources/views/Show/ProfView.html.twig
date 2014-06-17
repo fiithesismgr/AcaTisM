@@ -264,7 +264,7 @@
 
                      </ul>
 
-                     <div class="addNew">
+                     <div class="addNew" id="addProject">
 
                          <a href="{{ path("acatism_new_project") }}">
 
@@ -274,6 +274,17 @@
 
                      </div>
 
+                     <div id="dialog-form" title="Add new project">
+                        <p class="validateTips">All form fields are required.</p>
+                        <form>
+                        <fieldset>
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" />
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description" value="" />
+                        </fieldset>
+                        </form>
+                    </div>
 
                  </div>
 
@@ -385,10 +396,42 @@
 
 <script type="text/javascript" src="{{ asset("scripts/tabs.js") }}" ></script>
 
-<script type="text/javascript" src="{{  asset("scripts/jquery.min.js") }}" ></script>
+<script type="text/javascript" src="{{  asset("scripts/jquery-1.11.1.min.js") }}" ></script>
+
+<script type="text/javascript" src="{{  asset("scripts/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js") }}" ></script>
 
 <script type="text/javascript" src="{{ asset("scripts/taskDropdownProfsView.js") }}" ></script>
 
 <script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
 
+
+<script type="text/javascript" >
+    $(function() {
+        var name = $("#title"),
+            email = $("#description"),
+            allFields = $([]).add(title).add(description);
+
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an account": function() {
+                    $(this).dialog("close");
+                },
+                Cancel: function() {
+                   $(this).dialog("close"); 
+                }
+            }
+
+        });
+        $("#addProject").click(function(evt) {
+            evt.preventDefault();
+            $("#dialog-form").dialog("open");
+        });
+    });
+
+
+</script>
 {% endblock %}

@@ -162,18 +162,24 @@
                          {% if (app.user.role.role == 'ROLE_STUDENT') %}
                          <div class="apply">
                              {% if (projectsStatusList[project.id] is not defined) %}
-                                <div class="action">
-                                    <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}">
+                                {% set applyClass = "action" %}
+                                {% set cancelClass = "action hidden" %}
+                             {% elseif (projectsStatusList[project.id] is defined) %}
+                                {% set applyClass = "action hidden" %}
+                                {% set cancelClass = "action" %}
+                            {% endif %}
+
+                            <div class="{{applyClass}}" id="applyButton">
+                                    <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}" id="applyLink">
                                         <button>Apply</button>
                                     </a>
                                 </div>
-                             {% elseif (projectsStatusList[project.id] is defined) %}
-                                <div class="action">
-                                    <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}">
-                                        <button>Renounce</button>
-                                    </a>
-                                </div>
-                            {% endif %}
+
+                            <div class="{{cancelClass}}" id="cancelButton">
+                                <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}" id="cancelLink">
+                                     <button>Cancel</button>
+                                </a>
+                            </div>
                          </div>
                          {% endif %}
 
@@ -211,6 +217,59 @@
     <script type="text/javascript" src="{{  asset("scripts/jquery.min.js") }}" ></script>
 
     <script type="text/javascript" src="{{ asset("scripts/projectDropdown_Visitor.js") }}" ></script>
+
+    <script type="text/javascript">
+        $("document").ready(function() {
+            $("#applyButton").click(applyFn);
+            $("#cancelButton").click(cancelFn);
+        });
+
+        function applyFn(evt) {
+            evt.preventDefault();
+
+            var link = $("#applyLink").attr("href");
+            $.ajax({
+                url: link,
+                type: "POST",
+                dataType: "text",
+                success: successApplyFn,
+                error: errorFn
+            });
+
+            
+        }
+
+        function successApplyFn(result) {
+            $("#applyButton").addClass("hidden");
+            $("#cancelButton").removeClass("hidden");
+        }
+
+        function successCancelFn(result) {
+            $("#applyButton").removeClass("hidden");
+            $("#cancelButton").addClass("hidden");
+        }
+
+        function errorFn(xhr, status, strErr) {
+            console.log("Error.");
+
+        }
+
+        function cancelFn(evt) {
+            evt.preventDefault();
+
+            var link = $("#cancelLink").attr("href");
+            $.ajax({
+                url: link,
+                type: "POST",
+                dataType: "text",
+                success: successCancelFn,
+                error: errorFn
+            });
+            
+        }
+
+
+    </script>
 
 {% endblock %}
 

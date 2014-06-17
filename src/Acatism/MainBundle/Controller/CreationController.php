@@ -5,6 +5,7 @@ namespace Acatism\MainBundle\Controller;
 use Acatism\MainBundle\Document\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Acatism\MainBundle\Form\Type\ProjectType;
 use Acatism\MainBundle\Document\Project;
 use Acatism\MainBundle\Form\Type\TaskType;
@@ -108,11 +109,26 @@ public function newApplicationAction($proj_id)
             $em->persist($app);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            if($this->getRequest()->isXmlHttpRequest())
+            {
+                return new Response('success');
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            }
+            //return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
         else
         {
-            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            if($this->getRequest()->isXmlHttpRequest())
+            {
+                return new Response('fail');
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            }
         }
         
 

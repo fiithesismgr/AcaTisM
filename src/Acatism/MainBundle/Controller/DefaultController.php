@@ -32,8 +32,14 @@ class DefaultController extends Controller
             }
             else
             {
+                $user = $this->getUser();
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
+                         ->field('student')->references($user);
+
+                $applications = $qb->getQuery()->execute();
                 return $this->render('AcatismMainBundle:Show:StudView.html.twig',
-                  array('student' => $student));
+                  array('student' => $student, 'applicationlist' => $applications));
             }
         }
         elseif ($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true)
