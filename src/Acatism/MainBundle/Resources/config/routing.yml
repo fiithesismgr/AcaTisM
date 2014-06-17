@@ -46,4 +46,15 @@ acatism_cancel_application:
     pattern: /cancel_application/{proj_id}
     defaults: { _controller: AcatismMainBundle:Delete:cancelApplication }
 
+acatism_accept_application:
+    pattern: /accept_application/{applicationId}
+    defaults: { _controller: AcatismMainBundle:Application:accept }
+
+acatism_decline_application:
+    pattern: /decline_application/{applicationId}
+    defaults: { _controller: AcatismMainBundle:Application:decline }
+
+acatism_confirm_application:
+    pattern: /confirm_application/{applicationId}
+    defaults: { _controller: AcatismMainBundle:Application:confirm }
 

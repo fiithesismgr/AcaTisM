@@ -5,6 +5,7 @@ namespace Acatism\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security;
+use Acatism\MainBundle\Document\Collaboration;
 
 class ApplicationController extends Controller
 {
@@ -64,6 +65,14 @@ class ApplicationController extends Controller
             {
             	$application->setStatus('ACCEPTED');
             	$dm->flush();
+
+                $collaboration = new Collaboration();
+                $collaboration->setStudent($application->getStudent());
+                $collaboration->setProfessor($application->getProfessor());
+                $collaboration->setProject($application->getProject());
+
+                $dm->persist($collaboration);
+                $dm->flush();
             }
 
             return $this->render($this->generateUrl('acatism_main_homepage'));
