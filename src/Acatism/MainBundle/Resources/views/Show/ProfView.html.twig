@@ -139,7 +139,7 @@
                      <li id="activityTab_1">NewsFeed</li>
                      <li id="activityTab_2">Projects</li>
                      <li id="activityTab_3">Tasks</li>
-
+                     <li id="activityTab_4">Applications</li>
 
                  </ul>
 
@@ -379,6 +379,69 @@
                          </a>
 
                      </div>
+
+                 </div>
+
+                 <div class="activityPage" id="activityPage_4">
+
+
+                     <ul class="applicationList">
+
+                         {% for application in applicationlist %}
+
+                             <li id="application">
+
+                                 <div class="applicationInfo">
+
+                                     <div class="projectName">
+
+                                         {{ application.project.name }}
+
+                                     </div>
+
+                                     <div class="projectOwner">
+
+                                         <a href="{{ path('acatism_view_student', { 'username': application.student.username }) }}">
+                                             {{ application.student.firstname }}&nbsp;{{ application.student.lastname }}
+                                         </a>
+
+                                     </div>
+
+                                     <!--
+                                     <div class="applicationStatus">
+
+                                         {% if (application.isAccepted == true) %}
+
+                                             Accepted ( Awaiting for confirmation... )
+
+                                         {% else %}
+
+                                             Pending...
+
+                                         {% endif %}
+
+                                     </div>
+                                       -->
+
+                                     <div class="actions">
+
+                                         <button>Accept</button>
+                                         <button>Decline</button>
+
+                                     </div>
+
+
+                                     <div class="clear"></div>
+
+
+                                 </div>
+
+                             </li>
+
+                         {% endfor %}
+
+                     </ul>
+
 
                  </div>
 

@@ -306,6 +306,8 @@
 
                  <div class="activityPage" id="activityPage_3">
 
+                     <ul class="applicationList">
+
                      {% for application in applicationlist %}
 
                          <li id="application">
@@ -314,15 +316,34 @@
 
                                   <div class="projectName">
 
-                                      
+                                        {{ application.project.name }}
+
+                                  </div>
+
+                                  <div class="projectOwner">
+
+                                      <a href="{{ path('acatism_view_prof', { 'username': application.professor.username }) }}">
+                                      {{ application.professor.firstname }}&nbsp;{{ application.professor.lastname }}
+                                      </a>
 
                                   </div>
 
                                   <div class="applicationStatus">
 
+                                        {% if (application.isAccepted == true) %}
+
+                                            Accepted ( Awaiting for confirmation... )
+
+                                        {% else %}
+
+                                            Pending...
+
+                                        {% endif %}
 
 
                                   </div>
+
+                                  <div class="clear"></div>
 
 
                               </div>
@@ -330,6 +351,8 @@
                          </li>
 
                      {% endfor %}
+
+                     </ul>
 
                  </div>
 

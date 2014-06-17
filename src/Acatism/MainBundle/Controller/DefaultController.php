@@ -25,6 +25,7 @@ class DefaultController extends Controller
         {
             
             $student = $this->getStudentInformation();
+
             if(is_null($student))
             {
                 $this->get('session')->set('person', new Student());
@@ -40,6 +41,7 @@ class DefaultController extends Controller
                 $applications = $qb->getQuery()->execute();
                 return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                   array('student' => $student, 'applicationlist' => $applications));
+
             }
         }
         elseif ($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true)
@@ -55,6 +57,9 @@ class DefaultController extends Controller
             {
 
                 $user = $this->getUser();
+
+
+                // getting project list
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
                          ->field('professor')->references($user)
@@ -62,7 +67,7 @@ class DefaultController extends Controller
                 $projects = $qb->getQuery()->execute();
 
 
-                $user = $this->getUser();
+                // getting task list
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
                          ->field('professor')
@@ -70,10 +75,19 @@ class DefaultController extends Controller
                          ->sort('dueDate', 'ASC');
                 $tasks = $qb->getQuery()->execute();
 
+                // getting application list
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
+                    ->field('professor')->references($user);
+                $applications = $qb->getQuery()->execute();
+
+
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
                   array('professor' => $professor,
                         'projectlist' => $projects,
-                        'tasklist' => $tasks ));
+                        'tasklist' => $tasks,
+                        'applicationlist' => $applications
+                        ));
             }
         }
 
