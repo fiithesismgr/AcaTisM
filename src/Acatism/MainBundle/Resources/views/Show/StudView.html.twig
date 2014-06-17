@@ -228,87 +228,80 @@
 
                      <ul class="taskList">
 
-                         <li id="task">
+                         {% for task in tasklist %}
 
-                             <a href="#task">
+                             <li id="task">
 
-                                 <div class="taskHeader">
+                                 <a href="#task">
 
-                                     <div class="content">
+                                     <div class="taskHeader">
 
-                                         Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
+                                         <div class="content">
+
+                                             {{ task.title }}
+
+                                         </div>
+
+                                         <div class="posttime">
+
+                                             Deadline: {{ task.dueDate|date('Y-m-d') }}
+
+                                         </div>
+
+
+                                         <div class="extend">
+                                             <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                         </div>
+
+                                         <div class="clear"></div>
 
                                      </div>
 
+                                 </a>
 
-                                     <div class="posttime">
+                                 <div class="taskContent">
 
-                                         01/06/2014, 17:34
+
+                                     <div class="description">
+                                         {{ task.description }}
+                                     </div>
+
+                                     <div class="specifications">
+
+                                         {% if ( task.requireFile == true ) %}
+
+                                             {% if (task.requireFileFormat == true) %}
+                                                 * Requires file with specified format
+
+                                             {% endif %}
+
+                                         {%  else %} * Requires file with no specified format
+
+                                         {% endif %}
+
+                                         <br/>
+
+                                         {% if (task.requireSourceCode == true) %}
+                                             * Requires source code
+                                         {% endif %}
 
                                      </div>
 
-
-                                     <div class="extend">
-                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                     <div class="trash">
+                                         <a href="{{ path('acatism_delete_task', { 'task_id': task.id }) }}">
+                                             <img src="{{ asset('images/trash.png') }}" alt="Delete" />
+                                         </a>
                                      </div>
 
                                      <div class="clear"></div>
 
-                                 </div>
-
-                             </a>
-
-                             <div class="taskContent">
-
-                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-                             </div>
-
-
-                         </li>
-
-                         <li id="task">
-
-                             <a href="#task">
-
-                                 <div class="taskHeader">
-
-                                     <div class="content">
-
-                                         Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
-
-                                     </div>
-
-
-                                     <div class="posttime">
-
-                                         01/06/2014, 17:34
-
-                                     </div>
-
-
-                                     <div class="extend">
-                                         <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
-                                     </div>
-
-                                     <div class="clear"></div>
 
                                  </div>
 
-                             </a>
 
-                             <div class="taskContent">
+                             </li>
 
-                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-                             </div>
-
-
-                         </li>
+                         {% endfor %}
 
                      </ul>
                  </div>
@@ -342,15 +335,23 @@
 
                                   <div class="applicationStatus">
 
-                                        {% if (application.status == 'WAITING_CONFIRMATION') %}
-
-                                            Accepted ( Awaiting for confirmation... )
-
-                                        {% else %}
+                                         {% if (application.status == 'UNPROCESSED') %}
 
                                             Pending...
 
-                                        {% endif %}
+                                         {% elseif (application.status == 'WAITING_CONFIRMATION') %}
+
+                                            Accepted ( Awaiting for confirmation... )
+
+                                         {% elseif (application.status == 'ACCEPTED') %}
+
+                                            Accepted ( Confirmed )
+
+                                         {% elseif (application.status == 'DECLINED') %}
+
+                                            Not accepted
+
+                                         {% endif %}
 
 
                                   </div>

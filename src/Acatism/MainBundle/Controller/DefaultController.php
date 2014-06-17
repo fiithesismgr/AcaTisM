@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Acatism\MainBundle\Document\Student;
 use Acatism\MainBundle\Document\Professor;
+use Acatism\MainBundle\Document\Collaboration;
 use Acatism\MainBundle\Form\Type\StudentAboutType;
 use Acatism\MainBundle\Form\Type\StudentCvType;
 use Acatism\MainBundle\Form\Type\ProfessorAboutType;
@@ -37,10 +38,25 @@ class DefaultController extends Controller
                 $dm = $this->get('doctrine_mongodb')->getManager();
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
                          ->field('student')->references($user);
-
                 $applications = $qb->getQuery()->execute();
+
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+                    ->field('student')
+                    ->references($user);
+                $collaboration = $qb->getQuery()->getSingleResult();
+
+                $supervisor = $collaboration->getProfessor();
+
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
+                    ->field('professor')->references($supervisor);
+
+                $tasklist = $qb->getQuery()->execute();
+
                 return $this->render('AcatismMainBundle:Show:StudView.html.twig',
-                  array('student' => $student, 'applicationlist' => $applications));
+                  array('student' => $student,
+                        'applicationlist' => $applications,
+                        'tasklist' => $tasklist
+                  ));
 
             }
         }
