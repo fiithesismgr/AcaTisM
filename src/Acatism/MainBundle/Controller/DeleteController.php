@@ -4,6 +4,7 @@ namespace Acatism\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ODM\MongoDB\Cursor;
 
 
 // Controller for deleting tasks, projects
@@ -27,9 +28,21 @@ class DeleteController extends Controller{
 
             if($project->getProfessor() === $user){
 
-                $em = $this->get('doctrine_mongodb')->getManager();
-                $em->remove($project);
-                $em->flush();
+                
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
+                         ->field('project')->references($project);
+                $applications = $qb->getQuery()->execute();
+                foreach($applications as $application)
+                {
+                   $dm->remove($application);
+                    
+                }
+
+                
+
+                $dm->remove($project);
+                $dm->flush();
 
                 return $this->redirect($this->generateUrl('acatism_main_homepage'));
 
@@ -101,8 +114,6 @@ class DeleteController extends Controller{
             {
                 return $this->redirect($this->generateUrl('acatism_main_homepage'));
             }
-
-            
             
         }
         else
