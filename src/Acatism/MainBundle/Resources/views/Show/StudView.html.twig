@@ -343,6 +343,10 @@
 
                                             Accepted ( Awaiting for confirmation... )
 
+                                             <a href="{{ path('acatism_confirm_application', { 'applicationId': application.id }) }}">
+                                                 <button>Decline</button>
+                                             </a>
+
                                          {% elseif (application.status == 'ACCEPTED') %}
 
                                             Accepted ( Confirmed )

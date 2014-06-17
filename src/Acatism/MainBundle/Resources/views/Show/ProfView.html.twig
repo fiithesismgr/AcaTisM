@@ -399,7 +399,7 @@
 
                                      </div>
 
-                                     <div class="projectOwner">
+                                     <div class="projectApplier">
 
                                          <a href="{{ path('acatism_view_student', { 'username': application.student.username }) }}">
                                              {{ application.student.firstname }}&nbsp;{{ application.student.lastname }}
@@ -425,8 +425,13 @@
 
                                      <div class="actions">
 
-                                         <button>Accept</button>
-                                         <button>Decline</button>
+                                         <a href="{{ path('acatism_accept_application', { 'applicationId': application.id }) }}">
+                                             <button>Accept</button>
+                                         </a>
+
+                                         <a href="{{ path('acatism_decline_application', { 'applicationId': application.id }) }}">
+                                             <button>Decline</button>
+                                         </a>
 
                                      </div>
 
