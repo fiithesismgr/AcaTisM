@@ -493,4 +493,26 @@ class Student extends Person
     {
         return $this->id;
     }
+
+    /**
+     * Set isAccepted
+     *
+     * @param boolean $isAccepted
+     * @return self
+     */
+    public function setIsAccepted($isAccepted)
+    {
+        $this->isAccepted = $isAccepted;
+        return $this;
+    }
+
+    /**
+     * Get isAccepted
+     *
+     * @return boolean $isAccepted
+     */
+    public function getIsAccepted()
+    {
+        return $this->isAccepted;
+    }
 }

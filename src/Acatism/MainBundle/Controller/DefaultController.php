@@ -95,8 +95,8 @@ class DefaultController extends Controller
                 }
 
                 var_dump($projectsApplications);
-                */
-                return new Reponse('www');
+
+                return new Reponse('www'); */
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
                   array('professor' => $professor,
                         'projectlist' => $projects,

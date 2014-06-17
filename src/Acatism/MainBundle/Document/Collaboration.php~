@@ -1,0 +1,118 @@
+<?php
+
+// src/Acatism/MainBundle/Document/Collaboration.php
+
+namespace Acatism\MainBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * Acatism\MainBundle\Document\Collaboration
+ * @MongoDB\Document
+ */
+
+class Collaboration
+{
+    /**
+     * @MongoDB\Id(strategy="AUTO")
+     */
+
+    protected $id;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+
+    protected $professor;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+
+    protected $student;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\MainBundle\Document\Project")
+     */
+
+    protected $project;
+
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set professor
+     *
+     * @param Acatism\AuthenticationBundle\Document\User $professor
+     * @return self
+     */
+    public function setProfessor(\Acatism\AuthenticationBundle\Document\User $professor)
+    {
+        $this->professor = $professor;
+        return $this;
+    }
+
+    /**
+     * Get professor
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $professor
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
+    }
+
+    /**
+     * Set student
+     *
+     * @param Acatism\AuthenticationBundle\Document\User $student
+     * @return self
+     */
+    public function setStudent(\Acatism\AuthenticationBundle\Document\User $student)
+    {
+        $this->student = $student;
+        return $this;
+    }
+
+    /**
+     * Get student
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $student
+     */
+    public function getStudent()
+    {
+        return $this->student;
+    }
+
+    /**
+     * Set project
+     *
+     * @param Acatism\MainBundle\Document\Project $project
+     * @return self
+     */
+    public function setProject(\Acatism\MainBundle\Document\Project $project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Acatism\MainBundle\Document\Project $project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+}

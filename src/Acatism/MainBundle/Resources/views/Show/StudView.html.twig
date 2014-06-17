@@ -142,7 +142,11 @@
                  <ul>
 
                      <li id="activityTab_1">NewsFeed</li>
+
+                     {% if (student.isAccepted == true) %}
                      <li id="activityTab_2">Tasks</li>
+                     {% endif %}
+
                      <li id="activityTab_3">Applications</li>
 
                  </ul>
@@ -150,6 +154,8 @@
              </div>
 
              <div class="activitycontent">
+
+                 <!-- news tab -->
 
                  <div class="activityPage" id="activityPage_1">
 
@@ -215,6 +221,9 @@
 
                  </div>
 
+                 <!-- tasks tab -->
+
+                 {% if (student.isAccepted == true) %}
                  <div class="activityPage" id="activityPage_2">
 
                      <ul class="taskList">
@@ -303,6 +312,9 @@
 
                      </ul>
                  </div>
+                 {% endif %}
+
+                 <!-- applications tab -->
 
                  <div class="activityPage" id="activityPage_3">
 
@@ -355,7 +367,6 @@
                      </ul>
 
                  </div>
-
 
              </div>
 
