@@ -46,6 +46,18 @@ class Student extends Person
     */
     protected $projects;
 
+    /**
+    * @MongoDB\Field(type="boolean")
+    */
+    protected $isAccepted;
+
+     public function __construct()
+    {
+        $this->isAccepted = false;
+  
+    }
+
+
      public function createAboutForm(Controller $controller)
     {
         return $controller->createForm(new StudentAboutType(), $this);
@@ -480,5 +492,27 @@ class Student extends Person
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set isAccepted
+     *
+     * @param boolean $isAccepted
+     * @return self
+     */
+    public function setIsAccepted($isAccepted)
+    {
+        $this->isAccepted = $isAccepted;
+        return $this;
+    }
+
+    /**
+     * Get isAccepted
+     *
+     * @return boolean $isAccepted
+     */
+    public function getIsAccepted()
+    {
+        return $this->isAccepted;
     }
 }

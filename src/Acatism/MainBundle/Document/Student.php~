@@ -46,6 +46,18 @@ class Student extends Person
     */
     protected $projects;
 
+    /**
+    * @MongoDB\Field(type="boolean")
+    */
+    protected $isAccepted;
+
+     public function __construct()
+    {
+        $this->isAccepted = false;
+  
+    }
+
+
      public function createAboutForm(Controller $controller)
     {
         return $controller->createForm(new StudentAboutType(), $this);

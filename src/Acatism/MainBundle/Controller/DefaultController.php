@@ -81,13 +81,30 @@ class DefaultController extends Controller
                     ->field('professor')->references($user);
                 $applications = $qb->getQuery()->execute();
 
+                $projectsApplications = array();
+                /*
+                foreach($applications as $application)
+                {
+                    $projectId = $application->getProject()->getId();
+                    if(!isset($projectsApplications[$projectId]))
+                    {
+                        $projectsApplications[$projectId] = array();
+                    }
 
+                    array_push($projectsApplications[$projectId], $application);
+                }
+
+                var_dump($projectsApplications);
+                */
+                return new Reponse('www');
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
                   array('professor' => $professor,
                         'projectlist' => $projects,
                         'tasklist' => $tasks,
-                        'applicationlist' => $applications
+                        'applicationlist' => $applications,
+                        'projectsApplications' => $projectsApplications
                         ));
+
             }
         }
 
