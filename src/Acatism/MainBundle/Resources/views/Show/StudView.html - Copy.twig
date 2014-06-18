@@ -158,10 +158,64 @@
                  <!-- news tab -->
 
                  <div class="activityPage" id="activityPage_1">
-                    <ul class="news" id="newsList">
-                        
-                    </ul>
-                     
+
+                     <ul class="news">
+
+                         <li class="article">
+
+                             <div class="articlesubject">
+
+                                 <div class="content">
+
+                                     Catalin Baltuta si-a actualizat profilul.
+
+                                 </div>
+
+
+                                 <div class="posttime">
+
+                                     01/06/2014, 17:34
+
+                                 </div>
+
+                                 <div class="clear"></div>
+
+                             </div>
+
+                             <div class="clear"></div>
+
+                         </li>
+
+                         <li class="article">
+
+                             <div class="articlesubject">
+
+                                 <div class="content">
+
+                                     project
+
+                                 </div>
+
+
+                                 <div class="posttime">
+
+                                     01/06/2014, 17:34
+
+                                 </div>
+
+                                 <div class="clear"></div>
+
+                             </div>
+
+                             <div class="articlecontent">
+
+                                 content
+
+                             </div>
+
+                         </li>
+
+                     </ul>
 
                  </div>
 
@@ -341,7 +395,6 @@
 
     <script type="text/javascript" src="{{  asset("scripts/jquery-1.11.1.min.js") }}" ></script>
 
-    <script type="text/javascript" src="{{  asset("scripts/moment-with-langs.js") }}" ></script>
     <script type="text/javascript" src="{{  asset("scripts/FeedEk.js") }}" ></script>
 
     <script type="text/javascript" src="{{ asset("scripts/taskDropdownStudsView.js") }}" ></script>
@@ -349,46 +402,12 @@
     <script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
 
     <script type="text/javascript">
-         $("document").ready(function() {
-           var link = "http://localhost/AcaTisM/web/app_dev.php/newsfeed";
-            $.ajax({
-                url: link,
-                type: "GET",
-                dataType: "xml",
-                success: successFn,
-                error: errorFn
+         $(function() {
+            $('#divRss').FeedEk({
+            FeedUrl: 'feed://localhost/AcaTisM/web/app_dev.php/newsfeed',
+            MaxCount: 100
             });
         });
-
-        function successFn(result) {
-            $(result).find('entry').each(function() {
-                var subject = $(this).find('title').text();
-                var content = $(this).find('summary').text();
-                var date = $(this).find('updated').text();
-                $("#newsList").append(
-                    "<li class = 'article'>"+
-                        "<div class='articlesubject'>"+
-                            "<div class='content'>"+
-                                subject+
-                            "</div>"+
-                            "<div class='posttime'>"+
-                                moment(date).format('LLLL')+
-                            "</div>"+
-                            "<div class='clear'></div>"+
-                        "</div>"+
-                        "<div class='articlecontent'>"+
-                            content+
-                        "</div>"+
-                        "<div class='clear'></div>"+
-                    "</li>");
-            });
-        }
-
-        function errorFn(xhr, status, strErr) {
-            console.log("Error.");
-
-        }
-            
     </script>
 
 {% endblock %}

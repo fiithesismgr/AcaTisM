@@ -1,0 +1,71 @@
+<?php
+
+// src/Acatism/MainBundle/Document/NewsItem.php
+
+namespace Acatism\MainBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Eko\FeedBundle\Item\Writer\ItemInterface;
+
+/**
+ * Acatism\MainBundle\Document\NewsItem
+ * @MongoDB\Document
+ */
+class NewsItem implements ItemInterface
+{
+    /**
+    * @MongoDB\Id(strategy="AUTO")
+    */
+    protected $id;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $title;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $description;
+
+    /**
+    * @MongoDB\Field(type="date")
+    */
+    protected $publicationDate;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $link;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+    protected $author;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+    protected $recipient;
+
+    public function getFeedItemTitle() 
+    {
+    	return $this->title;
+    }
+
+    public function getFeedItemDescription() 
+    {
+    	return $this->description;
+    }
+
+    public function getFeedItemPubDate() 
+    {
+    	return $this->publicationDate;
+    }
+
+    public function getFeedItemLink() 
+    {
+    	return $this->link;
+    }
+
+}

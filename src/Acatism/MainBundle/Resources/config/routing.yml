@@ -58,3 +58,7 @@ acatism_confirm_application:
     pattern: /confirm_application/{applicationId}
     defaults: { _controller: AcatismMainBundle:Application:confirm }
 
+acatism_news_feed:
+    pattern: /newsfeed
+    defaults: { _controller: AcatismMainBundle:Default:newsFeed }
+

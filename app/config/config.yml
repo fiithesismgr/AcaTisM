@@ -88,3 +88,12 @@ doctrine_mongodb:
             auto_mapping: true
     auto_generate_hydrator_classes: true 
 
+eko_feed:
+    feeds:
+        article:
+            title:       'My news'
+            description: 'Latests news'
+            link:        'http://localhost/AcaTisM/web/app_dev.php'
+            encoding:    'utf-8'
+            author:      'AcaTisM' # Only required for Atom feeds
+

@@ -250,6 +250,22 @@ class DefaultController extends Controller
 
    }
 
+   public function newsFeedAction()
+   {
+      $dm = $this->get('doctrine_mongodb')->getManager();
+
+      $qb = $dm->createQueryBuilder('AcatismMainBundle:NewsItem')
+               ->field('title')->notEqual('ept');
+      $newsItems = $qb->getQuery()->getSingleResult();
+
+      $feed = $this->get('eko_feed.feed.manager')->get('article');
+      $feed->add($newsItems);
+
+      $response = new Response($feed->render('atom'));
+      $response->headers->set('Content-Type', 'text/xml');
+      return $response;
+   }
+
    public function getStudentInformation()
    {
       

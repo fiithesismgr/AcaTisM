@@ -3,6 +3,7 @@
 namespace Acatism\MainBundle\Controller;
 
 use Acatism\MainBundle\Document\Application;
+use Acatism\MainBundle\Document\NewsItem;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,7 @@ use Acatism\MainBundle\Form\Type\ProjectType;
 use Acatism\MainBundle\Document\Project;
 use Acatism\MainBundle\Form\Type\TaskType;
 use Acatism\MainBundle\Document\Task;
+use Zend\Stdlib\DateTime;
 
 class CreationController extends Controller{
 
@@ -40,9 +42,21 @@ public function newProjectAction(Request $request){
         $project->setDescription($form->get('description')->getData());
 
 
-        $em = $this->get('doctrine_mongodb')->getManager();
-        $em->persist($project);
-        $em->flush();
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($project);
+        $dm->flush();
+
+        $newsItem = new NewsItem();
+        $newsItem->setTitle('New Project.');
+        $newsItem->setDescription($user->getFirstname() . $user->getLastname() . ' a adaugat un nou proiect de licenta
+            numit ' . $project->getName());
+        $newsItem->setPublicationDate(new DateTime('NOW'));
+        $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
+        $newsItem->setAuthor($user);
+
+        $dm->persist($newsItem);
+        $dm->flush();
+
 
         return $this->redirect($this->generateUrl('acatism_main_homepage'));
     }
@@ -76,9 +90,9 @@ public function newTaskAction(Request $request){
             $task->setRequireFile($form->get('requireFileFormat')->getData());
             $task->setRequireSourceCode($form->get('requireSourceCode')->getData());
 
-            $em = $this->get('doctrine_mongodb')->getManager();
-            $em->persist($task);
-            $em->flush();
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($task);
+            $dm->flush();
 
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
 
@@ -105,9 +119,9 @@ public function newApplicationAction($proj_id)
             $app->setProfessor($proj->getProfessor());
             $app->setProject($proj);
 
-            $em = $this->get('doctrine_mongodb')->getManager();
-            $em->persist($app);
-            $em->flush();
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($app);
+            $dm->flush();
 
             if($this->getRequest()->isXmlHttpRequest())
             {
