@@ -140,6 +140,7 @@
                      <li id="activityTab_2">Projects</li>
                      <li id="activityTab_3">Tasks</li>
                      <li id="activityTab_4">Applications</li>
+                     <li id="activityTab_5">Posts</li>
 
                  </ul>
 
@@ -147,6 +148,8 @@
 
              <div class="activitycontent">
 
+
+                 <!-- newsfeed -->
                  <div class="activityPage" id="activityPage_1">
 
                      <ul class="news">
@@ -210,6 +213,8 @@
                      </ul>
 
                  </div>
+
+                 <!-- projects -->
 
                  <div class="activityPage" id="activityPage_2">
 
@@ -287,6 +292,8 @@
                     </div>
 
                  </div>
+
+                 <!--tasks -->
 
                  <div class="activityPage" id="activityPage_3">
 
@@ -382,6 +389,8 @@
 
                  </div>
 
+                 <!-- applications -->
+
                  <div class="activityPage" id="activityPage_4">
 
 
@@ -447,6 +456,68 @@
 
                      </ul>
 
+
+                 </div>
+
+                 <!-- posts -->
+
+                 <div class="activityPage" id="activityPage_5">
+
+                     <div class="addNew">
+
+                         <a href="{{ path("acatism_new_post") }}">
+                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
+                         </a>
+
+                     </div>
+
+                     <ul class="news">
+
+                         {% for post in postlist %}
+
+                             <li class="article">
+
+                                 <div class="articlesubject">
+
+                                     <div class="content">
+
+                                         {{ post.title }}
+
+                                     </div>
+
+
+                                     <div class="posttime">
+
+                                         {{ post.date|date('H:m Y-m-d') }}
+
+                                     </div>
+
+                                     <div class="clear"></div>
+
+                                 </div>
+
+                                 <div class="articlecontent">
+
+
+                                     <div class="content">
+                                     {{ post.content }}
+                                     </div>
+
+                                     <div class="trash">
+                                         <a href="{{ path('acatism_delete_post', { 'post_id': post.id }) }}">
+                                             <img src="{{ asset('images/trash.png') }}" alt="Delete" />
+                                         </a>
+                                     </div>
+
+                                     <div class="clear"></div>
+
+                                 </div>
+
+                             </li>
+
+                         {% endfor %}
+
+                     </ul>
 
                  </div>
 

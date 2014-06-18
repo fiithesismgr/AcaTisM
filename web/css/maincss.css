@@ -479,8 +479,12 @@ a:hover{
 
 .activitycontent #task .taskHeader .content{
 
-    width: 50%;
+    color: #449960;
     float: left;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px;
+    width: 50%;
 
 }
 
@@ -667,7 +671,7 @@ a:hover{
 
 .applicationInfo .applicationStatus{
 
-    float: left;
+    float: right;
     padding: 7px;
 
 }

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Acatism\MainBundle\Form\Type\ProjectType;
 use Acatism\MainBundle\Document\Project;
+use Acatism\MainBundle\Document\Post;
 use Acatism\MainBundle\Form\Type\TaskType;
 use Acatism\MainBundle\Document\Task;
 use Zend\Stdlib\DateTime;
@@ -105,6 +106,57 @@ public function newTaskAction(Request $request){
          }
     }
 
+public function newPostAction(Request $request){
+
+        $post = new Post();
+
+        $form = $this->createFormBuilder($post)
+            ->setAction($this->generateUrl('acatism_new_post'))
+            ->add('title','text')
+            ->add('content','textarea')
+            ->add('Post','submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+
+            $user = $this->getUser();
+
+            //$id = $user->getId();
+
+            $post->setProfessor($user);
+            $post->setTitle($form->get('title')->getData());
+            $post->setContent($form->get('content')->getData());
+            $post->setDate(new DateTime('NOW'));
+
+
+            $dm = $this->get('doctrine_mongodb')->getManager();
+
+            $dm->persist($post);
+            $dm->flush();
+
+            $newsItem = new NewsItem();
+            $newsItem->setTitle('New Post');
+            $newsItem->setDescription($user->getFirstname() . $user->getLastname() . ' a adaugat o noua postare: ' . $post->getTitle());
+            $newsItem->setPublicationDate(new DateTime('NOW'));
+            $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
+            $newsItem->setAuthor($user);
+
+            $dm->persist($newsItem);
+            $dm->flush();
+
+
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+        }
+
+        else{
+            return $this->render('AcatismMainBundle:Creation:NewPostCreation.html.twig',
+                array('form' => $form->createView(),
+                ));
+        }
+    }
+
 public function newApplicationAction($proj_id)
 {
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
@@ -131,6 +183,7 @@ public function newApplicationAction($proj_id)
             {
                 return $this->redirect($this->generateUrl('acatism_main_homepage'));
             }
+
             //return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
         else
@@ -147,7 +200,6 @@ public function newApplicationAction($proj_id)
         
 
     }
-
 
 }
 

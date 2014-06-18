@@ -84,9 +84,11 @@ class DefaultController extends Controller
 
                 $user = $this->getUser();
 
+                $dm = $this->get('doctrine_mongodb')->getManager();
+
 
                 // getting project list
-                $dm = $this->get('doctrine_mongodb')->getManager();
+
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
                          ->field('professor')->references($user)
                          ->sort('name', 'ASC');
@@ -94,7 +96,7 @@ class DefaultController extends Controller
 
 
                 // getting task list
-                $dm = $this->get('doctrine_mongodb')->getManager();
+
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
                          ->field('professor')
                          ->references($user)
@@ -102,13 +104,23 @@ class DefaultController extends Controller
                 $tasks = $qb->getQuery()->execute();
 
                 // getting application list
-                $dm = $this->get('doctrine_mongodb')->getManager();
+
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
                     ->field('professor')->references($user);
                 $applications = $qb->getQuery()->execute();
 
+
+                // getting posts list
+
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Post')
+                    ->field('professor')->references($user)
+                    ->sort('date', 'ASC');
+                $posts = $qb->getQuery()->execute();
+
                 $projectsApplications = array();
                 /*
+
+
                 foreach($applications as $application)
                 {
                     $projectId = $application->getProject()->getId();
@@ -123,12 +135,14 @@ class DefaultController extends Controller
                 var_dump($projectsApplications);
 
                 return new Reponse('www'); */
+
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
                   array('professor' => $professor,
                         'projectlist' => $projects,
                         'tasklist' => $tasks,
                         'applicationlist' => $applications,
-                        'projectsApplications' => $projectsApplications
+                        'projectsApplications' => $projectsApplications,
+                        'postlist' => $posts
                         ));
 
             }
@@ -268,7 +282,6 @@ class DefaultController extends Controller
 
    public function getStudentInformation()
    {
-      
 
       $dm = $this->get('doctrine_mongodb')->getManager();
 
@@ -276,6 +289,7 @@ class DefaultController extends Controller
                ->field('user')->references($this->getUser());
       return $qb->getQuery()->getSingleResult();
    }
+
    public function getProfessorInformation()
    {
 

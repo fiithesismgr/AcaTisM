@@ -1,0 +1,53 @@
+<?php
+
+// src/Acatism/MainBundle/Document/Post.php
+
+namespace Acatism\MainBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * Acatism\MainBundle\Document\Post
+ * @MongoDB\Document
+ */
+
+class Post
+{
+
+    /**
+     * @MongoDB\Id(strategy="AUTO")
+     */
+
+    protected $id;
+
+    /**
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 500)
+     */
+
+    protected $title;
+
+    /**
+     * @MongoDB\Field(type="string")
+     * @Assert\NotBlank()
+     */
+
+    protected $content;
+
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+
+    protected $professor;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $date;
+
+
+}

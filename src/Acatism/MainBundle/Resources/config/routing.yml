@@ -10,6 +10,10 @@ acatism_new_task:
     pattern: /new_task
     defaults: { _controller: AcatismMainBundle:Creation:newTask }
 
+acatism_new_post:
+    pattern: /new_post
+    defaults: { _controller: AcatismMainBundle:Creation:newPost }
+
 acatism_success:
     pattern: /success
     defaults: { _controller: AcatismMainBundle:Success:success }
@@ -21,6 +25,10 @@ acatism_delete_project:
 acatism_delete_task:
     pattern: /delete_task/{task_id}
     defaults: { _controller: AcatismMainBundle:Delete:deleteTask }
+
+acatism_delete_post:
+    pattern: /delete_post/{post_id}
+    defaults: { _controller: AcatismMainBundle:Delete:deletePost }
 
 acatism_view_students:
     pattern: /students/

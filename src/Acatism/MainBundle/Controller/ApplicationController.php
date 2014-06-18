@@ -9,6 +9,7 @@ use Acatism\MainBundle\Document\Collaboration;
 
 class ApplicationController extends Controller
 {
+
     public function acceptAction($applicationId)
     {
     	if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true) 

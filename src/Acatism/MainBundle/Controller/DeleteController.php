@@ -88,6 +88,40 @@ class DeleteController extends Controller{
 
     }
 
+    // Action for posts deletion
+    public function deletePostAction($post_id){
+
+        // if user has professor role
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+            // getting current user
+            $user = $this->getUser();
+
+            // searching the post object by the given id
+            $post = $this->get('doctrine_mongodb')
+                ->getRepository('AcatismMainBundle:Post')
+                ->findOneBy(array('id' => $post_id));
+
+            // if the post is owned by the current professor, delete it
+
+            if($post->getProfessor() === $user){
+
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                $dm->remove($post);
+                $dm->flush();
+
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+
+            }
+
+        }
+
+        else
+            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+
+    }
+
+    // Action for projects application canceling
     public function cancelApplicationAction($proj_id)
     {
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
@@ -106,6 +140,8 @@ class DeleteController extends Controller{
                 $dm->remove($application);
                 $dm->flush();
             }
+
+
             if($this->getRequest()->isXmlHttpRequest())
             {
                 return new Response('success');
@@ -116,6 +152,7 @@ class DeleteController extends Controller{
             }
             
         }
+
         else
         {
             if($this->getRequest()->isXmlHttpRequest())

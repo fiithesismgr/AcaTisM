@@ -87,9 +87,14 @@ class ViewController extends Controller
         $projects = $qb->getQuery()->execute();
 
 
+        $studIsAccepted = false;
+
         $projectsStatusList = array();
+
+
         if($this->getUser()->getRole()->getName() === 'student')
         {
+
             $dm = $this->get('doctrine_mongodb')->getManager();
             $qb = $dm->createQueryBuilder('AcatismMainBundle:Application');
             $qb->addOr($qb->expr()->field('professor')->references($prof));
@@ -100,6 +105,14 @@ class ViewController extends Controller
                 $projectId = $application->getProject()->getId();
                 $projectsStatusList[$projectId] = true;
             }
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($this->getUser());
+            $stud = $qb->getQuery()->getSingleResult();
+
+            if(!( is_null($stud) ))
+            $studIsAccepted = $stud->getIsAccepted();
+
         }
         
 
@@ -107,7 +120,8 @@ class ViewController extends Controller
             array('user' => $user,
                   'prof' => $prof,
                   'projectlist' => $projects,
-                  'projectsStatusList' => $projectsStatusList
+                  'projectsStatusList' => $projectsStatusList,
+                  'studIsAccepted' => $studIsAccepted
             ));
 
 

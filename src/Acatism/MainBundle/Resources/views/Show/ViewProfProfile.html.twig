@@ -160,7 +160,11 @@
 
 
                          {% if (app.user.role.role == 'ROLE_STUDENT') %}
+
+                             {% if (studIsAccepted == false) %}
+
                          <div class="apply">
+
                              {% if (projectsStatusList[project.id] is not defined) %}
                                 {% set applyClass = "action" %}
                                 {% set cancelClass = "action hidden" %}
@@ -182,6 +186,8 @@
                                 </a>
                             </div>
                          </div>
+
+                             {% endif %}
 
                          {% endif %}
 
@@ -224,6 +230,7 @@
         });
 
         function applyFn(evt) {
+
             evt.preventDefault();
 
             var link = $("#applyLink").attr("href");
@@ -234,7 +241,6 @@
                 success: successApplyFn,
                 error: errorFn
             });
-
             
         }
 

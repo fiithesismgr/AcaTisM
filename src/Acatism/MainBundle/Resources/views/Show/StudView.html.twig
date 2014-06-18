@@ -231,12 +231,6 @@
 
                                      </div>
 
-                                     <div class="trash">
-                                         <a href="{{ path('acatism_delete_task', { 'task_id': task.id }) }}">
-                                             <img src="{{ asset('images/trash.png') }}" alt="Delete" />
-                                         </a>
-                                     </div>
-
                                      <div class="clear"></div>
 
 
@@ -283,6 +277,8 @@
 
                                             Pending...
 
+                                             {% set showButton = "false" %}
+
                                          {% elseif (application.status == 'WAITING_CONFIRMATION') %}
 
                                             Accepted ( Confirm ? )
@@ -293,9 +289,13 @@
 
                                             Accepted ( Confirmed )
 
+                                            {% set showButton = "false" %}
+
                                          {% elseif (application.status == 'DECLINED') %}
 
                                             Not accepted
+
+                                            {% set showButton = "false" %}
 
                                          {% endif %}
 
@@ -306,7 +306,9 @@
 
                                       {% if showButton == "true" %}
 
+                                      <a href="{{ path('acatism_confirm_application', { 'applicationId': application.id } ) }}">
                                       <button>Confirm</button>
+                                      </a>
 
                                       {% endif %}
 
