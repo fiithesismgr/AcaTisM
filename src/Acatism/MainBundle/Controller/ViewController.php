@@ -77,8 +77,8 @@ class ViewController extends Controller
 
 
         $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
-            ->field('professor')->references($person)
-            ->field('student')->references($student);
+            ->field('professor')->references($visitor_user)
+            ->field('student')->references($visited_user);
 
         $collaboration = $qb->getQuery()->getSingleResult();
 
@@ -87,7 +87,7 @@ class ViewController extends Controller
 
                 // getting the tasks
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                    ->field('professor')->references($person);
+                    ->field('professor')->references($visitor_user);
 
                 $taskList = $qb->getQuery()->execute();
 
@@ -114,7 +114,18 @@ class ViewController extends Controller
                   'existsCollaboration' => $existsCollaboration
             ));
 
-
+        /*
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $visited_user = $this->get('doctrine_mongodb')
+                        ->getRepository('AcatismAuthenticationBundle:User')
+                        ->findOneBy(array('username' => $username));
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+                                ->field('professor')->references($this->getUser())
+                                ->field('student')->references($visited_user);
+        $collaboration = $qb->getQuery()->getSingleResult();
+        */
+        
+        return new Response($collaboration->getId());
     }
 
     public function viewAllStudentsAction(){
