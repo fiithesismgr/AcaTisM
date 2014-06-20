@@ -28,6 +28,7 @@ class ApplicationController extends Controller
 
                 $professor = $application->getProfessor();
                 $student = $application->getStudent();
+                $project = $application->getProject();
                 $newsItem = new NewsItem();
                 $newsItem->setTitle('Application accepted.');
                 $newsItem->setDescription('The professor ' . $professor->getFirstname() . ' ' . $professor->getLastname() . ' has 

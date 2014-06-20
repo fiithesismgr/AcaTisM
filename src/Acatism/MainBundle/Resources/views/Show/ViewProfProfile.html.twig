@@ -208,7 +208,7 @@
                                     </a>
                                 </div>
 
-                            <div class="{{cancelClass}}" id="{{'cancelButton' ~ loop.index}}">
+                            <div class="{{cancelClass}}" id="{{'cancelButton_' ~ loop.index}}">
                                 <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}" id="{{'cancelLink_' ~ loop.index}}">
                                      <button>Cancel</button>
                                 </a>
@@ -217,26 +217,13 @@
 
                                  {% else %}
 
-                                     <div class="assignedStudent">
-
-                                         <div class="label">Assigned Student: </div>
-
-                                         {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
-
-                                     </div>
-
+                                 {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
 
                                  {% endif %}
 
-                              {% elseif (project.getAssignedStud() is not null) %}
+                              {% elseif (project.assigned_stud is not null) %}
 
-                                  <div class="assignedStudent">
-
-                                      <div class="label">Assigned Student: </div>
-
-                                      {{ project.getAssignedStud().firstname ~ ' ' ~ project.getAssignedStud().lastname }}
-
-                                  </div>
+                                {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
 
                               {% endif %}
 
@@ -277,56 +264,50 @@
 
     <script type="text/javascript">
         $("document").ready(function() {
-            $(".actionApply").each(function() }
-                click(applyFn);
-            $("#cancelButton").click(cancelFn);
-        });
+            $(".actionApply").click(function(evt){
+                evt.preventDefault();
 
-        function applyFn(evt) {
+                var id = $(this).attr("id").split("_")[1];
+                var link = $("#applyLink_" + id).attr("href");
 
-            evt.preventDefault();
-
-            var link = $("#applyLink").attr("href");
-            $.ajax({
-                url: link,
-                type: "POST",
-                dataType: "text",
-                success: successApplyFn,
-                error: errorFn
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    dataType: "text",
+                    success: function(result){
+                        console.log(result);
+                        $("#applyButton_" + id).addClass("hidden");
+                        $("#cancelButton_" + id).removeClass("hidden");
+                    },
+                    error: errorFn
+                });
             });
-            
-        }
 
-        function successApplyFn(result) {
-            $("#applyButton").addClass("hidden");
-            $("#cancelButton").removeClass("hidden");
-        }
+            $(".actionCancel").click(function(evt){
+                evt.preventDefault();
 
-        function successCancelFn(result) {
-            $("#applyButton").removeClass("hidden");
-            $("#cancelButton").addClass("hidden");
-        }
+                var id = $(this).attr("id").split("_")[1];
+                var link = $("#cancelLink_" + id).attr("href");
+                console.log(link);
+
+                $.ajax({
+                    url: link,
+                    type: "POST",
+                    dataType: "text",
+                    success: function(result){
+                        console.log(result);
+                        $("#applyButton_" + id).removeClass("hidden");
+                        $("#cancelButton_" + id).addClass("hidden");
+                    },
+                    error: errorFn
+                });
+            });
+        });
 
         function errorFn(xhr, status, strErr) {
             console.log("Error.");
 
         }
-
-        function cancelFn(evt) {
-            evt.preventDefault();
-
-            var link = $("#cancelLink").attr("href");
-            $.ajax({
-                url: link,
-                type: "POST",
-                dataType: "text",
-                success: successCancelFn,
-                error: errorFn
-            });
-            
-        }
-
-
     </script>
 
 {% endblock %}
