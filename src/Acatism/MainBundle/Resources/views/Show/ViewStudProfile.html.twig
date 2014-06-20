@@ -6,16 +6,32 @@
 
      <div class="howdyandtools">
 
-         <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+         {% if app.user.role.role == 'ROLE_STUDENT' %}
 
+             <div class="profilename"><a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
 
-         <div class="profilecaption">
-             <a href="#">
-                 <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
-         </div>
+             <div class="profilecaption">
+                 <a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">
+                     <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" />
+                 </a>
+             </div>
+
+         {% endif %}
+
+         {% if app.user.role.role == 'ROLE_PROFESSOR' %}
+
+             <div class="profilename"><a href="{{ path('acatism_view_prof',{'username' : app.user.username}) }}">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+             <div class="profilecaption">
+                 <a href="{{ path('acatism_view_prof',{'username' : app.user.username}) }}">
+                     <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" />
+                 </a>
+             </div>
+
+         {% endif %}
 
          <div class="tool">
-             <a href="#">
+             <a href="{{ path('acatism_profile_settings') }}">
                  <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
              </a>
              <a href="{{ path('logout') }}">

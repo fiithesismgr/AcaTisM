@@ -338,4 +338,11 @@ class DefaultController extends Controller
       return $qb->getQuery()->getSingleResult();
    }
 
+   public function profileSettingsAction(){
+
+       return $this->render('AcatismMainBundle:Show:Settings.html.twig'
+           );
+
+   }
+
 }

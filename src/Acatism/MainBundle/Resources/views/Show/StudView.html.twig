@@ -6,15 +6,15 @@
 
     <div class="howdyandtools">
 
-        <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+        <div class="profilename"><a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
 
         <div class="profilecaption">
-            <a href="#">
+            <a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">
                 <img src="{{ student.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
         </div>
 
         <div class="tool">
-            <a href="#">
+            <a href="{{ path('acatism_profile_settings') }}">
                 <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
             </a>
             <a href="{{ path('logout') }}">

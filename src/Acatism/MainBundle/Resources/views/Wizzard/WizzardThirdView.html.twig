@@ -37,6 +37,25 @@
     {% endspaceless %}
 {% endblock form_errors %}
 
+    {% block utilities %}
+
+        <div class="howdyandtools">
+
+            <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+            <div class="tool">
+                <a href="{{ path('acatism_profile_settings') }}">
+                    <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+                </a>
+                <a href="{{ path('logout') }}">
+                    <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+                </a>
+            </div>
+
+        </div>
+
+    {% endblock %}
+
     {% block pageContent %}
 
         <div id="wizardSection">

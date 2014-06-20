@@ -583,6 +583,23 @@ a:hover{
 
 }
 
+.activitycontent .assignedStudent{
+
+    font-size: 14px;
+    float: right;
+    padding-top: 4%;
+
+}
+
+.activitycontent .assignedStudent .label{
+
+    float: left;
+    font-weight: bold;
+    color: #449960;
+    padding-right: 5px;
+
+}
+
 .trash{
 
     float: right;
@@ -665,6 +682,14 @@ a:hover{
     float: left;
     font-style: italic;
     font-weight: normal;
+}
+
+.applicationInfo .status{
+
+    float: right;
+    padding: 7px;
+
+
 }
 
 

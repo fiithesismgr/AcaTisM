@@ -33,12 +33,12 @@ class DeleteController extends Controller{
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
                          ->field('project')->references($project);
                 $applications = $qb->getQuery()->execute();
+
                 foreach($applications as $application)
                 {
                    $dm->remove($application);
                     
                 }
-
                 
 
                 $dm->remove($project);

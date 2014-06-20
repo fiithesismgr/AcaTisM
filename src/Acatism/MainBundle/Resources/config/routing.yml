@@ -2,6 +2,10 @@ acatism_main_homepage:
     pattern:  /
     defaults: { _controller: AcatismMainBundle:Default:index }
 
+acatism_profile_settings:
+    pattern:  /settings
+    defaults: { _controller: AcatismMainBundle:Default:profileSettings }
+
 acatism_new_project:
     pattern: /new_project
     defaults: { _controller: AcatismMainBundle:Creation:newProject }
@@ -69,4 +73,6 @@ acatism_confirm_application:
 acatism_news_feed:
     pattern: /newsfeed
     defaults: { _controller: AcatismMainBundle:Default:newsFeed }
+
+
 
