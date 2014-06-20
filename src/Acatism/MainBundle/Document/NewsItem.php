@@ -48,6 +48,17 @@ class NewsItem implements ItemInterface
      */
     protected $recipient;
 
+    /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $forAllStuds;
+
+    public function __construct()
+    {
+        $this->forAllStuds = false;
+  
+    }
+
     public function getFeedItemTitle() 
     {
     	return $this->title;
@@ -209,5 +220,27 @@ class NewsItem implements ItemInterface
     public function getRecipient()
     {
         return $this->recipient;
+    }
+
+    /**
+     * Set forAllStuds
+     *
+     * @param boolean $forAllStuds
+     * @return self
+     */
+    public function setForAllStuds($forAllStuds)
+    {
+        $this->forAllStuds = $forAllStuds;
+        return $this;
+    }
+
+    /**
+     * Get forAllStuds
+     *
+     * @return boolean $forAllStuds
+     */
+    public function getForAllStuds()
+    {
+        return $this->forAllStuds;
     }
 }

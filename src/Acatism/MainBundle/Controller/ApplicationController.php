@@ -22,6 +22,20 @@ class ApplicationController extends Controller
             {
             	$application->setStatus('WAITING_CONFIRMATION');
             	$dm->flush();
+
+
+                $professor = $application->getProfessor();
+                $student = $application->getStudent();
+                $newsItem = new NewsItem();
+                $newsItem->setTitle('Application accepted.');
+                $newsItem->setDescription('Professor ' . $professor->getFirstname() . ' ' . $professor->getLastname() . ' has 
+                    accepted your application for the thesis: ' . $project->getName());
+                $newsItem->setPublicationDate(new DateTime('NOW'));
+                $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
+                $newsItem->setAuthor($professor);
+
+        $dm->persist($newsItem);
+        $dm->flush();
             }
 
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
