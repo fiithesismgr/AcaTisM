@@ -2,7 +2,32 @@
 
 {% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
 
-{% block profile_section %}
+ {% block utilities %}
+
+     <div class="howdyandtools">
+
+         <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+
+         <div class="profilecaption">
+             <a href="#">
+                 <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
+         </div>
+
+         <div class="tool">
+             <a href="#">
+                 <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+             </a>
+             <a href="{{ path('logout') }}">
+                 <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+             </a>
+         </div>
+
+     </div>
+
+ {% endblock %}
+
+ {% block profile_section %}
 
     <div id="profile">
 
@@ -102,6 +127,118 @@
 {% endblock %}
 
  {% block activity_section %}
+
+     {% if ( existsCollaboration == true ) %}
+
+     <div id="activity">
+
+         <div class="activitytop">
+
+             What's new
+
+         </div>
+
+         <div class="activitymain">
+
+             <div class="activitycategory">
+
+                 <ul>
+
+                     <li id="activityTab_1">Tasks</li>
+
+                 </ul>
+
+             </div>
+
+             <div class="activitycontent">
+
+                 <div class="activityPage" id="activityPage_1">
+
+                     <ul class="taskList">
+
+                         {% for task in tasklist %}
+
+                             <li id="task">
+
+                                 <a href="#task">
+
+                                     <div class="taskHeader">
+
+                                         <div class="content">
+
+                                             {{ task.title }}
+
+                                         </div>
+
+                                         <div class="posttime">
+
+                                             Deadline: {{ task.dueDate|date('Y-m-d') }}
+
+                                         </div>
+
+
+                                         <div class="extend">
+                                             <img class="arrow" src="{{ asset('images/down.png') }}" alt="Down" />
+                                         </div>
+
+                                         <div class="clear"></div>
+
+                                     </div>
+
+                                 </a>
+
+                                 <div class="taskContent">
+
+
+                                     <div class="description">
+                                         {{ task.description }}
+                                     </div>
+
+                                     <div class="specifications">
+
+                                         {% if ( task.requireFile == true ) %}
+
+                                             {% if (task.requireFileFormat == true) %}
+                                                 * Requires file with specified format
+
+                                             {% endif %}
+
+                                         {%  else %} * Requires file with no specified format
+
+                                         {% endif %}
+
+                                         <br/>
+
+                                         {% if (task.requireSourceCode == true) %}
+                                             * Requires source code
+                                         {% endif %}
+
+                                     </div>
+
+                                     <div class="clear"></div>
+
+
+                                 </div>
+
+
+                             </li>
+
+                         {% endfor %}
+
+                     </ul>
+                 </div>
+
+             </div>
+
+         </div>
+
+         <div class="clear"></div>
+
+     </div>
+
+
+     {% endif %}
+
 
  {% endblock %}
 

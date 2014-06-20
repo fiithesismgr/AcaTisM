@@ -1,0 +1,111 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/register.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/userlists.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% block title %}
+
+    Students
+
+{% endblock %}
+
+    {% block utilities %}
+
+        <div class="howdyandtools">
+
+            <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+
+            <div class="profilecaption">
+                <a href="#">
+                    <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
+            </div>
+
+            <div class="tool">
+                <a href="#">
+                    <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+                </a>
+                <a href="{{ path('logout') }}">
+                    <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+                </a>
+            </div>
+
+        </div>
+
+    {% endblock %}
+
+    {% block pageContent %}
+
+        <div id="userListSection">
+
+            <div class="userListSectionHeader">
+
+
+                Students
+
+
+            </div>
+
+
+            <div class="userListSectionMain">
+
+
+                <ul class="userList">
+
+
+                    {% for stud in studlist %}
+
+
+                        <li class="user">
+
+                            <div class="userPicture">
+
+                                <a href="{{ path('acatism_view_student', {'username': stud.user.username }) }}">
+                                    <img src="{{ stud.getProfilePath() | apply_filter('medium_thumb') }}" alt="{{ stud.user.lastname ~ ' ' ~ stud.user.firstname }}" />
+                                </a>
+
+                            </div>
+
+                            <div class="userInfo">
+
+                                <div class="userName">
+
+                                    <a href="{{ path('acatism_view_student', {'username': stud.user.username }) }}">
+                                        {{ stud.user.lastname ~ ' ' ~ stud.user.firstname }}
+                                    </a>
+
+                                </div>
+
+                                <div class="userTitle">
+
+                                    Student
+
+                                </div>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                        </li>
+
+
+                    {% endfor %}
+
+
+                </ul>
+
+
+            </div>
+
+            <div class="clear"></div>
+
+
+        </div>
+
+    {% endblock %}

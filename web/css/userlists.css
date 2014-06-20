@@ -1,0 +1,59 @@
+#userListSection{
+
+    border-radius: 2px;
+    margin: 10% auto 0;
+    width: 85%;
+
+}
+
+.userListSectionHeader{
+
+    border-bottom: 1px solid #449960;
+    font-size: 20px;
+    font-weight: lighter;
+    padding: 10px;
+
+}
+
+.userListSectionMain{
+
+   padding: 10px;
+   font-size: 14px;
+
+}
+
+.userListSectionMain .userList{
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.userListSectionMain .userList .user{
+
+    margin-top: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px;
+
+}
+
+.userListSectionMain .userList .user .userPicture{
+
+    float: left;
+
+}
+
+.userListSectionMain .userList .user .userInfo{
+
+    float: left;
+    margin-left: 10px;
+    padding-top: 0.3%;
+
+}
+
+.userListSectionMain .userList .user .userInfo .userTitle{
+
+    margin-top: 5px;
+
+}

@@ -27,7 +27,8 @@
                 <ul>
 
                     <li><a href="{{ path('acatism_main_homepage') }}">Home</a></li>
-                    <li><a href="{{ path('acatism_view_profs')}}">Professors</a></li>
+                    <li><a href="{{ path('acatism_view_profs')}}">Academic Staff</a></li>
+                    <li><a href="{{ path('acatism_view_students')}}">Students</a></li>
                     <li><a href="#">About</a></li>
 
                 </ul>
@@ -54,27 +55,28 @@
 
     <div id="maincontainer">
 
-    {% block utilies %}
+    {% block utilities %}
 
-    <div class="howdyandtools">
+        <div class="howdyandtools">
 
-        <div class="profilename"><a href="#">Catalin</a></div>
+            <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
 
-        <div class="profilecaption">
-        <a href="#">
-            <img src="{{ asset('images/bt39blt_small.jpg') }}" alt="Catalin" /></a>
+
+            <div class="profilecaption">
+                <a href="#">
+                    <img src="#" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
+            </div>
+
+            <div class="tool">
+                <a href="#">
+                    <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+                </a>
+                <a href="{{ path('logout') }}">
+                    <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+                </a>
+            </div>
+
         </div>
-
-        <div class="tool">
-        <a href="#">
-            <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
-        </a>
-        <a href="{{ path('logout') }}">
-            <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
-        </a>
-        </div>
-
-    </div>
 
      {% endblock %}
 

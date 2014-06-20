@@ -7,6 +7,32 @@
     <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/views.css') }}" rel="stylesheet" type="text/css" />
 
+
+{% endblock %}
+
+{% block utilities %}
+
+<div class="howdyandtools">
+
+    <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+
+    <div class="profilecaption">
+        <a href="#">
+            <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
+    </div>
+
+    <div class="tool">
+        <a href="#">
+            <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
+        </a>
+        <a href="{{ path('logout') }}">
+            <img width="28px" height="28px" src="{{ asset('images/logout.png') }}" alt="LogOut" />
+        </a>
+    </div>
+
+</div>
+
 {% endblock %}
 
 {% block profile_section %}
@@ -99,7 +125,7 @@
 
 {% endblock %}
 
- {% block activity_section %}
+{% block activity_section %}
 
      <div id="activity">
 

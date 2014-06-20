@@ -76,6 +76,9 @@ avalanche_imagine:
         small_thumb:
             type:    thumbnail
             options: { size: [32, 32], mode: outbound }
+        medium_thumb:
+            type:    thumbnail
+            options: { size: [45, 45], mode: outbound }
 
 doctrine_mongodb:
     connections:

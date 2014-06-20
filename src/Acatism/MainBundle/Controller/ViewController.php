@@ -8,18 +8,48 @@ use Acatism\AuthenticationBundle\Document\User;
 
 class ViewController extends Controller
 {
-    public function viewStudentAction($username)
-    {
-        $user = $this->get('doctrine_mongodb')
+    public function viewStudentAction($username){
+
+        $person = null;
+
+        $visitor_user = $this->getUser();
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        // getting visitor Person entity ( visitor type )
+
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($visitor_user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+                ->field('user')->references($visitor_user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+        ////////////////////////
+
+        // getting info for visited student
+
+        $visited_user = $this->get('doctrine_mongodb')
             ->getRepository('AcatismAuthenticationBundle:User')
             ->findOneBy(array('username' => $username));
 
-        if(is_null($user) || ($user->getRole()->getName() != 'student'))
+        if(is_null($visited_user) || ($visited_user->getRole()->getName() != 'student'))
         {
             throw $this->createNotFoundException('Student with username ' . $username . ' does not exist.');
         }
 
-        if($user === $this->getUser())
+        if($visited_user === $this->getUser())
         {
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
         }
@@ -27,7 +57,7 @@ class ViewController extends Controller
         $dm = $this->get('doctrine_mongodb')->getManager();
 
         $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
-            ->field('user')->references($user);
+            ->field('user')->references($visited_user);
 
         $student = $qb->getQuery()->getSingleResult();
 
@@ -36,20 +66,126 @@ class ViewController extends Controller
             throw $this->createNotFoundException('Student with username ' . $username . ' does not have a profile defined yet.');
         }
 
+        ///////////////////////
+
+
+        // if the visitor is a Professor, check if there is an existent Collaboration between him and the visited stud
+
+        $existsCollaboration = false;
+
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+            ->field('professor')->references($person)
+            ->field('student')->references($student);
+
+        $collaboration = $qb->getQuery()->getSingleResult();
+
+            if(!is_null($collaboration)){
+                $existsCollaboration = true ; // collaboration existent
+
+                // getting the tasks
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
+                    ->field('professor')->references($person);
+
+                $taskList = $qb->getQuery()->execute();
+
+
+                return $this->render('AcatismMainBundle:Show:ViewStudProfile.html.twig',
+                    array('user' => $visited_user,
+                        'student' => $student,
+                        'visitor' => $person,
+                        'existsCollaboration' => $existsCollaboration,
+                        'taskList' => $taskList ));
+
+            }
+
+        }
+
+        //////////////////////
+
+        // rendering view
+
         return $this->render('AcatismMainBundle:Show:ViewStudProfile.html.twig',
-            array('user' => $user, 'student' => $student));
+            array('user' => $visited_user,
+                  'student' => $student,
+                  'visitor' => $person,
+                  'existsCollaboration' => $existsCollaboration
+            ));
 
 
     }
 
-    public function viewAllStudentsAction()
-    {
-        return new Response('All students');
+    public function viewAllStudentsAction(){
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $profs = $this->get('doctrine_mongodb')
+            ->getRepository('AcatismMainBundle:Student')
+            ->findAll();
+
+        $user = $this->getUser();
+
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        return $this->render('AcatismMainBundle:Users:ViewAllStuds.html.twig',
+            array( 'studlist' => $profs,
+                   'visitor' => $person )
+        );
+
+
     }
 
-    public function viewProfAction($username)
-    {
-        // searching user in db for getting info
+    public function viewProfAction($username){
+
+        // getting visitor Person entity
+
+        $user = $this->getUser();
+
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $dm = $this->get('doctrine_mongodb')->getManager();
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+            $dm = $this->get('doctrine_mongodb')->getManager();
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        // getting visited professor info
 
         $user = $this->get('doctrine_mongodb')
             ->getRepository('AcatismAuthenticationBundle:User')
@@ -119,17 +255,50 @@ class ViewController extends Controller
         return $this->render('AcatismMainBundle:Show:ViewProfProfile.html.twig',
             array('user' => $user,
                   'prof' => $prof,
+                  'visitor' => $person,
                   'projectlist' => $projects,
                   'projectsStatusList' => $projectsStatusList,
                   'studIsAccepted' => $studIsAccepted
-            ));
+                  ));
 
 
     }
 
-    public function viewAllProfsAction()
-    {
-        return new Response('All professors');
+    public function viewAllProfsAction(){
+
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $profs = $this->get('doctrine_mongodb')
+            ->getRepository('AcatismMainBundle:Professor')
+            ->findAll();
+
+        $user = $this->getUser();
+
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+                ->field('user')->references($user);
+
+            $person = $qb->getQuery()->getSingleResult();
+
+        }
+
+
+        return $this->render('AcatismMainBundle:Users:ViewAllProfs.html.twig',
+            array( 'proflist' => $profs,
+                  'visitor' => $person )
+            );
+
     }
 
 }

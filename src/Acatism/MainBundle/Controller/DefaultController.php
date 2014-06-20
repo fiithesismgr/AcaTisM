@@ -177,7 +177,7 @@ class DefaultController extends Controller
         else
         {
             $viewtype = $this->getUser()->getRole()->getRole();
-            return $this->render('AcatismMainBundle:Show:WizzardFirstView.html.twig',
+            return $this->render('AcatismMainBundle:Wizzard:WizzardFirstView.html.twig',
                     array('form' => $form->createView(),
                           'viewtype' => $viewtype
                     ));
@@ -220,7 +220,7 @@ class DefaultController extends Controller
         else
         {
             $viewtype = $this->getUser()->getRole()->getRole();
-            return $this->render('AcatismMainBundle:Show:WizzardSecondView.html.twig',
+            return $this->render('AcatismMainBundle:Wizzard:WizzardSecondView.html.twig',
                 array('form' => $form->createView(),
                     'viewtype' => $viewtype
                 ));
@@ -253,7 +253,7 @@ class DefaultController extends Controller
         else
         {
             $viewtype = $this->getUser()->getRole()->getRole();
-            return $this->render('AcatismMainBundle:Show:WizzardThirdView.html.twig',
+            return $this->render('AcatismMainBundle:Wizzard:WizzardThirdView.html.twig',
                 array('form' => $form->createView(),
                     'viewtype' => $viewtype
                 ));
@@ -299,4 +299,5 @@ class DefaultController extends Controller
                ->field('user')->references($this->getUser());
       return $qb->getQuery()->getSingleResult();
    }
+
 }
