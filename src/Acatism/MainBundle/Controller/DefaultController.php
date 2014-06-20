@@ -265,19 +265,57 @@ class DefaultController extends Controller
    }
 
    public function newsFeedAction()
-   {
-      $dm = $this->get('doctrine_mongodb')->getManager();
+   {  
+      if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
+      {
+         $dm = $this->get('doctrine_mongodb')->getManager();
 
-      $qb = $dm->createQueryBuilder('AcatismMainBundle:NewsItem')
-               ->field('title')->notEqual('ept');
-      $newsItems = $qb->getQuery()->getSingleResult();
+         $qb = $dm->createQueryBuilder('AcatismMainBundle:NewsItem');
+         $qb->addOr($qb->expr()->field('recipient')->references($this->getUser()));
+         $qb->addOr($qb->expr()->field('forAllStuds')->equals(true));
 
-      $feed = $this->get('eko_feed.feed.manager')->get('article');
-      $feed->add($newsItems);
 
-      $response = new Response($feed->render('atom'));
-      $response->headers->set('Content-Type', 'text/xml');
-      return $response;
+         $newsItems = $qb->getQuery()->execute();
+
+         $feed = $this->get('eko_feed.feed.manager')->get('article');
+         foreach($newsItems as $newsItem)
+         {
+            $feed->add($newsItem);
+         }
+         
+
+         $response = new Response($feed->render('atom'));
+         $response->headers->set('Content-Type', 'text/xml');
+
+         return $response;
+      }
+      elseif($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true)
+      { 
+          $dm = $this->get('doctrine_mongodb')->getManager();
+
+         $qb = $dm->createQueryBuilder('AcatismMainBundle:NewsItem');
+         $qb->addOr($qb->expr()->field('recipient')->references($this->getUser()));
+         //$qb->addOr($qb->expr()->field('forAllStuds')->equals(true));
+
+
+         $newsItems = $qb->getQuery()->execute();
+
+         $feed = $this->get('eko_feed.feed.manager')->get('article');
+         foreach($newsItems as $newsItem)
+         {
+            $feed->add($newsItem);
+         }
+
+         $response = new Response($feed->render('atom'));
+         $response->headers->set('Content-Type', 'text/xml');
+
+         return $response;
+      }
+      else
+      {
+          return new Response('error');
+      }
+      
    }
 
    public function getStudentInformation()

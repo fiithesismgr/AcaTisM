@@ -49,11 +49,11 @@ public function newProjectAction(Request $request){
 
         $newsItem = new NewsItem();
         $newsItem->setTitle('New Project.');
-        $newsItem->setDescription($user->getFirstname() . $user->getLastname() . ' a adaugat un nou proiect de licenta
-            numit ' . $project->getName());
+        $newsItem->setDescription('The professor ' . $user->getFirstname() . ' ' . $user->getLastname() . ' has added a new thesis
+            theme entitled: ' . $project->getName());
         $newsItem->setPublicationDate(new DateTime('NOW'));
         $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
-        $newsItem->setAuthor($user);
+        $newsItem->setForAllStuds(true);
 
         $dm->persist($newsItem);
         $dm->flush();
@@ -138,7 +138,8 @@ public function newPostAction(Request $request){
 
             $newsItem = new NewsItem();
             $newsItem->setTitle('New Post');
-            $newsItem->setDescription($user->getFirstname() . $user->getLastname() . ' a adaugat o noua postare: ' . $post->getTitle());
+            $newsItem->setDescription('The professor ' . $user->getFirstname() . ' ' . $user->getLastname() . ' 
+                has added a new post: ' . $post->getTitle());
             $newsItem->setPublicationDate(new DateTime('NOW'));
             $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
             $newsItem->setAuthor($user);
@@ -160,7 +161,8 @@ public function newPostAction(Request $request){
 public function newApplicationAction($proj_id)
 {
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
-        {
+        {   
+            $user = $this->getUser();
             $app = new Application();
 
             $proj = $this->get('doctrine_mongodb')
@@ -173,6 +175,14 @@ public function newApplicationAction($proj_id)
 
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($app);
+
+            $newsItem = new NewsItem();
+            $newsItem->setTitle('New application.');
+            $newsItem->setDescription('The student ' . $user->getFirstname() . ' ' . $user->getLastname() . ' has added a new thesis
+                theme entitled: ' . $project->getName());
+            $newsItem->setPublicationDate(new DateTime('NOW'));
+            $newsItem->setLink($this->generateUrl('acatism_view_student', array('username' => $user->getUsername())));
+
             $dm->flush();
 
             if($this->getRequest()->isXmlHttpRequest())

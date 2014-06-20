@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security;
 use Acatism\MainBundle\Document\Collaboration;
+use Zend\Stdlib\DateTime;
+use Acatism\MainBundle\Document\NewsItem;
 
 class ApplicationController extends Controller
 {
@@ -21,21 +23,21 @@ class ApplicationController extends Controller
             if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED')
             {
             	$application->setStatus('WAITING_CONFIRMATION');
-            	$dm->flush();
+            	//$dm->flush();
 
 
                 $professor = $application->getProfessor();
                 $student = $application->getStudent();
                 $newsItem = new NewsItem();
                 $newsItem->setTitle('Application accepted.');
-                $newsItem->setDescription('Professor ' . $professor->getFirstname() . ' ' . $professor->getLastname() . ' has 
+                $newsItem->setDescription('The professor ' . $professor->getFirstname() . ' ' . $professor->getLastname() . ' has 
                     accepted your application for the thesis: ' . $project->getName());
                 $newsItem->setPublicationDate(new DateTime('NOW'));
-                $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $user->getUsername())));
-                $newsItem->setAuthor($professor);
+                $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $professor->getUsername())));
+                $newsItem->setRecipient($student);
 
-        $dm->persist($newsItem);
-        $dm->flush();
+                $dm->persist($newsItem);
+                $dm->flush();
             }
 
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
@@ -57,7 +59,22 @@ class ApplicationController extends Controller
             if($this->getUser() === $application->getProfessor() && $application->getStatus() === 'UNPROCESSED')
             {
             	$application->setStatus('DECLINED');
-            	$dm->flush();
+
+                $professor = $application->getProfessor();
+                $student = $application->getStudent();
+
+                $newsItem = new NewsItem();
+                $newsItem->setTitle('Application declined.');
+                $newsItem->setDescription('The professor ' . $professor->getFirstname() . ' ' . $professor->getLastname() . ' has 
+                    declined your application for the thesis: ' . $project->getName());
+                $newsItem->setPublicationDate(new DateTime('NOW'));
+                $newsItem->setLink($this->generateUrl('acatism_view_prof', array('username' => $professor->getUsername())));
+                $newsItem->setRecipient($student);
+
+                $dm->persist($newsItem);
+                $dm->flush();
+
+            	//$dm->flush();
             }
 
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
@@ -96,6 +113,20 @@ class ApplicationController extends Controller
                          ->field('user')->references($this->getUser());
                 $student = $qb->getQuery()->getSingleResult();
                 $student->setIsAccepted(true);
+
+                $professor = $application->getProfessor();
+                $student = $application->getStudent();
+
+                $newsItem = new NewsItem();
+                $newsItem->setTitle('Application confirmed.');
+                $newsItem->setDescription('The student ' . $student->getFirstname() . ' ' . $student->getLastname() . ' has 
+                    confirmed his application for the thesis: ' . $project->getName());
+                $newsItem->setPublicationDate(new DateTime('NOW'));
+                $newsItem->setLink($this->generateUrl('acatism_view_student', array('username' => $student->getUsername())));
+                $newsItem->setRecipient($professor);
+
+                $dm->persist($newsItem);
+
                 $dm->flush();
             }
 
