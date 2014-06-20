@@ -19,16 +19,32 @@
 
         <div class="howdyandtools">
 
-            <div class="profilename"><a href="#">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+            {% if app.user.role.role == 'ROLE_STUDENT' %}
 
+                <div class="profilename"><a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
 
-            <div class="profilecaption">
-                <a href="#">
-                    <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" /></a>
-            </div>
+                <div class="profilecaption">
+                    <a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">
+                        <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" />
+                    </a>
+                </div>
+
+            {% endif %}
+
+            {% if app.user.role.role == 'ROLE_PROFESSOR' %}
+
+                <div class="profilename"><a href="{{ path('acatism_view_prof',{'username' : app.user.username}) }}">{{ app.user.firstname ~ " " ~ app.user.lastname }}</a></div>
+
+                <div class="profilecaption">
+                    <a href="{{ path('acatism_view_prof',{'username' : app.user.username}) }}">
+                        <img src="{{ visitor.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" />
+                    </a>
+                </div>
+
+            {% endif %}
 
             <div class="tool">
-                <a href="#">
+                <a href="{{ path('acatism_profile_settings') }}">
                     <img width="28px" height="28px" src="{{ asset('images/settings.png') }}" alt="Settings" />
                 </a>
                 <a href="{{ path('logout') }}">
@@ -42,66 +58,51 @@
 
     {% block pageContent %}
 
-        <div id="userListSection">
+        <div id="settingsListSection">
 
-            <div class="userListSectionHeader">
+            <div class="header">
 
-
-                Academic Staff
-
+                Settings
 
             </div>
 
+            <div class="settingsListMain">
 
-            <div class="userListSectionMain">
+                <div class="settingsSection">
 
-
-                <ul class="userList">
-
-
-                    {% for prof in proflist %}
+                    <div class="sectionTitle">
 
 
-                        <li class="user">
 
-                            <div class="userPicture">
-
-                                <a href="{{ path('acatism_view_prof', {'username': prof.user.username }) }}">
-                                    <img src="{{ prof.getProfilePath() | apply_filter('medium_thumb') }}" alt="{{ prof.user.lastname ~ ' ' ~ prof.user.firstname }}" />
-                                </a>
-
-                            </div>
-
-                            <div class="userInfo">
-
-                                <div class="userName">
+                    </div>
 
 
-                                    <a href="{{ path('acatism_view_prof', {'username': prof.user.username }) }}">
-                                        {{ prof.user.lastname ~ ' ' ~ prof.user.firstname }}
-                                    </a>
-
-                                </div>
-
-                                <div class="userTitle">
-
-                                    {{ prof.title }}
-
-                                </div>
-
-                            </div>
-
-                            <div class="clear"></div>
-
-                        </li>
+                    <div class="sectionContent">
 
 
-                    {% endfor %}
+
+                    </div>
 
 
-                </ul>
+                </div>
+
+                <div class="settingsSection">
+
+                    <div class="sectionTitle">
 
 
+
+                    </div>
+
+
+                    <div class="sectionContent">
+
+
+
+                    </div>
+
+
+                </div>
 
             </div>
 

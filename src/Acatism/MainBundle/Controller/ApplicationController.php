@@ -63,6 +63,7 @@ class ApplicationController extends Controller
 
                 $professor = $application->getProfessor();
                 $student = $application->getStudent();
+                $project = $application->getProject();
 
                 $newsItem = new NewsItem();
                 $newsItem->setTitle('Application declined.');
@@ -129,8 +130,21 @@ class ApplicationController extends Controller
 
                 $dm->persist($newsItem);
 
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
+                    ->field('student')->references($this->getUser())
+                    ->field('id')->notEqual($applicationId)
+                    ->field('status')->notEqual('DECLINED');
+
+                $trash_applications = $qb->getQuery()->execute();
+
+                foreach ( $trash_applications as $trash ){
+                    $dm->remove($trash);
+                }
+
                 $dm->flush();
             }
+
+
 
             return $this->redirect($this->generateUrl('acatism_main_homepage'));
     	}
