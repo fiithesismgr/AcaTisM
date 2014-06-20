@@ -31,3 +31,20 @@
 .hidden {
     display: none;
 }
+
+#project .assignedStudent{
+
+    font-size: 14px;
+    float: right;
+    padding-top: 4%;
+
+}
+
+#project .assignedStudent .label{
+
+    float: left;
+    font-weight: bold;
+    color: #449960;
+    padding-right: 5px;
+
+}

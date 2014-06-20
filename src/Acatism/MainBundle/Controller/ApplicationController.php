@@ -116,6 +116,7 @@ class ApplicationController extends Controller
 
                 $professor = $application->getProfessor();
                 $student = $application->getStudent();
+                $project = $application->getProject();
 
                 $newsItem = new NewsItem();
                 $newsItem->setTitle('Application confirmed.');
