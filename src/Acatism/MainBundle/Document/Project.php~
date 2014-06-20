@@ -43,6 +43,12 @@ class Project
     protected $professor;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+    protected $assigned_stud;
+
+
+    /**
      * Get id
      *
      * @return id $id

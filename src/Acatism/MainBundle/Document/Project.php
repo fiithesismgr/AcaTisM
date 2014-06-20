@@ -43,6 +43,12 @@ class Project
     protected $professor;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+    protected $assigned_stud;
+
+
+    /**
      * Get id
      *
      * @return id $id
@@ -120,5 +126,27 @@ class Project
     public function getProfessor()
     {
         return $this->professor;
+    }
+
+    /**
+     * Set assignedStud
+     *
+     * @param Acatism\AuthenticationBundle\Document\User $assignedStud
+     * @return self
+     */
+    public function setAssignedStud(\Acatism\AuthenticationBundle\Document\User $assignedStud)
+    {
+        $this->assigned_stud = $assignedStud;
+        return $this;
+    }
+
+    /**
+     * Get assignedStud
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $assignedStud
+     */
+    public function getAssignedStud()
+    {
+        return $this->assigned_stud;
     }
 }
