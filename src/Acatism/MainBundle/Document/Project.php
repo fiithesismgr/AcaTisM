@@ -47,6 +47,11 @@ class Project
      */
     protected $assigned_stud;
 
+    public function __construct()
+    {
+        $this->assigned_stud = null;
+    }
+
 
     /**
      * Get id

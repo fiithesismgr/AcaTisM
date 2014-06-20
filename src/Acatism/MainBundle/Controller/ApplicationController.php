@@ -79,7 +79,7 @@ class ApplicationController extends Controller
             if($this->getUser() === $application->getStudent() && $application->getStatus()==='WAITING_CONFIRMATION') 
             {
             	$application->setStatus('ACCEPTED');
-            	$dm->flush();
+            	//$dm->flush();
 
                 $collaboration = new Collaboration();
                 $collaboration->setStudent($application->getStudent());
@@ -87,7 +87,10 @@ class ApplicationController extends Controller
                 $collaboration->setProject($application->getProject());
 
                 $dm->persist($collaboration);
-                $dm->flush();
+                //$dm->flush();
+
+                $application->getProject()->setAssignedStud($application->getStudent());
+                //$dm->flush();
 
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
                          ->field('user')->references($this->getUser());
