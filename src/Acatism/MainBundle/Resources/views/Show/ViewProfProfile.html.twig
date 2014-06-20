@@ -194,22 +194,22 @@
                          <div class="apply">
 
                              {% if (projectsStatusList[project.id] is not defined) %}
-                                {% set applyClass = "action" %}
-                                {% set cancelClass = "action hidden" %}
+                                {% set applyClass = "actionApply" %}
+                                {% set cancelClass = "actionCancel hidden" %}
                              {% elseif (projectsStatusList[project.id] is defined) %}
-                                {% set applyClass = "action hidden" %}
-                                {% set cancelClass = "action" %}
+                                {% set applyClass = "actionApply hidden" %}
+                                {% set cancelClass = "actionCancel" %}
                             {% endif %}
 
 
-                            <div class="{{applyClass}}" id="applyButton">
-                                    <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}" id="applyLink">
+                            <div class="{{applyClass}}" id="{{'applyButton_' ~ loop.index}}">
+                                    <a href="{{ path('acatism_new_application', { 'proj_id': project.id }) }}" id="{{'applyLink_' ~ loop.index}}">
                                         <button>Apply</button>
                                     </a>
                                 </div>
 
-                            <div class="{{cancelClass}}" id="cancelButton">
-                                <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}" id="cancelLink">
+                            <div class="{{cancelClass}}" id="{{'cancelButton' ~ loop.index}}">
+                                <a href="{{ path('acatism_cancel_application', { 'proj_id': project.id }) }}" id="{{'cancelLink_' ~ loop.index}}">
                                      <button>Cancel</button>
                                 </a>
                             </div>
@@ -277,7 +277,8 @@
 
     <script type="text/javascript">
         $("document").ready(function() {
-            $("#applyButton").click(applyFn);
+            $(".actionApply").each(function() }
+                click(applyFn);
             $("#cancelButton").click(cancelFn);
         });
 

@@ -21,7 +21,14 @@
 
 }
 
-#project .apply .action{
+#project .apply .actionApply{
+
+    float: left;
+    padding-left: 10px;
+
+}
+
+#project .apply .actionCancel{
 
     float: left;
     padding-left: 10px;

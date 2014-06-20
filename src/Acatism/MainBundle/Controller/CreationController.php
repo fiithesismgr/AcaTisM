@@ -184,10 +184,11 @@ public function newApplicationAction($proj_id)
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($app);
 
+
             $newsItem = new NewsItem();
             $newsItem->setTitle('New application.');
-            $newsItem->setDescription('The student ' . $user->getFirstname() . ' ' . $user->getLastname() . ' has added a new thesis
-                theme entitled: ' . $project->getName());
+            $newsItem->setDescription('The student ' . $user->getFirstname() . ' ' . $user->getLastname() . ' has applied for
+                the thesis entitled: ' . $proj->getName());
             $newsItem->setPublicationDate(new DateTime('NOW'));
             $newsItem->setLink($this->generateUrl('acatism_view_student', array('username' => $user->getUsername())));
 
