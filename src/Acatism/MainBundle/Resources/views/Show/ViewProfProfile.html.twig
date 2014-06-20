@@ -187,7 +187,9 @@
 
                          {% if (app.user.role.role == 'ROLE_STUDENT') %}
 
-                             {% if (studIsAccepted == false) %}
+                             {% if ( studIsAccepted == false ) %}
+
+                                 {% if (project.getAssignedStud() is null) %}
 
                          <div class="apply">
 
@@ -213,7 +215,18 @@
                             </div>
                          </div>
 
-                             {% endif %}
+                                 {% else %}
+
+                                 {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
+
+                                 {% endif %}
+
+                              {% elseif (project.assigned_stud is not null) %}
+
+                                {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
+
+                              {% endif %}
+
 
                          {% endif %}
 
