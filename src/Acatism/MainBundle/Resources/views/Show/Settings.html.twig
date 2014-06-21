@@ -15,6 +15,36 @@
 
 {% endblock %}
 
+{% form_theme form _self %}
+
+{% block url_widget %}
+    <div class="inputClass">
+        {% set type = type|default('url') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="errorSection">
+                    <div class="icon">
+                        <img src="{{ asset('images/form_error.png') }}" alt="Error" />
+                    </div>
+                    <div class="message">
+                        {{ error.message }}
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+
     {% block utilities %}
 
         <div class="howdyandtools">
@@ -79,7 +109,44 @@
 
                     <div class="sectionContent">
 
-                            {{ form(form) }}
+                        {{  form_start(form) }}
+
+                        {{  form_errors(form) }}
+                        {{  form_errors(form.facebook) }}
+                        {{  form_errors(form.googleplus) }}
+                        {{  form_errors(form.twitter) }}
+                        {{  form_errors(form.skype) }}
+                        {{  form_errors(form.dropbox) }}
+                        {{  form_errors(form.github) }}
+
+                        {{ form_start(form) }}
+
+                        {{ form_widget(form.facebook, { 'attr': { 'class': 'normalInput', 'placeholder': 'Facebook' } }) }}
+
+                        {{ form_widget(form.googleplus, { 'attr': { 'class': 'normalInput', 'placeholder': 'Google Plus' } }) }}
+
+                        {{ form_widget(form.twitter, { 'attr': { 'class': 'normalInput', 'placeholder': 'Twitter' } }) }}
+
+                        {{ form_widget(form.skype, { 'attr': { 'class': 'normalInput', 'placeholder': 'Skype' } }) }}
+
+                        {{ form_widget(form.dropbox, { 'attr': { 'class': 'normalInput', 'placeholder': 'Dropbox' } }) }}
+
+                        {{ form_widget(form.github, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github' } }) }}
+
+                        <div class="clear"></div>
+
+                        <div class="actionGroup">
+
+                            <div class="inputClassButton">
+                                {{ form_widget(form.update) }}
+                            </div>
+
+                            <div class="clear"></div>
+
+
+                        </div>
+
+                        {{ form_end(form) }}
 
                     </div>
 
@@ -112,3 +179,4 @@
         </div>
 
     {% endblock %}
+

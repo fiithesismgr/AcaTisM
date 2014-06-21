@@ -82,3 +82,62 @@
 
 }
 
+.inputClass{
+
+    padding: 0.3%;
+
+}
+
+.normalInput{
+
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    height: 25px;
+    padding-left: 1%;
+    width: 280px;
+
+}
+
+.errorSection{
+
+    background: none repeat scroll 0 0 #F6CECE;
+    border-radius: 2px;
+    color: #DF0101;
+    margin: 1%;
+    padding: 1%;
+
+}
+
+.errorSection .icon{
+
+    float: left;
+
+}
+
+.errorSection .message{
+
+    float: left;
+    padding: 0.3%;
+
+}
+
+.actionGroup{
+
+    font-size: 12px;
+    padding: 1% 1%;
+
+}
+
+.actionGroup .inputClassButton{
+
+    float: left;
+
+}
+
+.actionGroup .actions{
+
+    padding: 2%;
+    float:left;
+
+}

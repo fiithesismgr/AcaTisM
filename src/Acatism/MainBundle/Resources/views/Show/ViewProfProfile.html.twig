@@ -91,17 +91,49 @@
                     <span class="name"> {{ user.firstname ~ " " ~ user.lastname }} </span>
                 </div>
 
-                <div class="social">
+                {% if sociallinks is not null %}
 
-                    <img src="{{ asset("images/Facebook.png") }}" alt="Facebook" title="Facebook"/>
-                    <img src="{{ asset("images/GooglePlus.png") }}" alt="Google Plus" title="Google Plus"/>
-                    <img src="{{ asset("images/Twitter.png") }}" alt="Twitter" title="Twitter"/>
-                    <!-- <img src="{{ asset("images/LinkedIn.png") }}" alt="LinkedIn" title="LinkedIn"/> -->
-                    <img src="{{ asset("images/Skype.png") }}" alt="Skype" title="Skype"/>
-                    <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
-                    <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
+                    <div class="social">
 
-                </div>
+                        {% if sociallinks.facebook is not null %}
+                            <a href="{{ sociallinks.facebook }}">
+                                <img src="{{ asset("images/Facebook.png") }}" alt="Facebook" title="Facebook"/>
+                            </a>
+                        {% endif %}
+
+                        {% if sociallinks.googleplus is not null %}
+                            <a href="{{ sociallinks.googleplus }}">
+                                <img src="{{ asset("images/GooglePlus.png") }}" alt="Google Plus" title="Google Plus"/>
+                            </a>
+                        {% endif %}
+
+                        {% if sociallinks.twitter is not null %}
+                            <a href="{{ sociallinks.twitter }}">
+                                <img src="{{ asset("images/Twitter.png") }}" alt="Twitter" title="Twitter"/>
+                            </a>
+                        {% endif %}
+
+                        {% if sociallinks.skype is not null %}
+                            <a href="{{ sociallinks.skype }}">
+                                <img src="{{ asset("images/Skype.png") }}" alt="Skype" title="Skype"/>
+                            </a>
+                        {% endif %}
+
+                        {% if sociallinks.dropbox %}
+                            <a href="{{ sociallinks.dropbox }}">
+                                <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
+                            </a>
+                        {% endif %}
+
+                        {% if sociallinks.github %}
+                            <a href="{{ sociallinks.github }}">
+                                <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
 
             </div>
 
@@ -237,7 +269,7 @@
 
                                  {% endif %}
 
-                              {% elseif (project.assigned_stud is not null) %}
+                              {% elseif (project.getAssignedStud() is not null) %}
 
                                 {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
 

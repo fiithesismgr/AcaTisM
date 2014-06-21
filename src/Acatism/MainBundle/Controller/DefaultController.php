@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+   public function indexAction()
     {
         //
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
@@ -36,11 +36,21 @@ class DefaultController extends Controller
             else
             {
                 $user = $this->getUser();
+
                 $dm = $this->get('doctrine_mongodb')->getManager();
+
+                // getting student social links
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
+                         ->field('user')->references($user);
+                $social = $qb->getQuery()->getSingleResult();
+
+                // getting student applications
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Application')
                          ->field('student')->references($user);
                 $applications = $qb->getQuery()->execute();
 
+
+                // if studdent has a collaboration, get his tasks
 
                 if($student->getIsAccepted() === true)
                 {
@@ -59,14 +69,16 @@ class DefaultController extends Controller
                     return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
                                  'applicationlist' => $applications,
-                                 'tasklist' => $tasklist
+                                 'tasklist' => $tasklist,
+                                 'sociallinks' => $social
                             ));
                 }
                 else
                 {
                     return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
-                                 'applicationlist' => $applications
+                                 'applicationlist' => $applications,
+                                 'sociallinks' => $social
                             ));
                 } 
             }
@@ -87,9 +99,12 @@ class DefaultController extends Controller
 
                 $dm = $this->get('doctrine_mongodb')->getManager();
 
+                // getting prof social links
+                $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
+                    ->field('user')->references($user);
+                $social = $qb->getQuery()->getSingleResult();
 
                 // getting project list
-
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
                          ->field('professor')->references($user)
                          ->sort('name', 'ASC');
@@ -143,7 +158,8 @@ class DefaultController extends Controller
                         'tasklist' => $tasks,
                         'applicationlist' => $applications,
                         'projectsApplications' => $projectsApplications,
-                        'postlist' => $posts
+                        'postlist' => $posts,
+                        'sociallinks' => $social
                         ));
 
             }
@@ -386,7 +402,7 @@ class DefaultController extends Controller
            ->add('skype','url', array('required' => false) )
            ->add('dropbox','url', array('required' => false) )
            ->add('github','url', array('required' => false) )
-           ->add('submit','submit')
+           ->add('update','submit')
            ->getForm();
 
        $form->handleRequest($request);

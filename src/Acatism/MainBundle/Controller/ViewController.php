@@ -68,6 +68,12 @@ class ViewController extends Controller
 
         ///////////////////////
 
+        // getting visited student social links
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
+            ->field('user')->references($visited_user);
+        $social = $qb->getQuery()->getSingleResult();
+
 
         // if the visitor is a Professor, check if there is an existent Collaboration between him and the visited stud
 
@@ -97,7 +103,9 @@ class ViewController extends Controller
                         'student' => $student,
                         'visitor' => $person,
                         'existsCollaboration' => $existsCollaboration,
-                        'taskList' => $taskList ));
+                        'taskList' => $taskList,
+                        'sociallinks' => $social
+                    ));
 
             }
 
@@ -228,6 +236,14 @@ class ViewController extends Controller
         }
 
 
+        // getting social links for the visited prof
+
+        $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
+            ->field('user')->references($prof->getUser());
+        $social = $qb->getQuery()->getSingleResult();
+
+        // getting project list for the visited prof
+
         $qb = $dm->createQueryBuilder('AcatismMainBundle:Project')
             ->field('professor')->references($prof->getUser())
             ->sort('name', 'ASC');
@@ -269,7 +285,8 @@ class ViewController extends Controller
                   'visitor' => $person,
                   'projectlist' => $projects,
                   'projectsStatusList' => $projectsStatusList,
-                  'studIsAccepted' => $studIsAccepted
+                  'studIsAccepted' => $studIsAccepted,
+                  'sociallinks' => $social
                   ));
 
 
