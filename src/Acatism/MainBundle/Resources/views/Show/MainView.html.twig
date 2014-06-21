@@ -33,6 +33,8 @@
                 </ul>
             </div>
 
+            {% if ( app.user.role.role == 'ROLE_STUDENT' )  %}
+
             <div id="search">
 
                 <form name="searchform" action="#" method="#">
@@ -43,6 +45,8 @@
                 </form>
 
             </div>
+
+            {% endif %}
 
             </div>
 

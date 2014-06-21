@@ -78,5 +78,9 @@ acatism_update_social_links:
     pattern: /update_social
     defaults: { _controller: AcatismMainBundle:Default:profileSettings }
 
+acatism_search:
+    pattern: /search/{keyword}
+    defaults: { _controller: AcatismMainBundle:View:search }
+
 
 

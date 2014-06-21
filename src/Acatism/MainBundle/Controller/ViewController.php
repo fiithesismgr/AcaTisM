@@ -5,6 +5,7 @@ namespace Acatism\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Acatism\AuthenticationBundle\Document\User;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ViewController extends Controller
 {
@@ -326,6 +327,29 @@ class ViewController extends Controller
             array( 'proflist' => $profs,
                   'visitor' => $person )
             );
+
+    }
+
+    public function searchAction(){
+
+
+        if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                ->field('user')->references($this->getUser());
+
+            $student = $qb->getQuery()->getSingleResult();
+
+
+            return $this->render('AcatismMainBundle:Users:SearchUsers.html.twig',
+                             array( 'proflist' => $profs,
+                                    'student' => $student )
+                             );
+
+        }
+
+        else throw new HttpException('Unauthorized access.', 401);
+
 
     }
 
