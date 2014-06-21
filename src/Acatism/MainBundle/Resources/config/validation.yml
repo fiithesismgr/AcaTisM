@@ -10,3 +10,15 @@ Acatism\MainBundle\Document\Project:
                  min: 200
                  minMessage: "Project description must be at least 200 chars length ! "
 
+Acatism\MainBundle\Document\Person:
+    properties:
+        cvFile:
+            - File:
+                maxSize: 4096k
+                mimeTypes: [application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text]
+       
+        profileFile:
+            - File:
+                maxSize: 4096k
+                mimeTypes: [image/*]
+

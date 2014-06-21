@@ -4,7 +4,6 @@ namespace Acatism\MainBundle\Document;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
@@ -14,7 +13,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\DiscriminatorField("type")
  * @MongoDB\DiscriminatorMap({"person"="Person", "student"="Student", "professor"="Professor"})
  */
-abstract class Person
+abstract class Person implements \Serializable
 {
     /**
     * @MongoDB\Id(strategy="AUTO")
@@ -62,9 +61,7 @@ abstract class Person
 	*/
 	protected $cvPath;
 
-	/**
-	* @Assert\File(maxSize="6000000")
-	*/
+
 	protected $cvFile;
 
 
@@ -73,11 +70,45 @@ abstract class Person
 	*/
 	protected $profilePath;
 
-	/**
-	* @Assert\File(maxSize="6000000")
-	*/
+
 	protected $profileFile;
 
+    /**
+    * @see \Serializable::serialize()
+    */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    /**
+    * @see \Serializable::unserialize()
+    */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            // see section on salt below
+            // $this->salt,
+        ) = unserialize($serialized);
+    }
 
 	/**
      * Get profileFile

@@ -57,6 +57,55 @@ class Student extends Person
   
     }
 
+    /**
+    * @see \Serializable::serialize()
+    */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            $this->year_of_stud,
+            $this->group,
+            $this->prog_languages,
+            $this->prog_technologies,
+            $this->projects,
+            $this->isAccepted,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    /**
+    * @see \Serializable::unserialize()
+    */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            $this->year_of_stud,
+            $this->group,
+            $this->prog_languages,
+            $this->prog_technologies,
+            $this->projects,
+            $this->isAccepted
+            // see section on salt below
+            // $this->salt,
+        ) = unserialize($serialized);
+    }
+
 
      public function createAboutForm(Controller $controller)
     {

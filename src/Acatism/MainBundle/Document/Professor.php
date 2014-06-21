@@ -38,6 +38,51 @@ class Professor extends Person
     */
     protected $title;
 
+    /**
+    * @see \Serializable::serialize()
+    */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            $this->office,
+            $this->teachings,
+            $this->publications,
+            $this->title,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    /**
+    * @see \Serializable::unserialize()
+    */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->user,
+            $this->university,
+            $this->faculty,
+            $this->phone,
+            $this->website,
+            $this->domains,
+            $this->languages,
+            $this->office,
+            $this->teachings,
+            $this->publications,
+            $this->title,
+            // see section on salt below
+            // $this->salt,
+        ) = unserialize($serialized);
+    }
+
     public function createAboutForm(Controller $controller)
     {
         return $controller->createForm(new ProfessorAboutType(), $this);
