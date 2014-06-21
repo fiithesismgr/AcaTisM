@@ -12,6 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\InheritanceType("SINGLE_COLLECTION")
  * @MongoDB\DiscriminatorField("type")
  * @MongoDB\DiscriminatorMap({"person"="Person", "student"="Student", "professor"="Professor"})
+ * @MongoDB\Index(keys={"domains"="text"}))
  */
 abstract class Person implements \Serializable
 {

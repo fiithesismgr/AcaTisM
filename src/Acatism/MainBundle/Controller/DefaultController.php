@@ -454,4 +454,14 @@ class DefaultController extends Controller
 
    }
 
+   public function searchAction($searchText) {
+        $profs = $this->get('doctrine_mongodb')
+                ->getRepository('AcatismMainBundle:Professor')
+                ->findBy(array('$text' => array('$search' => $searchText)));
+        foreach($profs as $prof) {
+          echo $prof->getUser()->getFirstname();
+        }
+        return new Response('wooow');
+   }
+
 }
