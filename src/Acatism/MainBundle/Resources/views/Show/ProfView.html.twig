@@ -247,7 +247,6 @@
                  </div>
 
                  <!-- projects -->
-
                  <div class="activityPage" id="activityPage_2">
 
                      <ul class="projectList">
@@ -298,7 +297,7 @@
 
                                              <div class="label">Assigned Student: </div>
 
-                                             {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
+                                             {{ project.getAssignedStud().firstname ~ ' ' ~ project.getAssignedStud().lastname }}
 
                                          </div>
 
@@ -314,6 +313,8 @@
                          {% endfor %}
 
                      </ul>
+
+                     {{ form(project_form) }}
 
                      <div class="addNew" id="addProject">
 
@@ -425,6 +426,8 @@
 
                      <div class="clear"></div>
 
+                     {{ form(task_form) }}
+
                      <div class="addNew">
 
                          <a href="{{ path("acatism_new_task") }}">
@@ -517,13 +520,64 @@
 
                  <div class="activityPage" id="activityPage_5">
 
-                     <div class="addNew">
+                     <div class="creationForm">
 
-                         <a href="{{ path("acatism_new_post") }}">
-                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
-                         </a>
+                         <div class="formTitle">
+                             <div class="ico">
+                                <img src="{{ asset('images/pencil.png') }}" alt="Pencil" />
+                             </div>
+
+                             <div class="title">
+                                New Post
+                             </div>
+
+                             <div class=clear></div>
+
+                         </div>
+
+                         <div class="formContent">
+
+                             {{  form_start(post_form) }}
+
+                             {{  form_errors(post_form) }}
+                             {{  form_errors(post_form.title) }}
+                             {{  form_errors(post_form.content) }}
+
+                             {{ form_start(post_form) }}
+
+                             <div class="postTitle">
+
+                             {{ form_widget(post_form.title, { 'attr': { 'class': 'postNormalInput', 'placeholder': 'Post Subject' } }) }}
+
+                             </div>
+
+                             <div class="postContent">
+
+                             {{ form_widget(post_form.content, { 'attr': { 'class': 'postTextAreaInput', 'placeholder': 'Post Content...' } }) }}
+
+                             </div>
+
+
+                             <div class="clear"></div>
+
+                             <div class="actionGroup">
+
+                                 <div class="inputClassButton">
+                                     {{ form_widget(post_form.post) }}
+                                 </div>
+
+                                 <div class="clear"></div>
+
+
+                             </div>
+
+                             {{ form_end(post_form) }}
+
+                         </div>
 
                      </div>
+
+                     <div class="separator">-- Your Posts --</div>
 
                      <ul class="news">
 

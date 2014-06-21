@@ -22,3 +22,18 @@ Acatism\MainBundle\Document\Person:
                 maxSize: 4096k
                 mimeTypes: [image/*]
 
+Acatism\MainBundle\Document\SocialMedia:
+    properties:
+        facebook:
+            - Url: ~
+        googleplus:
+            - Url: ~
+        twitter:
+            - Url: ~
+        skype:
+            - Url: ~
+        dropbox:
+            - Url: ~
+        github:
+            - Url: ~
+

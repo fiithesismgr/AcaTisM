@@ -10,13 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Acatism\MainBundle\Document\Student;
 use Acatism\MainBundle\Document\Professor;
-use Acatism\MainBundle\Document\Collaboration;
-use Acatism\MainBundle\Form\Type\StudentAboutType;
-use Acatism\MainBundle\Form\Type\StudentCvType;
-use Acatism\MainBundle\Form\Type\ProfessorAboutType;
-use Acatism\MainBundle\Form\Type\ProfessorCvType;
 use Acatism\MainBundle\Form\Type\PersonUploadType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Acatism\MainBundle\Document\Task;
+use Acatism\MainBundle\Form\Type\TaskType;
+use Acatism\MainBundle\Document\Project;
+use Acatism\MainBundle\Document\Post;
+
 
 class DefaultController extends Controller
 {
@@ -110,7 +109,6 @@ class DefaultController extends Controller
                          ->sort('name', 'ASC');
                 $projects = $qb->getQuery()->execute();
 
-
                 // getting task list
 
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
@@ -134,8 +132,8 @@ class DefaultController extends Controller
                 $posts = $qb->getQuery()->execute();
 
                 $projectsApplications = array();
-                /*
 
+                /*
 
                 foreach($applications as $application)
                 {
@@ -152,6 +150,32 @@ class DefaultController extends Controller
 
                 return new Reponse('www'); */
 
+                // creation forms generation
+
+                $project = new Project();
+
+                $project_form = $this->createFormBuilder($project)
+                                ->setAction($this->generateUrl('acatism_new_project'))
+                                ->add('name','text')
+                                ->add('description','textarea')
+                                ->add('Add','submit')
+                                ->getForm();
+
+                $task = new Task();
+
+                $task_form = $this->createForm(new TaskType(), $task,
+                                array('action' => $this->generateUrl('acatism_new_task'),
+                             ));
+
+                $post = new Post();
+
+                $post_form = $this->createFormBuilder($post)
+                            ->setAction($this->generateUrl('acatism_new_post'))
+                            ->add('title','text')
+                            ->add('content','textarea')
+                            ->add('post','submit')
+                            ->getForm();
+
                 return $this->render('AcatismMainBundle:Show:ProfView.html.twig',
                   array('professor' => $professor,
                         'projectlist' => $projects,
@@ -159,7 +183,10 @@ class DefaultController extends Controller
                         'applicationlist' => $applications,
                         'projectsApplications' => $projectsApplications,
                         'postlist' => $posts,
-                        'sociallinks' => $social
+                        'sociallinks' => $social,
+                        'project_form' => $project_form ->createView(),
+                        'task_form' => $task_form ->createView(),
+                        'post_form' => $post_form ->createView()
                         ));
 
             }

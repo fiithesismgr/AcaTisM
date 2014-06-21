@@ -725,4 +725,108 @@ a:hover{
 
 
 
+.actionGroup{
 
+    font-size: 12px;
+
+}
+
+.actionGroup .inputClassButton{
+
+    float: right;
+
+}
+
+.actionGroup .actions{
+
+    padding: 2%;
+    float:left;
+
+}
+
+.creationForm{
+
+    background: none repeat scroll 0 0 #ffffff;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    padding: 2px 10px;
+    font-size: 13px;
+
+}
+
+.creationForm .formTitle {
+
+    color: #449960;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 5px;
+    border-bottom: 1px solid #e9eaed;
+    padding: 5px 0 2px 10px;
+
+}
+
+.creationForm .formTitle .ico{
+    float: left;
+}
+
+.creationForm .formTitle .title{
+
+    float: left;
+    padding-left: 10px;
+
+}
+
+.creationForm .formContent {
+
+    padding: 5px 0;
+
+}
+
+.creationForm button{
+
+    background: linear-gradient(to bottom, #449960 0%, #44F085 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    height: 25px;
+    margin: 0 auto;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+
+.creationForm .formContent .postTitle input{
+
+    border: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    width: 98%;
+    font-family: Helvetica,Arial,'lucida grande',tahoma,verdana,arial,sans-serif;
+
+}
+
+.creationForm .formContent .postContent textarea{
+
+    resize: none;
+    width: 98%;
+    border: none;
+    padding: 5px 10px;
+    max-width: 98%;
+    font-family: Helvetica,Arial,'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 13px;
+
+}
+
+.separator{
+
+    color: #a0a0a0;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding-top: 30px;
+    width: 120px;
+
+}
