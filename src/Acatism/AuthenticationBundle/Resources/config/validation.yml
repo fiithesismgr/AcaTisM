@@ -4,11 +4,25 @@ Acatism\AuthenticationBundle\Document\User:
       constraints:
            - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
                     fields: email
-                    message: 'This e-mail is already in use'
+                    message: 'This e-mail adress is already in use'
            - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
                     fields: username
                     message: 'This username is already in use'
-      #properties:
+      properties:
+            firstname:
+               - NotBlank: ~
+            lastname:
+               - NotBlank: ~
+            email:
+               - NotBlank: ~
+               - Regex:
+                   pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
+                   message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
+            password:
+               - NotBlank: ~
+               - Length:
+                   min: 5
+                   minMessage: "The password  must have at least {{ limit }} characters"
         #   email:
           #    - Regex:
          #          pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
