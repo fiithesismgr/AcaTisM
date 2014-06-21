@@ -2,6 +2,7 @@
 
 namespace Acatism\MainBundle\Controller;
 
+use Acatism\MainBundle\Document\SocialMedia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security;
@@ -338,10 +339,75 @@ class DefaultController extends Controller
       return $qb->getQuery()->getSingleResult();
    }
 
-   public function profileSettingsAction(){
+   public function profileSettingsAction(Request $request){
 
-       return $this->render('AcatismMainBundle:Show:Settings.html.twig'
-           );
+       // getting visitor Person entity
+
+       $user = $this->getUser();
+
+       $dm = $this->get('doctrine_mongodb')->getManager();
+
+       if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+           $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+               ->field('user')->references($user);
+
+           $person = $qb->getQuery()->getSingleResult();
+
+       }
+
+
+       if($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true){
+
+           $qb = $dm->createQueryBuilder('AcatismMainBundle:Professor')
+               ->field('user')->references($user);
+
+           $person = $qb->getQuery()->getSingleResult();
+
+       }
+
+
+
+       $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
+           ->field('user')->references($this->getUser());
+       $social = $qb->getQuery()->getSingleResult();
+
+       if(is_null($social)){
+
+       $social = new SocialMedia();
+
+       }
+
+       $form = $this->createFormBuilder($social)
+           ->setAction($this->generateUrl('acatism_update_social_links'))
+           ->add('facebook','url', array('required' => false) )
+           ->add('googleplus','url', array('required' => false) )
+           ->add('twitter','url', array('required' => false) )
+           ->add('skype','url', array('required' => false) )
+           ->add('dropbox','url', array('required' => false) )
+           ->add('github','url', array('required' => false) )
+           ->add('submit','submit')
+           ->getForm();
+
+       $form->handleRequest($request);
+
+       if ($form->isValid()){
+
+           $social->setUser($this->getUser());
+
+           $dm->persist($social);
+           $dm->flush();
+
+           return $this->redirect($this->generateUrl('acatism_profile_settings'));
+       }
+
+       else{
+           return $this->render('AcatismMainBundle:Show:Settings.html.twig',
+               array(
+                     'visitor' =>$person ,
+                     'form' => $form->createView()
+               ));
+           }
 
    }
 

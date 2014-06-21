@@ -74,5 +74,9 @@ acatism_news_feed:
     pattern: /newsfeed
     defaults: { _controller: AcatismMainBundle:Default:newsFeed }
 
+acatism_update_social_links:
+    pattern: /update_social
+    defaults: { _controller: AcatismMainBundle:Default:profileSettings }
+
 
 

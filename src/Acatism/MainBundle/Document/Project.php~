@@ -47,6 +47,11 @@ class Project
      */
     protected $assigned_stud;
 
+    public function __construct()
+    {
+        $this->assigned_stud = null;
+    }
+
 
     /**
      * Get id
@@ -126,5 +131,27 @@ class Project
     public function getProfessor()
     {
         return $this->professor;
+    }
+
+    /**
+     * Set assignedStud
+     *
+     * @param Acatism\AuthenticationBundle\Document\User $assignedStud
+     * @return self
+     */
+    public function setAssignedStud(\Acatism\AuthenticationBundle\Document\User $assignedStud)
+    {
+        $this->assigned_stud = $assignedStud;
+        return $this;
+    }
+
+    /**
+     * Get assignedStud
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $assignedStud
+     */
+    public function getAssignedStud()
+    {
+        return $this->assigned_stud;
     }
 }

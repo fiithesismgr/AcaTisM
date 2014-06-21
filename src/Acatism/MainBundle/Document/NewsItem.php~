@@ -221,4 +221,26 @@ class NewsItem implements ItemInterface
     {
         return $this->recipient;
     }
+
+    /**
+     * Set forAllStuds
+     *
+     * @param boolean $forAllStuds
+     * @return self
+     */
+    public function setForAllStuds($forAllStuds)
+    {
+        $this->forAllStuds = $forAllStuds;
+        return $this;
+    }
+
+    /**
+     * Get forAllStuds
+     *
+     * @return boolean $forAllStuds
+     */
+    public function getForAllStuds()
+    {
+        return $this->forAllStuds;
+    }
 }
