@@ -247,7 +247,66 @@
                  </div>
 
                  <!-- projects -->
+
                  <div class="activityPage" id="activityPage_2">
+
+                     <div class="creationForm">
+
+                         <div class="formTitle">
+                             <div class="ico">
+                                 <img src="{{ asset('images/pencil.png') }}" alt="Pencil" />
+                             </div>
+
+                             <div class="title">
+                                 New Project
+                             </div>
+
+                             <div class=clear></div>
+                         </div>
+
+                         <div class="formContent">
+
+                             {{  form_start(project_form) }}
+
+                             {{  form_errors(project_form) }}
+                             {{  form_errors(project_form.name) }}
+                             {{  form_errors(project_form.description) }}
+
+                             {{ form_start(project_form) }}
+
+                             <div class="objectTitle">
+
+                                 {{ form_widget(project_form.name, { 'attr': { 'placeholder': 'Project Name' } }) }}
+
+                             </div>
+
+                             <div class="objectContent">
+
+                                 {{ form_widget(project_form.description, { 'attr': { 'placeholder': 'Post Content...' } }) }}
+
+                             </div>
+
+
+                             <div class="clear"></div>
+
+                             <div class="actionGroup">
+
+                                 <div class="inputClassButton">
+                                     {{ form_widget(project_form.Add) }}
+                                 </div>
+
+                                 <div class="clear"></div>
+
+
+                             </div>
+
+                             {{ form_end(project_form) }}
+
+                         </div>
+
+                     </div>
+
+                     <div class="separator">-- Your Projects -- </div>
 
                      <ul class="projectList">
 
@@ -314,35 +373,80 @@
 
                      </ul>
 
-                     {{ form(project_form) }}
-
-                     <div class="addNew" id="addProject">
-
-                         <a href="{{ path("acatism_new_project") }}">
-
-                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
-
-                         </a>
-
-                     </div>
-
-                     <div id="dialog-form" title="Add new project">
-                        <p class="validateTips">All form fields are required.</p>
-                        <form>
-                        <fieldset>
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" />
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="description" value="" />
-                        </fieldset>
-                        </form>
-                    </div>
 
                  </div>
 
                  <!--tasks -->
 
                  <div class="activityPage" id="activityPage_3">
+
+                     <div class="creationForm">
+
+                         <div class="formTitle">
+                             <div class="ico">
+                                 <img src="{{ asset('images/pencil.png') }}" alt="Pencil" />
+                             </div>
+
+                             <div class="title">
+                                 New Task
+                             </div>
+
+                             <div class=clear></div>
+                         </div>
+
+                         <div class="formContent">
+
+                             {{ form_start(task_form) }}
+
+                             {{ form_start(task_form) }}
+
+                             <div class="objectTitle">
+
+                                 {{ form_widget(task_form.title, { 'attr': { 'placeholder': 'Task Title' } }) }}
+
+                             </div>
+
+                             <div class="objectContent">
+
+                                 {{ form_widget(task_form.description, { 'attr': { 'placeholder': 'Task description...' } }) }}
+
+                                 <div class="dueDate">
+                                 <div class="label">DueDate:</div> {{ form_widget(task_form.dueDate) }}
+                                 </div>
+
+                                 <div class="options">
+
+                                 <div class="option">Requires file: {{ form_widget(task_form.requireFile) }}</div>
+                                 <div class="option">Requires file with specified format: {{ form_widget(task_form.requireFileFormat) }}</div>
+                                 <div class="option">Requires source code: {{ form_widget(task_form.requireSourceCode) }}</div>
+
+                                 </div>
+
+                             </div>
+
+
+
+
+                             <div class="clear"></div>
+
+                             <div class="actionGroup">
+
+                                 <div class="inputClassButton">
+                                     {{ form_widget(task_form.finish) }}
+                                 </div>
+
+                                 <div class="clear"></div>
+
+
+                             </div>
+
+                             {{ form_end(task_form) }}
+
+                         </div>
+
+                     </div>
+
+                     <div class="separator">-- Your Tasks -- </div>
 
                      <ul class="taskList">
 
@@ -425,16 +529,6 @@
                      </ul>
 
                      <div class="clear"></div>
-
-                     {{ form(task_form) }}
-
-                     <div class="addNew">
-
-                         <a href="{{ path("acatism_new_task") }}">
-                             <img src=" {{ asset("images/add.png") }} " alt="Add" />
-                         </a>
-
-                     </div>
 
                  </div>
 
@@ -539,21 +633,17 @@
 
                              {{  form_start(post_form) }}
 
-                             {{  form_errors(post_form) }}
-                             {{  form_errors(post_form.title) }}
-                             {{  form_errors(post_form.content) }}
-
                              {{ form_start(post_form) }}
 
-                             <div class="postTitle">
+                             <div class="objectTitle">
 
-                             {{ form_widget(post_form.title, { 'attr': { 'class': 'postNormalInput', 'placeholder': 'Post Subject' } }) }}
+                             {{ form_widget(post_form.title, { 'attr': { 'placeholder': 'Post Subject' } }) }}
 
                              </div>
 
-                             <div class="postContent">
+                             <div class="objectContent">
 
-                             {{ form_widget(post_form.content, { 'attr': { 'class': 'postTextAreaInput', 'placeholder': 'Post Content...' } }) }}
+                             {{ form_widget(post_form.content, { 'attr': { 'placeholder': 'Post Content...' } }) }}
 
                              </div>
 
@@ -577,7 +667,7 @@
 
                      </div>
 
-                     <div class="separator">-- Your Posts --</div>
+                     <div class="separator">-- Your Posts -- </div>
 
                      <ul class="news">
 

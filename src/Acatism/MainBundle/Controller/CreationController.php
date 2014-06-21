@@ -116,8 +116,8 @@ public function newPostAction(Request $request){
                 ->setAction($this->generateUrl('acatism_new_post'))
                 ->add('title','text')
                 ->add('content','textarea')
-                ->add('Post','submit')
-            ->getForm();
+                ->add('post','submit')
+                ->getForm();
 
             $form->handleRequest($request);
 
