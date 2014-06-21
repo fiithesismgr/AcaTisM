@@ -4,11 +4,24 @@ Acatism\MainBundle\Document\Project:
     properties:
         name:
             - NotBlank: ~
-
         description:
-            - Length:
-                 min: 200
-                 minMessage: "Project description must be at least 200 chars length ! "
+            - NotBlank: ~
+
+
+Acatism\MainBundle\Document\Task:
+    properties:
+        title:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+
+Acatism\MainBundle\Document\Post:
+    properties:
+        title:
+            - NotBlank: ~
+        content:
+            - NotBlank: ~
+
 
 Acatism\MainBundle\Document\Person:
     properties:
