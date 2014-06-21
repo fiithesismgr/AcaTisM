@@ -777,6 +777,8 @@ a:hover{
 
 .creationForm .formContent {
 
+    border-left: 1px solid #e9eaed;
+    margin-left: 30px;
     padding: 5px 0;
 
 }
@@ -797,6 +799,11 @@ a:hover{
 
 }
 
+.creationForm .formContent .postTitle{
+
+    border-bottom: 1px solid #e9eaed;
+
+}
 
 .creationForm .formContent .postTitle input{
 
@@ -810,13 +817,13 @@ a:hover{
 
 .creationForm .formContent .postContent textarea{
 
-    resize: none;
-    width: 98%;
-    border: none;
-    padding: 5px 10px;
-    max-width: 98%;
+    border: medium none;
     font-family: Helvetica,Arial,'lucida grande',tahoma,verdana,arial,sans-serif;
     font-size: 13px;
+    max-width: 98%;
+    padding: 5px 10px;
+    resize: none;
+    width: 85%;
 
 }
 
