@@ -358,4 +358,12 @@ class ViewController extends Controller
 
     }
 
+    public function emailAction(){
+
+        return $this->render('AcatismMainBundle:Email:EmailView.html.twig'
+        );
+
+
+    }
+
 }

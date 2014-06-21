@@ -82,5 +82,9 @@ acatism_search:
     pattern: /search/{keywords}
     defaults: { _controller: AcatismMainBundle:View:search }
 
+email_template:
+    pattern: /email_template
+    defaults: { _controller: AcatismMainBundle:View:email }
+
 
 

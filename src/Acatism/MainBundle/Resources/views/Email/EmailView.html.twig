@@ -1,0 +1,71 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/login.html.twig #}
+
+{% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
+
+{% block title %}
+
+    E-mail
+
+{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/email.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+
+    {% block header %}
+
+        <div id="header">
+
+            <div id="logo">
+                <a href="{{ asset(path('acatism_main_homepage')) }}">  <img src="{{ asset('logo.png') }}" title="AcaTisM" alt="AcaTisM" /></a>
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+
+    {% endblock %}
+
+    {% block main %}
+
+        <div id="maincontainer">
+
+            <div id="emailSection">
+
+
+                <div class="Header">
+
+                    <h1>Just one more step...</h1>
+
+                </div>
+
+                <div class="Main">
+
+                    Thanks for signing up to AcaTisM. To activate your account press the button bellow.
+
+                    <div class="activationButton">
+                        <a href="#">
+                            <button>Activate Account</button>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="Footer">
+
+                    * If you didn't signed up to AcaTisM, simply ignore this message.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    {% endblock %}
+
+
