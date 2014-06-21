@@ -54,7 +54,7 @@ class User implements AdvancedUserInterface, \Serializable
 
 	public function __construct()
 	{
-		$this->isActive = true;
+		$this->isActive = false;
 		// $this->role = new Role();
 		// may not be needed, see section on salt below
 		// $this->salt = md5(uniqid(null, true));

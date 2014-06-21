@@ -8,9 +8,9 @@ Acatism\AuthenticationBundle\Document\User:
            - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
                     fields: username
                     message: 'This username is already in use'
-      properties:
-           email:
-              - Regex:
-                   pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
-                   message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
+      #properties:
+        #   email:
+          #    - Regex:
+         #          pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
+         #          message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
 

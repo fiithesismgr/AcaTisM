@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Acatism\AuthenticationBundle\Document\User;
 use Acatism\AuthenticationBundle\Document\Role;
+use Acatism\AuthenticationBundle\Document\Confirmation;
 use Acatism\AuthenticationBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,9 +60,25 @@ class SecurityController extends Controller
 
            $user->setPassword($password);
 
-           $em = $this->get('doctrine_mongodb')->getManager();
-           $em->persist($user);
-           $em->flush();
+           $dm = $this->get('doctrine_mongodb')->getManager();
+           $dm->persist($user);
+
+           $confirmation = new Confirmation();
+           $confirmation->setUser($user);
+           $confirmation->setConfirmationHash(sha1(uniqid(mt_rand(), true)));
+           $dm->persist($confirmation);
+
+           $dm->flush();
+
+           $message = \Swift_Message::newInstance()
+                ->setSubject('Confirm account creation at AcaTisM.')
+                ->setFrom('noreply.acatism@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody($this->generateUrl('acatism_confirmation', 
+                            array('confirmationHash' => $confirmation->getConfirmationHash())));
+           $this->get('mailer')->send($message);
+
+           
 
            return $this->redirect($this->generateUrl('login'));
        }
@@ -83,16 +100,41 @@ class SecurityController extends Controller
        $role2->setName('professor');
        $role2->setRole('ROLE_PROFESSOR');
 
-       $em = $this->get('doctrine_mongodb')->getManager();
-       $em->persist($role1);
-       $em->flush();
+       $dm = $this->get('doctrine_mongodb')->getManager();
+       $dm->persist($role1);
+       $dm->flush();
 
-       $em->persist($role2);
-       $em->flush();
+       $dm->persist($role2);
+       $dm->flush();
 
        return new Response('wwoooow');
        */
    	    
+   }
+
+   public function confirmAction($confirmationHash) {
+      /*
+      $message = \Swift_Message::newInstance()
+                ->setSubject('Hello Email')
+                ->setFrom('noreply.acatism@gmail.com')
+                ->setTo('daniel.plecan@gmail.com')
+                ->setBody('ept');
+      $this->get('mailer')->send($message);
+      */
+      $dm = $this->get('doctrine_mongodb')->getManager();
+      $qb = $dm->createQueryBuilder('AcatismAuthenticationBundle:Confirmation')
+               ->field('confirmationHash')->equals($confirmationHash);   
+      $confirmation = $qb->getQuery()->getSingleResult();
+      if(is_null($confirmation)) {
+          return new Response('Confirmation link is invalid.');
+      } 
+      $user = $confirmation->getUser();
+      $user->setIsActive(true);
+      $dm->remove($confirmation);
+      $dm->flush();
+      return new Response('Account '. $user->getUsername() . ' has been confirmed. You may now login.');
+
+
    }
    
 }

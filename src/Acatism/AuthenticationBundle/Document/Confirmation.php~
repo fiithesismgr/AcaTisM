@@ -1,0 +1,31 @@
+<?php
+
+// src/Acatism/AuthenticationBundle/Document/Application.php
+
+namespace Acatism\AuthenticationBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+
+
+/**
+ * Acatism\AuthenticationBundle\Document\Confirmation
+ * @MongoDB\Document
+ */
+class Confirmation
+{
+    /**
+    * @MongoDB\Id(strategy="AUTO")
+    */
+    protected $id;
+
+    /**
+     * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+     */
+    protected $user;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $confirmationHash;
+}

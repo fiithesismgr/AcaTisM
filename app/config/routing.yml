@@ -31,6 +31,10 @@ _imagine:
     resource: .
     type:     imagine
 
+acatism_confirmation:
+     pattern: /confirm/{confirmationHash}
+     defaults: { _controller: AcatismAuthenticationBundle:Security:confirm }
+
 
 
 

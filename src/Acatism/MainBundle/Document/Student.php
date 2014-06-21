@@ -71,7 +71,7 @@ class Student extends Person
             $this->website,
             $this->domains,
             $this->languages,
-            $this->year_of_stud,
+            $this->year_of_study,
             $this->group,
             $this->prog_languages,
             $this->prog_technologies,
