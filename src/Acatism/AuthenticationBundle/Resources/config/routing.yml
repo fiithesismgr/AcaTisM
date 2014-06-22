@@ -2,8 +2,4 @@
 #    pattern:  /login/{name}
 #    defaults: { _controller: AcatismAuthenticationBundle:Default:index }
 
-acatism_success:
-     pattern: /success
-     defaults: { _controller: AcatismMainBundle:Success:success }
-
 

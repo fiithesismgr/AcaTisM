@@ -72,15 +72,20 @@ class SecurityController extends Controller
 
            $dm->flush();
 
+           $confirmationLink = $this->generateUrl('acatism_confirmation', 
+                            array('confirmationHash' => $confirmation->getConfirmationHash()), true);
+
            $message = \Swift_Message::newInstance()
                 ->setSubject('Confirm account creation at AcaTisM.')
                 ->setFrom('noreply.acatism@gmail.com')
                 ->setTo($user->getEmail())
-                ->setBody($this->generateUrl('acatism_confirmation', 
-                            array('confirmationHash' => $confirmation->getConfirmationHash())));
+                ->setBody($this->renderView('AcatismMainBundle:Email:EmailView.html.twig', array('confirmationLink' => $confirmationLink)));
            $this->get('mailer')->send($message);
 
-           
+           $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Your account has been created. A confirmation e-mail has been sent to your adress.'
+           );
 
            return $this->redirect($this->generateUrl('login'));
        }
@@ -128,13 +133,23 @@ class SecurityController extends Controller
                ->field('confirmationHash')->equals($confirmationHash);   
       $confirmation = $qb->getQuery()->getSingleResult();
       if(is_null($confirmation)) {
-          return new Response('Confirmation link is invalid.');
+          $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Confirmation link is invalid.'
+           );
+          return $this->redirect($this->generateUrl('login'));
       } 
       $user = $confirmation->getUser();
       $user->setIsActive(true);
       $dm->remove($confirmation);
       $dm->flush();
-      return new Response('Account '. $user->getUsername() . ' has been confirmed. You may now login.');
+
+      $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Account '. $user->getUsername() . ' has been confirmed. You may now login.'
+           );
+      
+      return $this->redirect($this->generateUrl('login'));
 
 
    }
