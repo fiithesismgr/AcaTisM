@@ -447,16 +447,18 @@ class DefaultController extends Controller
            ->field('user')->references($this->getUser());
        $githubAccount = $qb->getQuery()->getSingleResult();
 
+       $hasGithubAccount = true;
        if(is_null($social)){
           $social = new SocialMedia();
        }
 
        if(is_null($githubAccount)){
           $githubAccount = new GithubAccount();
+          $hasGithubAccount = false;
        }
 
-       $formSocial = $this->createFormBuilder($social)
-           ->setAction($this->generateUrl('acatism_update_social_links'))
+       $formSocial = $this->get('form.factory')->createNamedBuilder('formSocial', 'form', $social)
+           ->setAction($this->generateUrl('acatism_profile_settings'))
            ->add('facebook','url', array('required' => false) )
            ->add('googleplus','url', array('required' => false) )
            ->add('twitter','url', array('required' => false) )
@@ -466,8 +468,8 @@ class DefaultController extends Controller
            ->add('update','submit')
            ->getForm();
 
-      $formGit = $this->createFormBuilder($githubAccount)
-           ->setAction($this->generateUrl('acatism_update_social_links'))
+      $formGit = $this->get('form.factory')->createNamedBuilder('formGit', 'form', $githubAccount)
+           ->setAction($this->generateUrl('acatism_profile_settings'))
            ->add('githubUsername','text', array('required' => true) )
            ->add('githubPassword','password', array('required' => true) )
            ->add('update','submit')
@@ -507,6 +509,7 @@ class DefaultController extends Controller
                      'visitor' =>$person ,
                      'social_form' => $formSocial->createView(),
                      'git_form' => $formGit->createView(),
+                     'hasGithubAccount' => $hasGithubAccount
                ));
   }
 
