@@ -15,11 +15,26 @@
 
 {% endblock %}
 
-{% form_theme form _self %}
+{% form_theme social_form _self %}
+{% form_theme git_form _self %}
 
 {% block url_widget %}
     <div class="inputClass">
         {% set type = type|default('url') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block text_widget %}
+    <div class="inputClass">
+        {% set type = type|default('text') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block password_widget %}
+    <div class="inputClass">
+        {% set type = type|default('password') %}
         {{ block('form_widget_simple') }}
     </div>
 {% endblock %}
@@ -180,7 +195,7 @@
 
                         {{ form_widget(git_form.githubUsername, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github username' } }) }}
 
-                        {{ form_widget(social_form.githubPassword, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github password' } }) }}
+                        {{ form_widget(git_form.githubPassword, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github password' } }) }}
 
                         <div class="clear"></div>
 
