@@ -27,3 +27,38 @@
     font-size: 14px;
 
 }
+
+#infoSection .main a{
+
+    font-weight: lighter;
+
+}
+
+
+#infoSection .main h2{
+
+    font-weight: lighter;
+    font-size: 18px;
+
+}
+
+#infoSection .main ul{
+
+    list-style-type: square;
+
+}
+
+#infoSection .main ul li{
+
+    padding: 2px;
+
+}
+
+#infoSection .main span{
+
+    color: #449960;
+    font-style: italic;
+    font-weight: bold;
+
+}
+
