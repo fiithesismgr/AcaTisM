@@ -34,5 +34,5 @@ Acatism\MainBundle\Document\GithubAccount:
                     message: 'This Github account is already in use'
       getters:
         accountLegal:
-            - "False": { message: "The Github credentials are invalid or you are not connected to the Internet. Please try again." }
+            - "True": { message: "The Github credentials are invalid or you are not connected to the Internet. Please try again." }
 

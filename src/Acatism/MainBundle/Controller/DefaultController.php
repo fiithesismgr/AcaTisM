@@ -472,37 +472,44 @@ class DefaultController extends Controller
            ->add('githubPassword','password', array('required' => true) )
            ->add('update','submit')
            ->getForm();
+       if('POST' === $request->getMethod()) {
+            if($request->request->has('formSocial')) {
 
-       $formSocial->handleRequest($request);
-       $formGit->handleRequest($request);
+                $formSocial->handleRequest($request);
 
-       if ($formSocial->isValid()){
+                if ($formSocial->isSubmitted() && $formSocial->isValid()){
 
-           $social->setUser($this->getUser());
+                    $social->setUser($this->getUser());
 
-           $dm->persist($social);
-           $dm->flush();
+                    $dm->persist($social);
+                    $dm->flush();
 
-           return $this->redirect($this->generateUrl('acatism_profile_settings'));
+                    return $this->redirect($this->generateUrl('acatism_profile_settings'));
+                }
+            }
+
+            if($request->request->has('formGit')) {
+               $formGit->handleRequest($request);
+
+               if ($formGit->isSubmitted() && $formGit->isValid()) {
+                   $githubAccount->setUser($this->getUser());
+
+                   $dm->persist($githubAccount);
+                   $dm->flush();
+
+                   return $this->redirect($this->generateUrl('acatism_profile_settings'));
+               }
+            }
+
        }
-       elseif ($formGit->isValid()) {
-            $githubAccount->setUser($this->getUser());
-
-            $dm->persist($githubAccount);
-            $dm->flush();
-
-            return $this->redirect($this->generateUrl('acatism_profile_settings'));
-       }
-       else{
            return $this->render('AcatismMainBundle:Show:Settings.html.twig',
                array(
                      'visitor' =>$person ,
                      'social_form' => $formSocial->createView(),
                      'git_form' => $formGit->createView(),
                ));
-           }
+  }
 
-   }
 
    public function searchAction($searchText) {
         $profs = $this->get('doctrine_mongodb')
