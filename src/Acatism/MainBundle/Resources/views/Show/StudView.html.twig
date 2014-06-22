@@ -188,17 +188,18 @@
              <div class="activitycontent">
 
                  <!-- news tab -->
-
                  <div class="activityPage" id="activityPage_1">
-                    <ul class="news" id="newsList">
+
+                     <ul class="news" id="newsList">
                         
-                    </ul>
+                     <!-- newsfeed content set with jQuery -->
+
+                     </ul>
                      
 
                  </div>
 
                  <!-- tasks tab -->
-
                  {% if (student.isAccepted == true) %}
                  <div class="activityPage" id="activityPage_2">
 
@@ -208,7 +209,7 @@
 
                              <li id="task">
 
-                                 <a href="#task">
+                                 <a>
 
                                      <div class="taskHeader">
 
@@ -278,7 +279,6 @@
                  {% endif %}
 
                  <!-- applications tab -->
-
                  <div class="activityPage" id="activityPage_3">
 
                      <ul class="applicationList">
@@ -377,7 +377,6 @@
     <script type="text/javascript" src="{{  asset("scripts/jquery-1.11.1.min.js") }}" ></script>
 
     <script type="text/javascript" src="{{  asset("scripts/moment-with-langs.js") }}" ></script>
-    <script type="text/javascript" src="{{  asset("scripts/FeedEk.js") }}" ></script>
 
     <script type="text/javascript" src="{{ asset("scripts/taskDropdownStudsView.js") }}" ></script>
 

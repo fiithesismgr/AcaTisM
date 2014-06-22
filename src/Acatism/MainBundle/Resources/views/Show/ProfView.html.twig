@@ -180,7 +180,6 @@
 
              <div class="activitycontent">
 
-
                  <!-- newsfeed -->
                  <div class="activityPage" id="activityPage_1">
 
@@ -305,7 +304,7 @@
 
                      </div>
 
-                     <div class="separator">-- Your Projects -- </div>
+                     <div class="separator">-- Your Projects --</div>
 
                      <ul class="projectList">
 
@@ -313,7 +312,7 @@
 
                              <li id="project">
 
-                                 <a href="#project">
+                                 <a>
 
                                      <div class="projectHeader">
 
@@ -452,7 +451,7 @@
 
                              <li id="task">
 
-                                 <a href="#task">
+                                 <a>
 
                                      <div class="taskHeader">
 
@@ -523,7 +522,6 @@
 
                          {% endfor %}
 
-
                      </ul>
 
                      <div class="clear"></div>
@@ -531,7 +529,6 @@
                  </div>
 
                  <!-- applications -->
-
                  <div class="activityPage" id="activityPage_4">
 
 
@@ -609,7 +606,6 @@
                  </div>
 
                  <!-- posts -->
-
                  <div class="activityPage" id="activityPage_5">
 
                      <div class="creationForm">
@@ -739,60 +735,6 @@
 
 <script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
 
-    <!--
-
-<script type="text/javascript" >
-    $(function() {
-        var name = $("#title"),
-            email = $("#description"),
-            allFields = $([]).add(title).add(description);
-
-        $("#dialog-form").dialog({
-            autoOpen: false,
-            height: 300,
-            width: 350,
-            modal: true,
-            buttons: {
-                "Create an account": function() {
-                    $(this).dialog("close");
-                },
-                Cancel: function() {
-                   $(this).dialog("close");
-                }
-            }
-
-        });
-        $("#addProject").click(function(evt) {
-            evt.preventDefault();
-            $("#dialog-form").dialog("open");
-        });
-    });
-
-
-</script>
-
--->
-
-<script type="text/javascript">
-
-    $("document").ready(function() {
-
-        $("#task_requireFileFormat").attr('disabled','disabled');
-
-        $("#task_requireFile").change(function() {
-
-           if ( $(this).prop('checked') == true )
-               $("#task_requireFileFormat").removeAttr('disabled');
-
-            else
-               $("#task_requireFileFormat").attr('disabled','disabled');
-
-        }
-        );
-
-    });
-
-
-</script>
+<script type="text/javascript" src="{{ asset("scripts/taskRequireFile.js") }}"></script>
 
 {% endblock %}

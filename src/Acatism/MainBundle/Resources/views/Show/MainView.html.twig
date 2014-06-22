@@ -24,15 +24,15 @@
 
             <div id="toplinks">
                 <ul>
-
                     <li><a href="{{ path('acatism_main_homepage') }}">Home</a></li>
                     <li><a href="{{ path('acatism_view_profs')}}">Academic Staff</a></li>
                     <li><a href="{{ path('acatism_view_students')}}">Students</a></li>
-                    <li><a href="#">About</a></li>
-
+                    <li><a href="{{ path('about') }}">About</a></li>
+                    <li><a href="{{ path('userguide') }}">User Guide</a></li>
                 </ul>
             </div>
 
+            {% block search %}
             {% if ( app.user.role.role == 'ROLE_STUDENT' )  %}
 
             <div id="search">
@@ -44,9 +44,11 @@
 
                 </form>
 
+
             </div>
 
             {% endif %}
+            {% endblock %}
 
             </div>
 
@@ -58,7 +60,7 @@
 
     <div id="maincontainer">
 
-    {% block utilities %}
+        {% block utilities %}
 
         <div class="howdyandtools">
 
@@ -83,7 +85,7 @@
 
      {% endblock %}
 
-    {% block pageContent %}
+        {% block pageContent %}
 
     {% block profile_section %}
 

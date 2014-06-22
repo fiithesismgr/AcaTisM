@@ -23,8 +23,11 @@ security:
                 target: /
             #http_basic:
             #    realm: "Secured Demo Area"
+
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/confirm, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/about, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/userguide, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/.*, roles: [ROLE_STUDENT, ROLE_PROFESSOR] }

@@ -1,3 +1,5 @@
+// task dropdown for StudView ( same script as on ProfView, just the tab id differs ; script commented on taskDropdownProfsView.js )
+
 jQuery(window).load(function() {
 
     $("#activityPage_2 > ul > li > a").click(function () { // binding onclick

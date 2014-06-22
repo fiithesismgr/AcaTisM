@@ -18,10 +18,6 @@ acatism_new_post:
     pattern: /new_post
     defaults: { _controller: AcatismMainBundle:Creation:newPost }
 
-acatism_success:
-    pattern: /success
-    defaults: { _controller: AcatismMainBundle:Success:success }
-
 acatism_delete_project:
     pattern: /delete_project/{project_id}
     defaults: { _controller: AcatismMainBundle:Delete:deleteProject }
@@ -86,5 +82,10 @@ email_template:
     pattern: /email_template
     defaults: { _controller: AcatismMainBundle:View:email }
 
+about:
+    pattern: /about
+    defaults: { _controller: AcatismMainBundle:Info:about }
 
-
+userguide:
+    pattern: /userguide
+    defaults: { _controller: AcatismMainBundle:Info:userguide}

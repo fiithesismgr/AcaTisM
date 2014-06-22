@@ -1,6 +1,5 @@
-/**
- * Created by Lucian Costin Ailenei on 05.06.2014.
- */
+
+// setting attribute data-curent on selected tab
 
 window.onload=function() {
 
@@ -20,12 +19,14 @@ window.onload=function() {
     navitem.setAttribute("class","activityActive");
 
     // hide contents that doesn't match to the current activity category
+
     var pages = container.querySelectorAll(".activityPage");
     for (var i = 1; i < pages.length; i++) {
         pages[i].style.display="none";
     }
 
-    //this adds click event to tabs
+    // add click event to tabs
+
     var tabs = container.querySelectorAll(".activitymain .activitycategory ul li");
     for (var i = 0; i < tabs.length; i++) {
         tabs[i].onclick=displayPage;
@@ -37,15 +38,18 @@ window.onload=function() {
 
 function displayPage() {
 
+    // getting the data-curent attribute value
     var current = this.parentNode.getAttribute("data-current");
 
-    //remove class of activityActive and hide old contents
+    // remove class of activityActive and hide old content
+
     document.getElementById("activityTab_" + current).removeAttribute("class");
     document.getElementById("activityPage_" + current).style.display="none";
 
     var ident = this.id.split("_")[1];
 
-    //add class of activityActive to new active tab and show contents
+    // add class of activityActive to new active tab and show content
+
     this.setAttribute("class","activityActive");
     document.getElementById("activityPage_" + ident).style.display="block";
     this.parentNode.setAttribute("data-current",ident);

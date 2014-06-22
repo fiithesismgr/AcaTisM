@@ -1,0 +1,29 @@
+#infoSection{
+
+    margin: 10% auto 0;
+    width: 85%;
+}
+
+#infoSection .header{
+
+    border-bottom: 1px solid #449960;
+    padding: 10px;
+
+}
+
+#infoSection .header h1{
+
+    font-weight: lighter;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    color: #449960;
+
+}
+
+#infoSection .main{
+
+    padding: 3%;
+    font-size: 14px;
+
+}

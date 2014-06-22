@@ -1,3 +1,7 @@
+// same script as on tasks ( script commented on taskDropdownProfsView.js )
+
+// project dropdown for students when visiting a profs page
+
 jQuery(window).load(function() {
 
     $("#activityPage_1 > ul > li > a").click(function () { // binding onclick

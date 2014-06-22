@@ -2,6 +2,7 @@ a {
     color: #449960;
     text-decoration: none;
     font-weight: bold;
+    cursor: pointer;
 
 }
 
@@ -474,6 +475,10 @@ a:hover{
     z-index: 2;
     background: none repeat scroll 0 0 #EBF5FF;
     padding: 10px 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
 }
 
@@ -551,6 +556,10 @@ a:hover{
     z-index: 2;
     background: none repeat scroll 0 0 #EBF5FF;
     padding: 10px 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
 }
 

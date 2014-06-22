@@ -1,0 +1,60 @@
+{# src/Acatism/AuthenticationBundle/Resources/views/Security/register.html.twig #}
+
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('css/maincss.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/info.css') }}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+
+{% block title %}
+
+    AcaTisM User Guide
+
+{% endblock %}
+
+    {% block body %}
+
+        {% block header %}
+
+            <div id="header">
+
+                <div id="logo">
+                    <a href="{{ path('acatism_main_homepage') }}">  <img src="{{ asset('logo.png') }}" title="AcaTisM" alt="AcaTisM" /></a>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+
+        {% endblock %}
+
+        {% block main %}
+            <div id="maincontainer">
+
+                <div id="infoSection">
+
+                    <div class="header">
+
+                        <h1>User Guide</h1>
+
+                    </div>
+
+                    <div class="main">
+
+                        User Guide Content.
+
+                    </div>
+
+                    <div class="clear"></div>
+
+
+                </div>
+
+            </div>
+        {% endblock %}
+
+    {% endblock %}
+

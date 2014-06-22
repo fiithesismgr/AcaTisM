@@ -1,3 +1,5 @@
+// task for visitor on student profile ( same script as on ProfView, just the tab id differs ; script commented on taskDropdownProfsView.js )
+
 jQuery(window).load(function() {
 
     $("#activityPage_1 > ul > li > a").click(function () { // binding onclick

@@ -1,3 +1,7 @@
+// same script as on tasks ( script commented on taskDropdownProfsView.js )
+
+// project dropdown for ProfView
+
 jQuery(window).load(function() {
 
     $("#activityPage_2 > ul > li > a").click(function () { // binding onclick
