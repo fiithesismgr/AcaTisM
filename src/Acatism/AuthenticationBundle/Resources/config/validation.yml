@@ -27,3 +27,12 @@ Acatism\AuthenticationBundle\Document\User:
                    min: 5
                    minMessage: "The password  must have at least {{ limit }} characters"
 
+Acatism\MainBundle\Document\GithubAccount:
+      constraints:
+           - Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique: 
+                    fields: githubUsername
+                    message: 'This Github account is already in use'
+      getters:
+        accountLegal:
+            - "False": { message: "The Github credentials are invalid or you are not connected to the Internet. Please try again." }
+

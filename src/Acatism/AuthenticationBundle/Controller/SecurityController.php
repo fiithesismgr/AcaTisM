@@ -141,8 +141,8 @@ class SecurityController extends Controller
    public function authorizationAction() {
         $client = new \Github\Client();
 
-        $client->authenticate('fiithesismgr', 'passwordforrepository', \Github\Client::AUTH_HTTP_PASSWORD);
-        $data = array('note' => 'This is an optional description', 'scopes' => array('public_repo'));
+        $client->authenticate('fiithesismgr', 'passwordforrepositoryy', \Github\Client::AUTH_HTTP_PASSWORD);
+        $data = array('note' => 'This is an optional descriptionn', 'scopes' => array('public_repo'));
 
         $authorization = $client->api('authorizations')->create($data);
 

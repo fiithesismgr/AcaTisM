@@ -1,0 +1,158 @@
+<?php
+// src/Acatism/MainBundle/Document/GithubAccount.php
+
+namespace Acatism\MainBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Github\Exception\RuntimeException;
+use Github\Client;
+
+/**
+* Acatism\MainBundle\Document\TaskProgress
+*
+* @MongoDB\Document
+*/
+
+class GithubAccount
+{
+    /**
+    * @MongoDB\Id(strategy="AUTO")
+    */
+    protected $id;
+
+    /**
+    * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\User")
+    */
+    protected $user;
+
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $githubUsername;
+    
+    /**
+    * @MongoDB\Field(type="string")
+    */
+    protected $githubToken;
+    
+    protected $githubPassword;
+
+    public function __construct()
+    {
+        $this->isFinished = false;
+    }
+
+    public function isAccountLegal() {
+        if(is_null($githubUsername) || is_null($githubPassword)) {
+            return true;
+        }
+        $client = new Client();
+
+        try {
+            $client->authenticate($this->githubUsername, $this->githubPassword, Client::AUTH_HTTP_PASSWORD);
+        } catch(RunetimeException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return id $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Acatism\AuthenticationBundle\Document\User $user
+     * @return self
+     */
+    public function setUser(\Acatism\AuthenticationBundle\Document\User $user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Acatism\AuthenticationBundle\Document\User $user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set githubUsername
+     *
+     * @param string $githubUsername
+     * @return self
+     */
+    public function setGithubUsername($githubUsername)
+    {
+        $this->githubUsername = $githubUsername;
+        return $this;
+    }
+
+    /**
+     * Get githubUsername
+     *
+     * @return string $githubUsername
+     */
+    public function getGithubUsername()
+    {
+        return $this->githubUsername;
+    }
+
+    /**
+     * Set githubToken
+     *
+     * @param string $githubToken
+     * @return self
+     */
+    public function setGithubToken($githubToken)
+    {
+        $this->githubToken = $githubToken;
+        return $this;
+    }
+
+    /**
+     * Get githubToken
+     *
+     * @return string $githubToken
+     */
+    public function getGithubToken()
+    {
+        return $this->githubToken;
+    }
+
+    /**
+     * Set githubPassword
+     *
+     * @param string $githubPassword
+     * @return self
+     */
+    public function setGithubPassword($githubPassword)
+    {
+        $this->githubPassword = $githubPassword;
+        return $this;
+    }
+
+    /**
+     * Get githubPassword
+     *
+     * @return string $githubPassword
+     */
+    public function getGithubPassword()
+    {
+        return $this->githubPassword;
+    }
+}
