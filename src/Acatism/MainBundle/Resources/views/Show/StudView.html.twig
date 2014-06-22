@@ -2,6 +2,30 @@
 
 {% extends 'AcatismMainBundle:Show:MainView.html.twig' %}
 
+{% block git_account_allert %}
+
+    {% if ( hasGithubAccount == false ) %}
+
+        <div class="notificationMessage">
+
+            <div class="icon">
+                <img src="{{ asset('images/notification.png') }}" alt="Notification" />
+            </div>
+
+            <div class="message">
+
+                You haven't synced your GitHub account yet. You won't be able to confirm a collaboration, please go to Settings.
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
 {% block utilities %}
 
     <div class="howdyandtools">

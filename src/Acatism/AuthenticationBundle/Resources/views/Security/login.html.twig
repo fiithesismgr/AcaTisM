@@ -52,7 +52,7 @@
 
             <div class="formSectionMain">
 
-                {% if ( app.session.flashbag.get('notice') | length > 0 ) %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
 
                 <div class="notificationMessage">
 
@@ -62,9 +62,9 @@
 
                     <div class="message">
 
-                        {% for flashMessage in app.session.flashbag.get('notice') %}
+
                                 {{ flashMessage }}
-                        {% endfor %}
+
 
                     </div>
 
@@ -72,7 +72,7 @@
 
                 </div>
 
-                {% endif %}
+                {% endfor %}
 
             {% if error %}
 	           <div class="errorSection">

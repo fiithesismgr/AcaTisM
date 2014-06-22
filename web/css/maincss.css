@@ -861,3 +861,27 @@ a:hover{
     width: 130px;
 
 }
+
+.notificationMessage{
+
+    background: none repeat scroll 0 0 #f2f5a9;
+    border-radius: 2px;
+    color: #886a08;
+    margin: 1%;
+    padding: 1%;
+
+}
+
+.notificationMessage .icon{
+
+    float: left;
+    padding: 0.1%;
+}
+
+.notificationMessage .message{
+
+    float: left;
+    font-size: 12px;
+    padding: 0.4% 1%;
+
+}

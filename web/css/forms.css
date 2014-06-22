@@ -42,13 +42,14 @@
 .notificationMessage .icon{
 
     float: left;
-
+    padding: 0.1%;
 }
 
 .notificationMessage .message{
 
     float: left;
-    padding-left: 10px;
+    font-size: 12px;
+    padding: 0.4% 1%;
 
 }
 
