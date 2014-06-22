@@ -52,6 +52,7 @@
 
             <div class="formSectionMain">
 
+                {% if ( app.session.flashbag.get('notice') | length > 0 ) %}
 
                 <div class="notificationMessage">
 
@@ -67,7 +68,11 @@
 
                     </div>
 
+                    <div class="clear"></div>
+
                 </div>
+
+                {% endif %}
 
             {% if error %}
 	           <div class="errorSection">
