@@ -821,8 +821,8 @@ a:hover{
     font-size: 13px;
     max-width: 98%;
     padding: 5px 10px;
-    width: 85%;
-
+    min-width: 85%;
+    max-width: 85%;
 }
 
 .creationForm .formContent .dueDate{

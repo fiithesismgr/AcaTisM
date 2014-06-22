@@ -345,6 +345,7 @@ class ViewController extends Controller
             $profs = $this->get('doctrine_mongodb')
                           ->getRepository('AcatismMainBundle:Professor')
                           ->findBy(array('$text' => array('$search' => $keywords)));
+
             return $this->render('AcatismMainBundle:Users:SearchUsers.html.twig',
                              array( 'proflist' => $profs,
                                     'student' => $student )

@@ -247,7 +247,6 @@
                  </div>
 
                  <!-- projects -->
-
                  <div class="activityPage" id="activityPage_2">
 
                      <div class="creationForm">
@@ -377,7 +376,6 @@
                  </div>
 
                  <!--tasks -->
-
                  <div class="activityPage" id="activityPage_3">
 
                      <div class="creationForm">
@@ -775,5 +773,26 @@
 
 -->
 
+<script type="text/javascript">
+
+    $("document").ready(function() {
+
+        $("#task_requireFileFormat").attr('disabled','disabled');
+
+        $("#task_requireFile").change(function() {
+
+           if ( $(this).prop('checked') == true )
+               $("#task_requireFileFormat").removeAttr('disabled');
+
+            else
+               $("#task_requireFileFormat").attr('disabled','disabled');
+
+        }
+        );
+
+    });
+
+
+</script>
 
 {% endblock %}

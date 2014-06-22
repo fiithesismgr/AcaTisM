@@ -25,6 +25,7 @@
                     <a href="{{ path('acatism_view_student',{'username' : app.user.username}) }}">
                         <img src="{{ student.getProfilePath() | apply_filter('small_thumb') }}" alt="{{app.user.firstname ~ " " ~ app.user.lastname}}" />
                     </a>
+                </div>
 
                 <div class="tool">
                     <a href="{{ path('acatism_profile_settings') }}">
@@ -50,6 +51,8 @@
             </div>
 
             <div class="userListSectionMain">
+
+                {% if ( proflist | length > 0 ) %}
 
                 <ul class="userList">
 
@@ -95,6 +98,12 @@
 
 
                 </ul>
+
+                {% else %}
+
+                No results found.
+
+                {% endif %}
 
 
 
