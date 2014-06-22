@@ -10,21 +10,20 @@ Acatism\AuthenticationBundle\Document\User:
                     message: 'This username is already in use'
       properties:
             firstname:
-               - NotBlank: ~
+               - NotBlank: 
+                   message: 'Please enter your first name'
             lastname:
-               - NotBlank: ~
+               - NotBlank: 
+                   message: 'Please enter your last name'
             email:
-               - NotBlank: ~
                - Regex:
                    pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
                    message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
+            username:
+               - NotBlank:
+                   message: 'Please choose a username'
             password:
-               - NotBlank: ~
                - Length:
                    min: 5
                    minMessage: "The password  must have at least {{ limit }} characters"
-        #   email:
-          #    - Regex:
-         #          pattern: "/^[a-zA-Z]+[.][a-zA-Z]+[@info.uaic.ro]/"
-         #          message: 'Your e-mail must match this pattern: firstname.lastname@info.uaic.ro'
 

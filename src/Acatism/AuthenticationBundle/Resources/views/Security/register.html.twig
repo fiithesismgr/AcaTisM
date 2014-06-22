@@ -168,9 +168,6 @@
 
     <script type="text/javascript">
         $("document").ready(function() {
-
-            $('#user_username').attr('disabled', 'disabled');
-
             $('#user_email').focusout(function() {
                 var username = $(this).val().split("@")[0];
                 $('#user_username').val(username);
