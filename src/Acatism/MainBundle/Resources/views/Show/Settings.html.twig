@@ -98,47 +98,96 @@
 
             <div class="main">
 
+                 <!-- social links -->
+
+                 <div class="settingsSection">
+
+                        <div class="sectionHeader">
+
+                            <h2>Set social links</h2>
+
+                        </div>
+
+
+                        <div class="sectionContent">
+
+                            {{  form_start(social_form) }}
+
+                            {{  form_errors(social_form) }}
+                            {{  form_errors(social_form.facebook) }}
+                            {{  form_errors(social_form.googleplus) }}
+                            {{  form_errors(social_form.twitter) }}
+                            {{  form_errors(social_form.skype) }}
+                            {{  form_errors(social_form.dropbox) }}
+                            {{  form_errors(social_form.github) }}
+
+                            {{ form_start(social_form) }}
+
+                            {{ form_widget(social_form.facebook, { 'attr': { 'class': 'normalInput', 'placeholder': 'Facebook' } }) }}
+
+                            {{ form_widget(social_form.googleplus, { 'attr': { 'class': 'normalInput', 'placeholder': 'Google Plus' } }) }}
+
+                            {{ form_widget(social_form.twitter, { 'attr': { 'class': 'normalInput', 'placeholder': 'Twitter' } }) }}
+
+                            {{ form_widget(social_form.skype, { 'attr': { 'class': 'normalInput', 'placeholder': 'Skype' } }) }}
+
+                            {{ form_widget(social_form.dropbox, { 'attr': { 'class': 'normalInput', 'placeholder': 'Dropbox' } }) }}
+
+                            {{ form_widget(social_form.github, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github' } }) }}
+
+                            <div class="clear"></div>
+
+                            <div class="actionGroup">
+
+                                <div class="inputClassButton">
+                                    {{ form_widget(social_form.update) }}
+                                </div>
+
+                                <div class="clear"></div>
+
+
+                            </div>
+
+                            {{ form_end(social_form) }}
+
+                        </div>
+
+
+                </div>
+
+
+                 <!-- github account -->
+
+                {% if (app.user.role.role != 'ROLE_PROFESSOR') %}
+
                 <div class="settingsSection">
 
                     <div class="sectionHeader">
 
-                            <h2>Social Media</h2>
+                        <h2>Add github account</h2>
 
                     </div>
 
-
                     <div class="sectionContent">
 
-                        {{  form_start(form) }}
+                        {{  form_start(git_form) }}
 
-                        {{  form_errors(form) }}
-                        {{  form_errors(form.facebook) }}
-                        {{  form_errors(form.googleplus) }}
-                        {{  form_errors(form.twitter) }}
-                        {{  form_errors(form.skype) }}
-                        {{  form_errors(form.dropbox) }}
-                        {{  form_errors(form.github) }}
+                        {{  form_errors(git_form) }}
+                        {{  form_errors(git_form.githubUsername) }}
+                        {{  form_errors(git_form.githubPassword) }}
 
-                        {{ form_start(form) }}
+                        {{ form_start(git_form) }}
 
-                        {{ form_widget(form.facebook, { 'attr': { 'class': 'normalInput', 'placeholder': 'Facebook' } }) }}
+                        {{ form_widget(git_form.githubUsername, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github username' } }) }}
 
-                        {{ form_widget(form.googleplus, { 'attr': { 'class': 'normalInput', 'placeholder': 'Google Plus' } }) }}
-
-                        {{ form_widget(form.twitter, { 'attr': { 'class': 'normalInput', 'placeholder': 'Twitter' } }) }}
-
-                        {{ form_widget(form.skype, { 'attr': { 'class': 'normalInput', 'placeholder': 'Skype' } }) }}
-
-                        {{ form_widget(form.dropbox, { 'attr': { 'class': 'normalInput', 'placeholder': 'Dropbox' } }) }}
-
-                        {{ form_widget(form.github, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github' } }) }}
+                        {{ form_widget(social_form.githubPassword, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github password' } }) }}
 
                         <div class="clear"></div>
 
                         <div class="actionGroup">
 
                             <div class="inputClassButton">
-                                {{ form_widget(form.update) }}
+                                {{ form_widget(git_form.update) }}
                             </div>
 
                             <div class="clear"></div>
@@ -146,14 +195,18 @@
 
                         </div>
 
-                        {{ form_end(form) }}
+                        {{ form_end(git_form) }}
 
                     </div>
 
 
                 </div>
 
-                <div class="settingsSection">
+                {% endif %}
+
+
+                 <!-- password resetion -->
+                 <div class="settingsSection">
 
                     <div class="sectionHeader">
 

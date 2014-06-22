@@ -51,7 +51,7 @@
                         <li name="Email"><span>E-mail</span>: {{app.user.email}}</li>
                         <li name="Phone"><span>Phone</span>: {{student.phone}}</li>
 
-                        <li name="Website"><span>Website</span>: <a href="#">{{student.website}}</a></span></li>
+                        <li name="Website"><span>Website</span>: <a href="#">{{student.website}}</a></li>
 
 
                     </ul>
@@ -101,13 +101,13 @@
                     {% endif %}
 
                     {% if sociallinks.dropbox %}
-                        <a href="{{ sociallinks.dropbox }}">
+                        <a href="{{ sociallinks.dropbox is not null }}">
                             <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
                         </a>
                     {% endif %}
 
                     {% if sociallinks.github %}
-                        <a href="{{ sociallinks.github }}">
+                        <a href="{{ sociallinks.github is not null }}">
                             <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
                         </a>
                     {% endif %}
@@ -259,7 +259,7 @@
                                          <br/>
 
                                          {% if (taskProgress.task.requireSourceCode == true) %}
-                                             * Requires source code
+                                             * Requires source code : <a href="{{ taskProgress.repository['html_url'] }}">{{ taskProgress.repository['html_url'] }}</a>
                                          {% endif %}
 
                                      </div>

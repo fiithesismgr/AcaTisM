@@ -119,13 +119,13 @@
                             </a>
                         {% endif %}
 
-                        {% if sociallinks.dropbox %}
+                        {% if sociallinks.dropbox is not null %}
                             <a href="{{ sociallinks.dropbox }}">
                                 <img src="{{ asset("images/Dropbox.png") }}" alt="Dropbox" title="Dropbox" />
                             </a>
                         {% endif %}
 
-                        {% if sociallinks.github %}
+                        {% if sociallinks.github is not null %}
                             <a href="{{ sociallinks.github }}">
                                 <img src="{{ asset("images/GitHub.png") }}" alt="GitHub" title="GitHub" />
                             </a>
