@@ -15,6 +15,8 @@ use Acatism\MainBundle\Document\Task;
 use Acatism\MainBundle\Form\Type\TaskType;
 use Acatism\MainBundle\Document\Project;
 use Acatism\MainBundle\Document\Post;
+use Acatism\MainBundle\Document\GithubAccount;
+use Acatism\MainBundle\Document\TaskProgress;
 
 
 class DefaultController extends Controller
@@ -50,8 +52,11 @@ class DefaultController extends Controller
 
 
                 // if studdent has a collaboration, get his tasks
+                $githubAccount = $dm->createQueryBuilder('AcatismMainBundle:GithubAccount')
+                                    ->field('user')->references($user)
+                                    ->getQuery()->getSingleResult();
 
-                if($student->getIsAccepted() === true)
+                if($student->getIsAccepted() === true && !is_null($githubAccount))
                 {
                     $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
                              ->field('student')
@@ -66,10 +71,34 @@ class DefaultController extends Controller
 
                     $tasklist = $qb->getQuery()->execute();
 
+                    foreach($tasklist as $task) {
+                        $taskProgress = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
+                                           ->field('student')->references($user)
+                                           ->field('task')->references($task)
+                                           ->getQuery()
+                                           ->getSingleResult();
+                        if(is_null($taskProgress)) {
+                            $taskProgress = new TaskProgress();
+                            $taskProgress->setStudent($user);
+                            $taskProgress->setTask($task);
+                            $taskProgress->setDueDate($task->getDueDate());
+                            if($task->getRequireSourceCode() === true) {
+                                $taskProgress->setRepository($githubAccount->createRepository($task->getTitle()));
+                            }
+                            $dm->persist($taskProgress);
+                        }
+                    }
+                    $dm->flush();
+
+                    $taskProgressList = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
+                                           ->field('student')->references($user)
+                                           ->getQuery()
+                                           ->execute();
+
                     return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
                                  'applicationlist' => $applications,
-                                 'tasklist' => $tasklist,
+                                 'taskProgressList' => $taskProgressList,
                                  'sociallinks' => $social
                             ));
                 }

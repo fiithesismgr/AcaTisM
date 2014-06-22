@@ -37,13 +37,9 @@ class GithubAccount
     
     protected $githubPassword;
 
-    public function __construct()
-    {
-        $this->isFinished = false;
-    }
 
     public function isAccountLegal() {
-        if(is_null($githubUsername) || is_null($githubPassword)) {
+        if(is_null($this->githubUsername) || is_null($this->githubPassword)) {
             return true;
         }
         
@@ -157,5 +153,21 @@ class GithubAccount
     public function getGithubPassword()
     {
         return $this->githubPassword;
+    }
+
+    public function createRepository($repositoryName) {
+        try {
+            $client = new Client();
+            $client->authenticate($this->githubToken, Client::AUTH_HTTP_TOKEN);
+
+            $repository = $client->api('repo')->create($repositoryName, 
+                                        'AcaTisM Generated Repository', 
+                                        'http://my-repo-homepage.org', 
+                                        true);
+            return $repository;
+        } catch (RunetimeException $e) {
+            return null;
+        }
+        
     }
 }

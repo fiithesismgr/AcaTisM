@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Acatism\AuthenticationBundle\Document\User;
 use Acatism\AuthenticationBundle\Document\Role;
 use Acatism\AuthenticationBundle\Document\Confirmation;
+use Acatism\MainBundle\Document\GithubAccount;
 use Acatism\AuthenticationBundle\Form\Type\UserType;
 use Symfony\Component\HttpFoundation\Response;
 use Github\Client;
@@ -139,21 +140,16 @@ class SecurityController extends Controller
    }
 
    public function authorizationAction() {
-        $client = new \Github\Client();
-
-        $client->authenticate('fiithesismgr', 'passwordforrepositoryy', \Github\Client::AUTH_HTTP_PASSWORD);
-        $data = array('note' => 'This is an optional descriptionn', 'scopes' => array('public_repo'));
-
-        $authorization = $client->api('authorizations')->create($data);
-
-        echo $authorization['token'];
-
-        $client2 = new \Github\Client();
-        $client2->authenticate($authorization['token'], \Github\Client::AUTH_HTTP_TOKEN);
-
-        $repo = $client2->api('repo')->create('my-new-repo', 'This is the description of a repo', 'http://my-repo-homepage.org', true);
-
-        var_dump($repo);
+        $githubAccount = new GithubAccount();
+        $githubAccount->setGithubUsername('fiithesismgr');
+        $githubAccount->setGithubPassword('passwordforrepository');
+        $githubAccount->setUser($this->getUser());
+        if($githubAccount->isAccountLegal() === true) {
+          $dm = $this->get('doctrine_mongodb')->getManager();
+          $dm->persist($githubAccount);
+          $dm->flush();
+          echo 'success!';
+        }
         return new Response('wow');
    }
    

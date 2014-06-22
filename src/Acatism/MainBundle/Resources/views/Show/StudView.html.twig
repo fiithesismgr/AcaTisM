@@ -205,7 +205,7 @@
 
                      <ul class="taskList">
 
-                         {% for task in tasklist %}
+                         {% for taskProgress in taskProgressList %}
 
                              <li id="task">
 
@@ -215,13 +215,13 @@
 
                                          <div class="content">
 
-                                             {{ task.title }}
+                                             {{ taskProgress.task.title }}
 
                                          </div>
 
                                          <div class="posttime">
 
-                                             Deadline: {{ task.dueDate|date('Y-m-d') }}
+                                             Deadline: {{ taskProgress.task.dueDate|date('Y-m-d') }}
 
                                          </div>
 
@@ -240,14 +240,14 @@
 
 
                                      <div class="description">
-                                         {{ task.description }}
+                                         {{ taskProgress.task.description }}
                                      </div>
 
                                      <div class="specifications">
 
-                                         {% if ( task.requireFile == true ) %}
+                                         {% if ( taskProgress.task.requireFile == true ) %}
 
-                                             {% if (task.requireFileFormat == true) %}
+                                             {% if (taskProgress.task.requireFileFormat == true) %}
                                                  * Requires file with specified format
 
                                              {% endif %}
@@ -258,7 +258,7 @@
 
                                          <br/>
 
-                                         {% if (task.requireSourceCode == true) %}
+                                         {% if (taskProgress.task.requireSourceCode == true) %}
                                              * Requires source code
                                          {% endif %}
 

@@ -24,7 +24,7 @@ class TaskProgress
     protected $student;
     
     /**
-    * @MongoDB\ReferenceOne(targetDocument="Acatism\AuthenticationBundle\Document\Task")
+    * @MongoDB\ReferenceOne(targetDocument="Acatism\MainBundle\Document\Task")
     */
     protected $task;
     
@@ -88,10 +88,10 @@ class TaskProgress
     /**
      * Set task
      *
-     * @param Acatism\AuthenticationBundle\Document\Task $task
+     * @param Acatism\MainBundle\Document\Task $task
      * @return self
      */
-    public function setTask(\Acatism\AuthenticationBundle\Document\Task $task)
+    public function setTask(\Acatism\MainBundle\Document\Task $task)
     {
         $this->task = $task;
         return $this;
@@ -100,7 +100,7 @@ class TaskProgress
     /**
      * Get task
      *
-     * @return Acatism\AuthenticationBundle\Document\Task $task
+     * @return Acatism\MainBundle\Document\Task $task
      */
     public function getTask()
     {
