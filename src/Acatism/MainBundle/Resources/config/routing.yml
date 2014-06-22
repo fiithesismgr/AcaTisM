@@ -79,7 +79,7 @@ acatism_update_social_links:
     defaults: { _controller: AcatismMainBundle:Default:profileSettings }
 
 acatism_search:
-    pattern: /search/{keyword}
+    pattern: /search/{keywords}
     defaults: { _controller: AcatismMainBundle:View:search }
 
 

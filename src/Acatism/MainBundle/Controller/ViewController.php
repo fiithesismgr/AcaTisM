@@ -330,17 +330,21 @@ class ViewController extends Controller
 
     }
 
-    public function searchAction(){
+    public function searchAction($keywords){
 
 
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
+
+            $dm = $this->get('doctrine_mongodb')->getManager();
 
             $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
                 ->field('user')->references($this->getUser());
 
             $student = $qb->getQuery()->getSingleResult();
 
-
+            $profs = $this->get('doctrine_mongodb')
+                          ->getRepository('AcatismMainBundle:Professor')
+                          ->findBy(array('$text' => array('$search' => $keywords)));
             return $this->render('AcatismMainBundle:Users:SearchUsers.html.twig',
                              array( 'proflist' => $profs,
                                     'student' => $student )
@@ -348,8 +352,9 @@ class ViewController extends Controller
 
         }
 
-        else throw new HttpException('Unauthorized access.', 401);
-
+        else {
+            throw new HttpException('Unauthorized access.', 401);
+        }
 
     }
 
