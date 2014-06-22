@@ -439,19 +439,23 @@ class DefaultController extends Controller
 
        }
 
-
-
        $qb = $dm->createQueryBuilder('AcatismMainBundle:SocialMedia')
            ->field('user')->references($this->getUser());
        $social = $qb->getQuery()->getSingleResult();
 
+       $qb = $dm->createQueryBuilder('AcatismMainBundle:GithubAccount')
+           ->field('user')->references($this->getUser());
+       $githubAccount = $qb->getQuery()->getSingleResult();
+
        if(is_null($social)){
-
-       $social = new SocialMedia();
-
+          $social = new SocialMedia();
        }
 
-       $form = $this->createFormBuilder($social)
+       if(is_null($githubAccount)){
+          $githubAccount = new GithubAccount();
+       }
+
+       $formSocial = $this->createFormBuilder($social)
            ->setAction($this->generateUrl('acatism_update_social_links'))
            ->add('facebook','url', array('required' => false) )
            ->add('googleplus','url', array('required' => false) )
@@ -462,9 +466,17 @@ class DefaultController extends Controller
            ->add('update','submit')
            ->getForm();
 
-       $form->handleRequest($request);
+      $formGit = $this->createFormBuilder($githubAccount)
+           ->setAction($this->generateUrl('acatism_update_social_links'))
+           ->add('githubUsername','text', array('required' => true) )
+           ->add('githubPassword','password', array('required' => true) )
+           ->add('update','submit')
+           ->getForm();
 
-       if ($form->isValid()){
+       $formSocial->handleRequest($request);
+       $formGit->handleRequest($request);
+
+       if ($formSocial->isValid()){
 
            $social->setUser($this->getUser());
 
@@ -473,12 +485,20 @@ class DefaultController extends Controller
 
            return $this->redirect($this->generateUrl('acatism_profile_settings'));
        }
+       elseif ($formGit->isValid()) {
+            $githubAccount->setUser($this->getUser());
 
+            $dm->persist($githubAccount);
+            $dm->flush();
+
+            return $this->redirect($this->generateUrl('acatism_profile_settings'));
+       }
        else{
            return $this->render('AcatismMainBundle:Show:Settings.html.twig',
                array(
                      'visitor' =>$person ,
-                     'form' => $form->createView()
+                     'social_form' => $formSocial->createView(),
+                     'git_form' => $formGit->createView(),
                ));
            }
 
