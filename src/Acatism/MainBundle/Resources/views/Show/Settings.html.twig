@@ -171,7 +171,7 @@
 
                  <!-- github account -->
 
-                {% if (app.user.role.role != 'ROLE_PROFESSOR') %}
+                {% if (app.user.role.role == 'ROLE_STUDENT') %}
 
                 <div class="settingsSection">
 
@@ -182,6 +182,8 @@
                     </div>
 
                     <div class="sectionContent">
+
+                        {% if ( hasGithubAccount == true ) %}
 
                         {{  form_start(git_form) }}
 
@@ -207,6 +209,14 @@
                         </div>
 
                         {{ form_end(git_form) }}
+
+                            {% else %}
+
+                            Your Github account is already synced.
+
+                        {% endif %}
+
+
 
                     </div>
 
