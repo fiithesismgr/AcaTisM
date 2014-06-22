@@ -94,7 +94,8 @@ class ViewController extends Controller
 
                 // getting the tasks
                 $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                    ->field('professor')->references($visitor_user);
+                    ->field('professor')->references($visitor_user)
+                    ->sort('dueDate', 'ASC');
 
                 $taskList = $qb->getQuery()->execute();
 

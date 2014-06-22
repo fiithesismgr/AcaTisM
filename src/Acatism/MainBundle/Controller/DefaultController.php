@@ -61,7 +61,8 @@ class DefaultController extends Controller
                     $supervisor = $collaboration->getProfessor();
 
                     $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                             ->field('professor')->references($supervisor);
+                             ->field('professor')->references($supervisor)
+                             ->sort('dueDate', 'ASC');
 
                     $tasklist = $qb->getQuery()->execute();
 

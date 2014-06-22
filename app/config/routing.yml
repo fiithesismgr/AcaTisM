@@ -35,6 +35,10 @@ acatism_confirmation:
      pattern: /confirm/{confirmationHash}
      defaults: { _controller: AcatismAuthenticationBundle:Security:confirm }
 
+acatism_authorization:
+     pattern: /authorization
+     defaults: { _controller: AcatismAuthenticationBundle:Security:authorization }
+
 
 
 
