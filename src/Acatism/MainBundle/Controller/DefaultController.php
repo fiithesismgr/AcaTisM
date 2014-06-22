@@ -56,6 +56,12 @@ class DefaultController extends Controller
                                     ->field('user')->references($user)
                                     ->getQuery()->getSingleResult();
 
+                $hasGithubAccount = false;
+
+                if(!is_null($githubAccount)) {
+                  $hasGithubAccount = true;
+                }
+
                 if($student->getIsAccepted() === true && !is_null($githubAccount))
                 {
                     $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
@@ -99,7 +105,8 @@ class DefaultController extends Controller
                            array('student' => $student,
                                  'applicationlist' => $applications,
                                  'taskProgressList' => $taskProgressList,
-                                 'sociallinks' => $social
+                                 'sociallinks' => $social,
+                                 'hasGithubAccount' => $hasGithubAccount
                             ));
                 }
                 else
@@ -107,7 +114,8 @@ class DefaultController extends Controller
                     return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
                                  'applicationlist' => $applications,
-                                 'sociallinks' => $social
+                                 'sociallinks' => $social,
+                                 'hasGithubAccount' => $hasGithubAccount
                             ));
                 } 
             }
