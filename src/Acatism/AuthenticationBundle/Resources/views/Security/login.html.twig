@@ -52,6 +52,23 @@
 
             <div class="formSectionMain">
 
+
+                <div class="notificationMessage">
+
+                    <div class="icon">
+                        <img src="{{ asset('images/notification.png') }}" alt="Notification" />
+                    </div>
+
+                    <div class="message">
+
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                                {{ flashMessage }}
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
             {% if error %}
 	           <div class="errorSection">
                    <div class="icon">
