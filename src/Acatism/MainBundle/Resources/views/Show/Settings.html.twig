@@ -136,8 +136,6 @@
                             {{  form_errors(social_form.dropbox) }}
                             {{  form_errors(social_form.github) }}
 
-                            {{ form_start(social_form) }}
-
                             {{ form_widget(social_form.facebook, { 'attr': { 'class': 'normalInput', 'placeholder': 'Facebook' } }) }}
 
                             {{ form_widget(social_form.googleplus, { 'attr': { 'class': 'normalInput', 'placeholder': 'Google Plus' } }) }}
@@ -190,8 +188,6 @@
                         {{  form_errors(git_form) }}
                         {{  form_errors(git_form.githubUsername) }}
                         {{  form_errors(git_form.githubPassword) }}
-
-                        {{ form_start(git_form) }}
 
                         {{ form_widget(git_form.githubUsername, { 'attr': { 'class': 'normalInput', 'placeholder': 'Github username' } }) }}
 
