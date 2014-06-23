@@ -222,7 +222,37 @@ public function newApplicationAction($proj_id)
 
 public function confirmTaskAction($id){
 
-    return new Response('jaja');
+    if ($this->get('security.context')->isGranted('ROLE_PROFESSOR') === true) {
+        $taskProgress = $this->get('doctrine_mongodb')
+                        ->getRepository('AcatismMainBundle:TaskProgress')
+                        ->findOneBy(array('id' => $id));
+
+
+
+        if(!is_null($taskProgress)) {
+            $dm = $this->get('doctrine_mongodb')->getManager();
+
+            $student = $taskProgress->getStudent();
+
+            $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+                             ->field('student')
+                             ->references($user);
+            $collaboration = $qb->getQuery()->getSingleResult();
+
+            if($collaboration->getProfessor() === $this->getUser()) {
+                $taskProgress->setIsFinished(true);
+            
+            
+                $dm->flush();
+            }
+            
+        }
+    return $this->redirect($this->generateUrl('acatism_main_homepage'));
+    }
+    else {
+        return $this->redirect($this->generateUrl('acatism_main_homepage'));
+    }
+    
 
 }
 
