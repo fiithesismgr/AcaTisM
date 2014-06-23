@@ -236,7 +236,7 @@ public function confirmTaskAction($id){
 
             $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
                              ->field('student')
-                             ->references($user);
+                             ->references($student);
             $collaboration = $qb->getQuery()->getSingleResult();
 
             if($collaboration->getProfessor() === $this->getUser()) {

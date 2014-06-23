@@ -36,7 +36,7 @@ class SecurityController extends Controller
 
    public function registerAction(Request $request) 
    {
-
+        
    	    $user = new User();
 
         $form = $this->createForm(new UserType(), $user,
@@ -79,7 +79,7 @@ class SecurityController extends Controller
                 ->setSubject('Confirm account creation at AcaTisM.')
                 ->setFrom('noreply.acatism@gmail.com')
                 ->setTo($user->getEmail())
-                ->setBody($this->renderView('AcatismMainBundle:Email:EmailView.html.twig', array('confirmationLink' => $confirmationLink)));
+                ->setBody('You have requested an account at AcaTisM. Follow this link to activate it: ' . $confirmationLink);
            $this->get('mailer')->send($message);
 
            $this->get('session')->getFlashBag()->add(
@@ -98,7 +98,7 @@ class SecurityController extends Controller
 
 
       
-       /*
+      /*
        $role1 = new Role();
        $role1->setName('student');
        $role1->setRole('ROLE_STUDENT');
@@ -115,7 +115,7 @@ class SecurityController extends Controller
        $dm->flush();
 
        return new Response('wwoooow');
-       */
+      */
    	    
    }
 

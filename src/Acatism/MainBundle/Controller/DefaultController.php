@@ -78,7 +78,7 @@ class DefaultController extends Controller
                     $tasklist = $qb->getQuery()->execute();
 
                     foreach($tasklist as $task) {
-                        $taskProgress = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
+                          $taskProgress = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
                                            ->field('student')->references($user)
                                            ->field('task')->references($task)
                                            ->getQuery()
@@ -94,6 +94,7 @@ class DefaultController extends Controller
                             $dm->persist($taskProgress);
                         }
                     }
+                    
                     $dm->flush();
 
                     $taskProgressList = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
@@ -391,9 +392,21 @@ class DefaultController extends Controller
       {
          $dm = $this->get('doctrine_mongodb')->getManager();
 
+         $qb = $dm->createQueryBuilder('AcatismMainBundle:Collaboration')
+                  ->field('student')->references($this->getUser());
+
+         $collaboration = $qb->getQuery()->getSingleResult();
+
+
          $qb = $dm->createQueryBuilder('AcatismMainBundle:NewsItem');
          $qb->addOr($qb->expr()->field('recipient')->references($this->getUser()));
          $qb->addOr($qb->expr()->field('forAllStuds')->equals(true));
+
+         if(!is_null($collaboration)) {
+            $qb->addOr($qb->expr()->field('author')->references($collaboration->getProfessor()));
+         }
+
+         $qb->sort('publicationDate', 'DESC');
 
 
          $newsItems = $qb->getQuery()->execute();

@@ -265,13 +265,25 @@
 
                                  {% else %}
 
-                                 {{ project.getAssignedStud().firstname ~ project.getAssignedStud().lastname }}
+                                  <div class="assignedStudent">
+
+                                             <div class="label">Assigned Student: </div>
+
+                                             {{ project.getAssignedStud().firstname ~ ' ' ~ project.getAssignedStud().lastname }}
+
+                                         </div>
 
                                  {% endif %}
 
                               {% elseif (project.getAssignedStud() is not null) %}
 
-                                {{ project.getAssignedStud().firstname ~ ' ' ~ project.getAssignedStud().lastname }}
+                                 <div class="assignedStudent">
+
+                                             <div class="label">Assigned Student: </div>
+
+                                             {{ project.getAssignedStud().firstname ~ ' ' ~ project.getAssignedStud().lastname }}
+
+                                         </div>
 
                               {% endif %}
 

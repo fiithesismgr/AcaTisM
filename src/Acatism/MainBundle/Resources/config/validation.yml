@@ -27,13 +27,21 @@ Acatism\MainBundle\Document\Person:
     properties:
         cvFile:
             - File:
-                maxSize: 4096k
+                maxSize: 2048k
                 mimeTypes: [application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text]
        
         profileFile:
             - File:
-                maxSize: 4096k
+                maxSize: 2048k
                 mimeTypes: [image/*]
+
+Acatism\MainBundle\Document\TaskProgress:
+    properties:
+        file:
+            - File:
+                maxSize: 2048k
+                mimeTypes: [application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text]
+       
 
 Acatism\MainBundle\Document\SocialMedia:
     properties:

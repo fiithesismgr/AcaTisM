@@ -71,7 +71,7 @@ acatism_news_feed:
     defaults: { _controller: AcatismMainBundle:Default:newsFeed }
 
 acatism_search:
-    pattern: /search/{keywords}
+    pattern: /search
     defaults: { _controller: AcatismMainBundle:View:search }
 
 email_template:

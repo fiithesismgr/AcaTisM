@@ -4,6 +4,7 @@ namespace Acatism\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Acatism\AuthenticationBundle\Document\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -333,27 +334,34 @@ class ViewController extends Controller
 
     }
 
-    public function searchAction($keywords){
+    public function searchAction(Request $request){
 
 
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true){
 
-            $dm = $this->get('doctrine_mongodb')->getManager();
+            if('POST' === $request->getMethod()) {
+                $keywords = $request->request->get('searchTerm');
+                if(!is_null($keywords)) {
+                    $dm = $this->get('doctrine_mongodb')->getManager();
 
-            $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
-                ->field('user')->references($this->getUser());
+                    $qb = $dm->createQueryBuilder('AcatismMainBundle:Student')
+                             ->field('user')->references($this->getUser());
 
-            $student = $qb->getQuery()->getSingleResult();
+                    $student = $qb->getQuery()->getSingleResult();
 
-            $profs = $this->get('doctrine_mongodb')
+                    $profs = $this->get('doctrine_mongodb')
                           ->getRepository('AcatismMainBundle:Professor')
                           ->findBy(array('$text' => array('$search' => $keywords)));
 
-            return $this->render('AcatismMainBundle:Users:SearchUsers.html.twig',
+                    return $this->render('AcatismMainBundle:Users:SearchUsers.html.twig',
                              array( 'proflist' => $profs,
                                     'student' => $student )
                              );
-
+                }
+            }
+            else {
+                return $this->redirect($this->generateUrl('acatism_main_homepage'));
+            }
         }
 
         else {
