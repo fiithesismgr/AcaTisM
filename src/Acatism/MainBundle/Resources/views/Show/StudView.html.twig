@@ -230,9 +230,9 @@
 
                      <ul class="taskList">
 
-                         {% for taskProgress in taskProgressList %}
+                         {% set printform = true %}
 
-                             {% set printform = true %}
+                         {% for taskProgress in taskProgressList %}
 
                              <li id="task">
 
@@ -310,6 +310,7 @@
                                                 {{ form_errors(upload_form.file) }}
 
 
+                                                <div class="fileBrowser">
                                                 {{ form_start(upload_form) }}
 
                                                 {{ form_widget(upload_form.file) }}
@@ -317,8 +318,11 @@
                                                 {{ form_widget(upload_form.upload) }}
 
                                                 {{ form_end(upload_form) }}
+                                                </div>
+
 
                                                 {% set printform = false %}
+
 
                                          {% endif %}
 

@@ -220,6 +220,12 @@ public function newApplicationAction($proj_id)
 
     }
 
+public function confirmTaskAction($id){
+
+    return new Response('jaja');
+
+}
+
 }
 
 ?>

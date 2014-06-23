@@ -85,3 +85,7 @@ about:
 userguide:
     pattern: /userguide
     defaults: { _controller: AcatismMainBundle:Info:userguide}
+
+confirm_task:
+    pattern: /confirm_task/{id}
+    defaults: { _controller: AcatismMainBundle:Creation:confirmTask }
