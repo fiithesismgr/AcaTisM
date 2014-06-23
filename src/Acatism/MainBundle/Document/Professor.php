@@ -53,7 +53,7 @@ class Professor extends Person
             $this->domains,
             $this->languages,
             $this->office,
-            $this->teachings,
+            $this->teaching,
             $this->publications,
             $this->title,
             // see section on salt below
@@ -75,7 +75,7 @@ class Professor extends Person
             $this->domains,
             $this->languages,
             $this->office,
-            $this->teachings,
+            $this->teaching,
             $this->publications,
             $this->title,
             // see section on salt below
