@@ -232,6 +232,8 @@
 
                          {% for taskProgress in taskProgressList %}
 
+                             {% set printform = true %}
+
                              <li id="task">
 
                                  <a>
@@ -272,12 +274,27 @@
 
                                          {% if ( taskProgress.task.requireFile == true ) %}
 
-                                             {% if (taskProgress.task.requireFileFormat == true) %}
-                                                 * Requires file with specified format
+                                             {% if (taskProgress.filePath is not null) %}
 
-                                             {% endif %}
+                                                {% if (taskProgress.task.requireFileFormat == true) %}
+                                                 * Requires file with specified format : <a href="{{ taskProgress.filePath }}">{{ taskProgress.filePath }}</a>
 
-                                         {%  else %} * Requires file with no specified format
+                                                 {%  else %} * Requires file with no specified format: <a href="{{ taskProgress.filePath }}">{{ taskProgress.filePath }}</a>
+
+                                                {% endif %}
+
+                                              {% else %}
+
+                                                  {% if (taskProgress.task.requireFileFormat == true) %}
+                                                      * Requires file with specified format
+
+                                                  {%  else %} * Requires file with no specified format
+
+                                                  {% endif %}
+
+                                            {% endif %}
+
+
 
                                          {% endif %}
 
@@ -285,6 +302,24 @@
 
                                          {% if (taskProgress.task.requireSourceCode == true) %}
                                              * Requires source code : <a href="{{ taskProgress.repository['html_url'] }}">{{ taskProgress.repository['html_url'] }}</a>
+                                         {% endif %}
+
+                                         {% if (taskProgress.task.requireFile == true) and (taskProgress.isFinished == false) and (printform == true) %}
+
+                                                {{ form_errors(upload_form) }}
+                                                {{ form_errors(upload_form.file) }}
+
+
+                                                {{ form_start(upload_form) }}
+
+                                                {{ form_widget(upload_form.file) }}
+
+                                                {{ form_widget(upload_form.upload) }}
+
+                                                {{ form_end(upload_form) }}
+
+                                                {% set printform = false %}
+
                                          {% endif %}
 
                                      </div>
