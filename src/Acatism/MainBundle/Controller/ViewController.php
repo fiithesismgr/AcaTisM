@@ -92,12 +92,14 @@ class ViewController extends Controller
             if(!is_null($collaboration)){
                 $existsCollaboration = true ; // collaboration existent
 
-                // getting the tasks
-                $qb = $dm->createQueryBuilder('AcatismMainBundle:Task')
-                    ->field('professor')->references($visitor_user)
-                    ->sort('dueDate', 'ASC');
+                // getting the tasks progress
+                
 
-                $taskList = $qb->getQuery()->execute();
+                $taskProgressList = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
+                                           ->field('student')->references($visited_user)
+                                           ->sort('dueDate', 'ASC')
+                                           ->getQuery()
+                                           ->execute();
 
 
                 return $this->render('AcatismMainBundle:Show:ViewStudProfile.html.twig',
@@ -105,7 +107,7 @@ class ViewController extends Controller
                         'student' => $student,
                         'visitor' => $person,
                         'existsCollaboration' => $existsCollaboration,
-                        'taskList' => $taskList,
+                        'taskProgressList' => $taskProgressList,
                         'sociallinks' => $social
                     ));
 

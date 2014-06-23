@@ -183,64 +183,9 @@
                  <!-- newsfeed -->
                  <div class="activityPage" id="activityPage_1">
 
-                     <ul class="news">
+                     <ul class="news" id="newsList">
 
-                         <li class="article">
-
-                             <div class="articlesubject">
-
-                                 <div class="content">
-
-                                     Catalin Baltuta si-a actualizat profilul.
-
-                                 </div>
-
-
-                                 <div class="posttime">
-
-                                     01/06/2014, 17:34
-
-                                 </div>
-
-                                 <div class="clear"></div>
-
-                             </div>
-
-                             <div class="clear"></div>
-
-                         </li>
-
-                         <li class="article">
-
-                             <div class="articlesubject">
-
-                                 <div class="content">
-
-                                     Un nou proiect extraordinar ce poarta numele de AcaTisM este in curs de dezvoltare.
-
-                                 </div>
-
-
-                                 <div class="posttime">
-
-                                     01/06/2014, 17:34
-
-                                 </div>
-
-                                 <div class="clear"></div>
-
-                             </div>
-
-                             <div class="articlecontent">
-
-                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-                                 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-                             </div>
-
-                         </li>
-
+                         
                      </ul>
 
                  </div>
@@ -733,8 +678,53 @@
 
 <script type="text/javascript" src="{{ asset("scripts/taskDropdownProfsView.js") }}" ></script>
 
+<script type="text/javascript" src="{{  asset("scripts/moment-with-langs.js") }}" ></script>
+
 <script type="text/javascript" src="{{ asset("scripts/projectDropdown.js") }}" ></script>
 
 <script type="text/javascript" src="{{ asset("scripts/taskRequireFile.js") }}"></script>
+
+ <script type="text/javascript">
+         $("document").ready(function() {
+           var link = "http://localhost/AcaTisM/web/app_dev.php/newsfeed";
+            $.ajax({
+                url: link,
+                type: "GET",
+                dataType: "xml",
+                success: successFn,
+                error: errorFn
+            });
+        });
+
+        function successFn(result) {
+            $(result).find('entry').each(function() {
+                var subject = $(this).find('title').text();
+                var content = $(this).find('summary').text();
+                var date = $(this).find('updated').text();
+                $("#newsList").append(
+                    "<li class = 'article'>"+
+                        "<div class='articlesubject'>"+
+                            "<div class='content'>"+
+                                subject+
+                            "</div>"+
+                            "<div class='posttime'>"+
+                                moment(date).format('LLLL')+
+                            "</div>"+
+                            "<div class='clear'></div>"+
+                        "</div>"+
+                        "<div class='articlecontent'>"+
+                            content+
+                        "</div>"+
+                        "<div class='clear'></div>"+
+                    "</li>");
+            });
+        }
+
+        function errorFn(xhr, status, strErr) {
+            console.log("Error.");
+
+        }
+            
+    </script>
 
 {% endblock %}
