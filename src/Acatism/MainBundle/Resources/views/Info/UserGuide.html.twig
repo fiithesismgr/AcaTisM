@@ -46,11 +46,11 @@
 
                         <article>
 
-                            <h2>What do I need to use AcaTisM ?</h2>
+                            <h2>What do you need to use AcaTisM ?</h2>
 
-                            Using the AcaTisM application services requires an account. This application is especially made for the
+                            Using the AcaTisM application services requires registration. This application is especially made for the
                             <a href="http://www.infoiasi.ro">Faculty of Computer Science</a> from the
-                            <a href="http://www.uaic.ro">University "Alexandru Ioan Cuza" from Iasi</a>, and in order to register
+                            <a href="http://www.uaic.ro">University "Alexandru Ioan Cuza" Iasi</a>, and in order to register
                             to AcaTisM you must have an account provided by this faculty. You will use the e-mail associated with this account
                             for the registration.
 
@@ -65,29 +65,28 @@
                             to AcaTisM.<br/>
 
                             You can access the register page either by following the "/register" route or by following the "Sign up now >>" link
-                            placed at the bottom of the login section from the <i>Login</i> ( route "/login" ).<br/>
+                            placed at the bottom of the login section from the <i>Login</i> page ( route "/login" ). <br/>
 
                             After accesing the register page, you will interact with a form which will ask you for the following information:
 
                             <ul>
-                                <li><i>Firstname</i>, which is a required field</li>
-                                <li><i>Lastname</i>, which is a required field</i></li>
-                                <li><i>E-mail</i>, which is a required field where you must provide your e-mail associated with the account
+                                <li><i>Firstname</i>, required field</li>
+                                <li><i>Lastname</i>, required field</i></li>
+                                <li><i>E-mail</i>, required field where you must provide your e-mail associated with the account
                                 about which is mentioned at the <i>What do I need to use AcaTisM</i> section</li>
-                                <li><i>Username</i>, which is a required field that auto completes with the username from the e-mail above,
-                                or you can change it on your preference</li>
-                                <li><i>Password</i>, which must be at least 5 chars</li>
-                                <li><i>Account Type</i>, which lets you choose between a <i>Student</i> account type or a <i>Professor</i> one</li>
+                                <li><i>Username</i>, required field that auto completes with the username from the e-mail above,
+                                or you can change it at your own desire</li>
+                                <li><i>Password</i>, must be at least 5 chars</li>
+                                <li><i>Account Type</i>, lets you choose between a <i>Student</i> account type or a <i>Professor</i> one</li>
 
                             </ul>
 
-                            After completing the form, hitting the <i>Submit</i> button will process your request, and in case any errors appeared
-                            in the form completion, the application will alert you about them. <br/>
+                            After completing the form, hitting the <i>Submit</i> button will process your request. You will be alerted by the
+                            application in case for inconvenencies.
 
-                            If your request is processed succesfully, a message will be sent to the e-mail associated with the account in order
-                            to confirm the registration. The message will ask you to follow a link, which will confirm the account and redirect
-                            you to AcaTisM main page. If you do not confirm the registration, you will not be able to use the account for
-                            the next step, the <i>Log In</i>.
+                            If the form completes succesfully, a message will be sent to the e-mail associated with the account in order
+                            to confirm the registration. The message will ask you to follow a link, which will confirm the account and will redirect
+                            you to AcaTisM home page. If you do not confirm the registration, you will not be able to use the account.
 
 
                         </article>
@@ -99,10 +98,10 @@
                             If you have succesfully completed the form associated with the account registration,
                             you will be automatically redirected to the login page, situated at the "/login" route.
                             <br/>
-                            This page will alert you in case you haven't confirm your account yet, which is necessary.
-                            After confirmation, you can log into the application. After the login, each user has to
+                            This page will alert you that you must confirm your account in order to sign in.
+                            After the login, each user has to
                             complete a wizard, but before talking about this, let's see something about <i>The idea behind
-                            the application</i>.
+                            the application</i> on the next chapter.
 
 
                         </article>
@@ -111,30 +110,38 @@
 
                             <h2>The idea behind the application</h2>
 
+                            If you want to use the application entirely correct and efficiently, you must
+                            definetely read this section. This will give you a more clear vision about the application functionalities
+                            and will help
+                            you understand faster the next sections.
+
                             AcaTisM was thought to work like a social-network. Students and professors interact one with each other
-                            in order to establish collaborations for thesis developing and coordination. AcaTisM provides an account
-                            profile for each person that registers to the application, which means that every student and professor have
+                            in order to establish collaborations for thesis developing and coordination. The application provides a profile
+                            for every registered, confirmed and completed account, which means that every student and professor have
                             a personal profile page where they can put information about them. Each personal profile has the following
                             sections:
 
                             <ul>
 
-                                <li>A top section, called <i>Profile Info Section</i>, which displays information about the user's profile which
-                                can be seen by any visitor,
-                                sectioned which is divided in three parts: the <i>left part</i> called <i>About</i>, which displays information like University, Faculty,
-                                <i>Year of Study, Group, E-mail, Phone and Website</i> for students profiles </li> and <i>University, Faculty, Office,
-                                E-mail and Phone</i> for professors profiles; the <i>middle part</i>, which display a <i>profile picture</i> and the <i>Title</i> of the
-                                person which owns the profile; <i>the right part</i> called <i>Curriculum Vitae</i> for students and <i>Bibliography</i>
-                                for professors, which displays information about computer science knowledge and
-                                realisations of the profile owner like: <i>Domains of Interest, Well-known programming languages, Well-known programming techs,
+                                <li>A top section, the <i>Profile Info Section</i>, which displays information about the user's profile which, section which
+                                can be seen by any visitor. This is also
+                                divided in three parts: the <i>left widget</i> called <i>About</i>, which displays information like <i>University, Faculty,
+                                Year of Study, Group, E-mail, Phone and Website</i> for students profiles </li> and <i>University, Faculty, Office,
+                                E-mail and Phone</i> for professors profiles; the <i>middle part</i>, which displays a <i>profile picture</i>,the <i>Title</i> of the
+                                person which owns the profile and some optional social links which can be set on the Settings page; <i>the right widget</i> called <i>Curriculum Vitae</i>
+                                for students and <i>Bibliography</i>
+                                for professors, which displays information about the owners knowledge and
+                                realisations like: <i>Domains of Interest, Well-known programming languages, Well-known programming techs,
                                 Projects and Languages</i> for students and <i>Domains of Interest, Teaching, Main publications,
-                                and Languages</i> for professors.
+                                and Languages</i> for professors. This section is public for every person that visits the profile page. </li>
 
                                 <li>A section entitled <i>What's New</i> where users activity can be seen: <i>NewsFeed, Projects, Tasks, Posts, Applications</i>;
-                                The activities displaying differs on the visitors of the profile, depending on their status and collaborations.
-                                You will find more information about the user's activity and how they interact at the <i>Users and Interaction</i>
-                                chapter.
+                                    Each type of activity has a separated tab and users can navigate trough them by using the left-sided menu.
+                                    The activities content displaying differs at each visitor of the profile page, depending on their status and collaborations.
+
                                 </li>
+
+
 
 
                             Now that we talked a little about the idea behind the application and you know how the applications works,
@@ -171,10 +178,70 @@
 
                             </ul>
 
-                            After completing his profile info, the user will be able to use the application entirely and interract
+                            After completing his profile info, the user will be able to use the application entirely and interact
                             with other users in different ways as we will see on the next chapter.
 
 
+
+                        </article>
+
+                        <article>
+
+                            <h2>Users and Interaction</h2>
+
+                            After registering and completing the profile info, the users are able to navigate trough the application. Each type of
+                            user has some interests and he uses the AcaTisM services in order to satisfy them. Let's see what each type
+                            of user is able to perform using the application:
+
+                            <h3>The Professor</h3>
+
+                            <ul>
+                                <li> completes his profile info </li>
+                                <li> associates social links with his profile using the <i>Settings</i> section, links which will be
+                                     displayed later as icons under his profile picture </li>
+
+                                <li> uses the tab <i>Projects</i> from the activity section to post a list of themes proposals</li>
+                                <li> waits for students appliances on his projects and he manages them on the <i>Applications</i>
+                                tab from the activity section</li>
+                                <li> posts new tasks on the <i>Tasks</i> tab for the students who set a collaboration with him; he can ask for
+                                     required files with
+                                     required formats and he can supervise students progress by visiting a GitHub repository which is created for each
+                                     task assigned to a student on the GitHub account provided by the student</li>
+                                <li> posts things for his collaborating students using the <i>Posts</i> tab </li>
+                                <li> visits other profiles </li>
+                                <li> views all the other professors and students who use the application by navigating trough <i>Academic Staff</i>
+                                link or <i>Students</i>one, placed on the top navigation. </li>
+                            </ul>
+
+
+                            <h3>The Student</h3>
+
+                            <ul>
+
+                                <li>completes his profile info</li>
+
+                                <li>uses the search situated on the top right corner of the application in order to look for professors, or
+                                sees all the professors who have an account on the <i>Academic Staff</i> page</li>
+                                <li>visits other profiles</li>
+                                <li> views all the other professors and students who use the application by navigating trough <i>Academic Staff</i>
+                                    link or <i>Students</i>one, placed on the top navigation. </li>
+                                <li>navigates trough professors profile pages in order to view their thesis themes proposals and he can apply
+                                for them</li>
+                                <li>checks the status of his applications on the <i>Applications</i> tab available on his profile page ; he can
+                                confirm an application in order to set a collaboration or he can cancel any application by navigating to profs profiles,
+                                and going to their projects list tab.
+                                </li>
+
+                                <li>can see the tasks given by his collaborator on the <i>Tasks</i> tab from his profile page </li>
+                                <li>provides a GitHub account on the <i>Settings</i> page in order for his collaborator to check his
+                                progress viewing the source code</li>
+                                <li>a repository is created for each one of the tasks and he uses them for hosting source-code for his thesis</li>
+                                <li>views news from his collaborator on the <i>NewsFeed</i> tab available on his profile page</li>
+
+
+
+
+                            </ul>
 
                         </article>
 

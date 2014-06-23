@@ -42,6 +42,13 @@
 
 }
 
+#infoSection .main h3{
+
+    font-size: 16px;
+    font-weight: normal;
+
+}
+
 #infoSection .main ul{
 
     list-style-type: square;
