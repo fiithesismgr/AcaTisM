@@ -56,6 +56,19 @@ class TaskProgress
         $this->isFinished = false;
     }
 
+    public function upload()
+    {
+        if(!is_null($this->file))
+        {
+            $extension = $this->filee->guessExtension();
+            $directory = __DIR__.'/../../../../web/'.'files/students';
+            $path = sha1(uniqid(mt_rand(). '.' . $extension;
+            $this->file->move($directory, $path);
+            $this->filePath = 'images/students/' . $path;
+        }
+        $this->file = null;
+    }
+
     /**
      * Set file
      *

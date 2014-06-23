@@ -98,11 +98,12 @@ class DefaultController extends Controller
 
                     $taskProgressList = $dm->createQueryBuilder('AcatismMainBundle:TaskProgress')
                                            ->field('student')->references($user)
+                                           ->sort('dueDate', 'ASC')
                                            ->getQuery()
                                            ->execute();
                     $currentTaskProgress = null;
                     foreach($taskProgressList as $taskProgress) {
-                      if($taskProgress->getIsFinished() == false) {
+                      if($taskProgress->getIsFinished() == false && $taskProgress->getTask()->getRequireFile() == true) {
                           $currentTaskProgress = $taskProgress;
                           break;
                       }
@@ -119,7 +120,6 @@ class DefaultController extends Controller
 
                         if ($formUpload->isValid())
                         {
-                          
                             $currentTaskProgress->upload();
                             $dm->flush();
                             return $this->redirect($this->generateUrl('acatism_main_homepage'));
@@ -139,7 +139,7 @@ class DefaultController extends Controller
                     
                     }
                     else {
-                      return $this->render('AcatismMainBundle:Show:StudView.html.twig',
+                        return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
                                  'applicationlist' => $applications,
                                  'taskProgressList' => $taskProgressList,
