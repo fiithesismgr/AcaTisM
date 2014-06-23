@@ -21,7 +21,7 @@ use Acatism\MainBundle\Document\TaskProgress;
 
 class DefaultController extends Controller
 {
-   public function indexAction()
+   public function indexAction(Request $request)
     {
         //
         if($this->get('security.context')->isGranted('ROLE_STUDENT') === true)
@@ -100,14 +100,53 @@ class DefaultController extends Controller
                                            ->field('student')->references($user)
                                            ->getQuery()
                                            ->execute();
+                    $currentTaskProgress = null;
+                    foreach($taskProgressList as $taskProgress) {
+                      if($taskProgress->getIsFinished() == false) {
+                          $currentTaskProgress = $taskProgress;
+                          break;
+                      }
+                    }
 
-                    return $this->render('AcatismMainBundle:Show:StudView.html.twig',
+                    if(!is_null($currentTaskProgress)) {
+                        $formUpload = $this->get('form.factory')->createNamedBuilder('formUpload', 'form', $currentTaskProgress)
+                            ->setAction($this->generateUrl('acatism_main_homepage'))
+                            ->add('file', 'file',  array('required' => true, 'label' => 'File: '))
+                            ->add('upload', 'submit', array('label' => 'Upload'))
+                            ->getForm();
+
+                        $formUpload->handleRequest($request);
+
+                        if ($formUpload->isValid())
+                        {
+                          
+                            $currentTaskProgress->upload();
+                            $dm->flush();
+                            return $this->redirect($this->generateUrl('acatism_main_homepage'));
+                        }
+                        else
+                        {
+                          return $this->render('AcatismMainBundle:Show:StudView.html.twig',
+                           array('student' => $student,
+                                 'applicationlist' => $applications,
+                                 'taskProgressList' => $taskProgressList,
+                                 'sociallinks' => $social,
+                                 'hasGithubAccount' => $hasGithubAccount,
+                                 'upload_form' => $formUpload->createView()
+                            ));
+                         }
+
+                    
+                    }
+                    else {
+                      return $this->render('AcatismMainBundle:Show:StudView.html.twig',
                            array('student' => $student,
                                  'applicationlist' => $applications,
                                  'taskProgressList' => $taskProgressList,
                                  'sociallinks' => $social,
                                  'hasGithubAccount' => $hasGithubAccount
                             ));
+                    }
                 }
                 else
                 {

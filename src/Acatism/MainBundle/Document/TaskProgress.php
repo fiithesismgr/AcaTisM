@@ -4,6 +4,7 @@
 namespace Acatism\MainBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
 * Acatism\MainBundle\Document\TaskProgress
@@ -38,6 +39,8 @@ class TaskProgress
     */
     protected $filePath;
 
+    protected $file;
+
     /**
     * @MongoDB\Field(type="date")
     */
@@ -51,6 +54,28 @@ class TaskProgress
     public function __construct()
     {
         $this->isFinished = false;
+    }
+
+    /**
+     * Set file
+     *
+     * @param UploadedFile $file
+     * @return self
+     */
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return UploadedFile $file
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
