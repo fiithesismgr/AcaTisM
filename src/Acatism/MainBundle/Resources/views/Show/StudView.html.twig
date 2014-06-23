@@ -277,9 +277,9 @@
                                              {% if (taskProgress.filePath is not null) %}
 
                                                 {% if (taskProgress.task.requireFileFormat == true) %}
-                                                 * Requires file with specified format : <a href="{{ taskProgress.filePath }}">{{ taskProgress.filePath }}</a>
+                                                 * Requires file with specified format : <a href="{{ asset(taskProgress.filePath) }}">View uploaded file</a>
 
-                                                 {%  else %} * Requires file with no specified format: <a href="{{ taskProgress.filePath }}">{{ taskProgress.filePath }}</a>
+                                                 {%  else %} * Requires file with no specified format: <a href="{{ asset(taskProgress.filePath) }}">View uploaded file</a>
 
                                                 {% endif %}
 
@@ -301,7 +301,7 @@
                                          <br/>
 
                                          {% if (taskProgress.task.requireSourceCode == true) %}
-                                             * Requires source code : <a href="{{ taskProgress.repository['html_url'] }}">{{ taskProgress.repository['html_url'] }}</a>
+                                             * Requires source code : <a href="{{ taskProgress.repository['html_url'] }}">View repository</a>
                                          {% endif %}
 
                                          {% if (taskProgress.task.requireFile == true) and (taskProgress.isFinished == false) and (printform == true) %}

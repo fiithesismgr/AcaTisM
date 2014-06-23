@@ -60,11 +60,11 @@ class TaskProgress
     {
         if(!is_null($this->file))
         {
-            $extension = $this->filee->guessExtension();
+            $extension = $this->file->guessExtension();
             $directory = __DIR__.'/../../../../web/'.'files/students';
-            $path = sha1(uniqid(mt_rand(). '.' . $extension;
+            $path = sha1(uniqid(mt_rand())). '.' . $extension;
             $this->file->move($directory, $path);
-            $this->filePath = 'images/students/' . $path;
+            $this->filePath = 'files/students/' . $path;
         }
         $this->file = null;
     }

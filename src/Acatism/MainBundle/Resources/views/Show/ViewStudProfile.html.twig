@@ -206,7 +206,7 @@
 
                      <ul class="taskList">
 
-                         {% for task in taskList %}
+                         {% for taskProgress in taskProgressList %}
 
                              <li id="task">
 
@@ -216,13 +216,13 @@
 
                                          <div class="content">
 
-                                             {{ task.title }}
+                                             {{ taskProgress.task.title }}
 
                                          </div>
 
                                          <div class="posttime">
 
-                                             Deadline: {{ task.dueDate|date('Y-m-d') }}
+                                             Deadline: {{ taskProgress.task.dueDate|date('Y-m-d') }}
 
                                          </div>
 
@@ -241,27 +241,44 @@
 
 
                                      <div class="description">
-                                         {{ task.description }}
+                                         {{ taskProgress.task.description }}
                                      </div>
 
                                      <div class="specifications">
 
-                                         {% if ( task.requireFile == true ) %}
+                                         {% if ( taskProgress.task.requireFile == true ) %}
 
-                                             {% if (task.requireFileFormat == true) %}
-                                                 * Requires file with specified format
+                                             {% if (taskProgress.filePath is not null) %}
+
+                                                 {% if (taskProgress.task.requireFileFormat == true) %}
+                                                     * Requires file with specified format : <a href="{{ asset(taskProgress.filePath) }}">View uploaded file</a>
+
+                                                 {%  else %} * Requires file with no specified format: <a href="{{ asset(taskProgress.filePath) }}">View uploaded file</a>
+
+                                                 {% endif %}
+
+                                             {% else %}
+
+                                                 {% if (taskProgress.task.requireFileFormat == true) %}
+                                                     * Requires file with specified format
+
+                                                 {%  else %} * Requires file with no specified format
+
+                                                 {% endif %}
 
                                              {% endif %}
 
-                                         {%  else %} * Requires file with no specified format
+
 
                                          {% endif %}
 
                                          <br/>
 
-                                         {% if (task.requireSourceCode == true) %}
-                                             * Requires source code
+                                         {% if (taskProgress.task.requireSourceCode == true) %}
+                                             * Requires source code : <a href="{{ taskProgress.repository['html_url'] }}">View repository</a>
                                          {% endif %}
+
+
 
                                      </div>
 
